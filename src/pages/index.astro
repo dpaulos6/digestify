@@ -1,0 +1,70 @@
+---
+import CopyIcon from '../icons/CopyIcon.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Digestify">
+	<main class="flex-1 flex flex-col items-center">
+    <span class="text-3xl mt-12">Digest your data at lightspeed!</span>
+    <section class="flex max-w-5xl w-full gap-4 items-center my-12 px-12">
+      <div class="flex flex-col gap-1 w-full">
+        <textarea name="input" id="input" class="w-full min-h-52 h-auto border rounded-md resize-none p-2 focus:outline-primary" placeholder="Type whatever here" />
+      </div>
+      <div class="flex flex-col gap-1 w-full relative">
+        <button id="copyBtn" class="absolute bottom-2 right-2 z-10 flex items-center gap-1 w-fit px-1.5 py-1 hover:bg-black/5 text-neutral-600 rounded-md transition group-hover:opacity-100 group-hover:pointer-events-auto">
+          <CopyIcon class="h-6 w-6" />
+          <span id="copyTextSpan">Copy</span>
+        </button>
+        <textarea name="output" id="output" class="flex w-full min-h-52 h-auto border rounded-md resize-none p-2 relative focus:outline-primary" />
+      </div>
+    </section>
+	</main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('input') as HTMLTextAreaElement | null;
+    const output = document.getElementById('output') as HTMLDivElement | null;
+    async function handleInput() {
+      if (input && output) {
+        const hash = await encryptSHA256(input.value);
+        output.innerText = hash;
+      } else {
+        console.error("Input or output element not found");
+      }
+    }
+
+    const textarea = document.getElementById('input') as HTMLTextAreaElement | null;
+    const copyBtn = document.getElementById('copyBtn') as HTMLButtonElement | null;
+    if (textarea) {
+      textarea.addEventListener('input', handleInput);
+      copyBtn?.addEventListener('click', copyText);
+    } else {
+      console.error("Textarea element not found");
+    }
+  });
+
+  function copyText() {
+    const output = document.getElementById('output') as HTMLTextAreaElement | null;
+    const copyText = document.getElementById('copyTextSpan') as HTMLSpanElement;
+    if (output && output.value != "") {
+      navigator.clipboard.writeText(output.value);
+      const t = copyText.innerText
+      copyText.innerText = "Copied!";
+      setTimeout(() => {
+        copyText.innerText = t;
+      }, 5000);
+    }
+  }
+
+  function encryptSHA256(string: string) {
+    const utf8 = new TextEncoder().encode(string);
+    return crypto.subtle.digest('SHA-256', utf8).then((hashBuffer) => {
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray
+        .map((bytes) => bytes.toString(16).padStart(2, '0'))
+        .join('');
+      return hashHex;
+    });
+  }
+</script>
