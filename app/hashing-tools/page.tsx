@@ -46,7 +46,7 @@ export default function Home() {
             {hashedValue && (
               <button
                 id="copyBtn"
-                className="absolute bottom-2 right-2 z-10 flex items-center gap-1 w-fit px-1.5 py-1 hover:bg-foreground/5 text-neutral-600 dark:text-neutral-300 rounded-md group-hover:opacity-100 group-hover:pointer-events-auto transition select-none"
+                className="absolute bottom-2 right-2 z-10 flex items-center gap-1 w-fit p-1 hover:bg-foreground/5 text-neutral-600 dark:text-neutral-300 rounded-md group-hover:opacity-100 group-hover:pointer-events-auto transition select-none"
                 onClick={handleCopy}
               >
                 <CopyIcon className="h-6 w-6" />
