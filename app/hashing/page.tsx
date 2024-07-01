@@ -1,9 +1,8 @@
 'use client'
 
-import { CopyIcon, Check } from 'lucide-react'
 import { useState } from 'react'
 import { digest } from '@/helpers/bcrypt'
-import { copyToClipboard } from '@/helpers/clipboard'
+import CopyToClipboardWrapper from '@/components/copy-to-clipboard'
 
 export default function Home() {
   const [hashedValue, setHashedValue] = useState('')
@@ -20,10 +19,6 @@ export default function Home() {
     } else {
       setHashedValue('')
     }
-  }
-
-  const handleCopy = (event: React.MouseEvent<HTMLButtonElement>) => {
-    copyToClipboard(hashedValue, event.currentTarget)
   }
 
   return (
@@ -43,23 +38,12 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-col gap-1 w-full relative">
-            {hashedValue && (
-              <button
-                id="copyBtn"
-                className="absolute bottom-2 right-2 z-10 flex items-center gap-1 w-fit p-1 hover:bg-foreground/5 text-neutral-600 dark:text-neutral-300 rounded-md group-hover:opacity-100 group-hover:pointer-events-auto transition select-none"
-                onClick={handleCopy}
-              >
-                <CopyIcon className="h-6 w-6" />
-              </button>
-            )}
-            <textarea
-              name="output"
-              id="output"
-              className="flex w-full min-h-52 h-auto ring-1 ring-border rounded-md resize-none p-2 relative focus:outline-none focus-visible:ring-2 focus-visible:ring-primary [&:not(:disabled)]:hover:ring-primary disabled:cursor-not-allowed transition cursor-default"
-              placeholder="Your hashed string"
-              value={hashedValue}
-              disabled={!hashedValue}
-            />
+            <CopyToClipboardWrapper
+              contentType="textarea"
+              className="w-full min-h-52 h-auto ring-1 ring-border rounded-md resize-none p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:ring-primary transition cursor-default disabled:cursor-not-allowed disabled:hover:ring-border"
+            >
+              {hashedValue}
+            </CopyToClipboardWrapper>
           </div>
         </div>
       </section>

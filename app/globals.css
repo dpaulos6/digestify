@@ -73,4 +73,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  code {
+    @apply w-fit h-fit resize-none border py-1 px-1.5 rounded bg-foreground/5;
+  }
 }

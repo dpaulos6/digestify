@@ -19,37 +19,37 @@ const montserrat = Montserrat({ subsets: ['latin'] })
 const components: { title: string; href: string; description: string }[] = [
   {
     title: 'Hashing Tools',
-    href: '/hashing-tools',
+    href: '/hashing',
     description:
       'Hash text and files with various algorithms like MD5, SHA-256, and more.'
   },
   {
     title: 'Key Generation',
-    href: '#',
+    href: '/keygen',
     description:
       'Generate secure UUIDs and secrets for any application or need.'
   },
   {
     title: 'Encryption and Decryption',
-    href: '#',
+    href: '/',
     description:
       'Encrypt and decrypt text and files using robust symmetric algorithms.'
   },
   {
     title: 'Encoding and Decoding',
-    href: '#',
+    href: '/',
     description:
       'Efficiently encode and decode text and files in formats like Base64 and Base32.'
   },
   {
     title: 'Miscellaneous',
-    href: '#',
+    href: '/',
     description:
       'Tools for hash comparison, cracking, one-time passwords generation, and more.'
   },
   {
     title: 'Educational Resources',
-    href: '#',
+    href: '/',
     description:
       'Guides and explanations to enhance your understanding of security practices.'
   }
