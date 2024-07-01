@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs'
-import copy from 'copy-to-clipboard'
 
 export const digest = async (input: string): Promise<string> => {
   const plainText = input.trim()
