@@ -5,9 +5,9 @@ export default function Home() {
   return (
     <main className="flex flex-1 items-center">
       <section className="w-full py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_550px]">
-            <div className="flex flex-col justify-center space-y-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="flex flex-col items-center sm:flex-row gap-6 lg:gap-12">
+            <div className="flex flex-col w-full justify-center space-y-4">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                   Powerful Hashing Tools for Your Needs
@@ -28,7 +28,7 @@ export default function Home() {
               </div> */}
             </div>
 
-            <ShieldCheck className="w-1/2 text-primary h-auto m-auto" />
+            <ShieldCheck className="w-72 h-auto md:w-96 lg:w-[500px] text-primary h-auto" />
           </div>
         </div>
       </section>
