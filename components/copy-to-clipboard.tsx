@@ -3,6 +3,7 @@
 import React, { useRef, useState, ReactNode, RefObject } from 'react'
 import { cn } from '@/lib/utils'
 import { CopyIcon, CheckIcon } from 'lucide-react'
+import { toast } from './ui/use-toast'
 
 type Position = 'inside' | 'outside'
 type ContentType = 'input' | 'textarea' | 'code'
@@ -34,9 +35,25 @@ export default function CopyToClipboardWrapper({
           : textRef.current.innerText
       navigator.clipboard.writeText(text).then(() => {
         setCopied(true)
+
+        function truncateText(text: string, maxLength = 12) {
+          if (text.length <= maxLength) {
+            return text
+          }
+          return text.slice(0, maxLength) + '...'
+        }
+        const truncatedText = truncateText(text, 16)
+
+        toast({
+          description: (
+            <span>
+              Coppied <code>{truncatedText}</code> to clipboard.
+            </span>
+          )
+        })
         setTimeout(() => {
           setCopied(false)
-        }, 3000)
+        }, 2000)
       })
     }
   }
