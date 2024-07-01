@@ -1,3 +1,5 @@
+'use client'
+
 import { DigestifyIcon } from '@/icons'
 import { cn } from '@/lib/utils'
 import { Moon, Sun } from 'lucide-react'
