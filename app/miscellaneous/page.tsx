@@ -30,13 +30,30 @@ const formSchema = z.object({
   includeUppercase: z.boolean().default(true),
   includeLowercase: z.boolean().default(true),
   includeNumbers: z.boolean().default(true),
-  includeSymbols: z.boolean().default(true),
-  easyToRead: z.boolean().default(false),
-  easyToSay: z.boolean().default(false)
+  includeSymbols: z.boolean().default(true)
+  // easyToRead: z.boolean().default(false),
+  // easyToSay: z.boolean().default(false)
 })
+// .refine(
+//   (data) =>
+//     data.includeUppercase ||
+//     data.includeLowercase ||
+//     data.includeNumbers ||
+//     data.includeSymbols,
+//   {
+//     message: 'At least one character type must be selected',
+//     path: [
+//       'includeUppercase',
+//       'includeLowercase',
+//       'includeNumbers',
+//       'includeSymbols'
+//     ]
+//   }
+// )
 
 export default function SecretGenerator() {
   const [securePassword, setSecurePassword] = useState('')
+  const [isUnselected, setIsUnselected] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,9 +62,9 @@ export default function SecretGenerator() {
       includeUppercase: true,
       includeLowercase: true,
       includeNumbers: true,
-      includeSymbols: true,
-      easyToRead: false,
-      easyToSay: false
+      includeSymbols: true
+      // easyToRead: false,
+      // easyToSay: false
     }
   })
 
@@ -58,7 +75,30 @@ export default function SecretGenerator() {
   }, [watch])
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    setSecurePassword(generatePassword(data))
+    const {
+      includeUppercase,
+      includeLowercase,
+      includeNumbers,
+      includeSymbols
+    } = data
+    const unselected =
+      !includeUppercase &&
+      !includeLowercase &&
+      !includeNumbers &&
+      !includeSymbols
+    setIsUnselected(unselected)
+
+    if (!unselected) {
+      toast({ itemID: 'invalidPasswordOptions' }).dismiss()
+      setSecurePassword(generatePassword(data))
+    } else {
+      toast({
+        itemID: 'invalidPasswordOptions',
+        variant: 'destructive',
+        title: 'Invalid Password Options.',
+        description: 'At least one character type must be selected.'
+      })
+    }
   }
 
   return (
