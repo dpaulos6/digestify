@@ -73,31 +73,33 @@ export default function CopyToClipboardWrapper({
     !children || (typeof children === 'string' && children.trim() === '')
 
   return (
-    <>
+    <div
+      className={cn('relative flex flex-wrap gap-2 items-center', className)}
+    >
       <Component
         className={cn(
-          'relative flex flex-wrap gap-2 items-center',
-          className,
           position === 'outside' ? 'flex gap-2' : '',
           contentType === 'code' ? 'code' : ''
         )}
         ref={textRef as RefObject<any>}
-        value={contentType !== 'code' ? String(children) : undefined}
-        readOnly={contentType !== 'code'}
-        disabled={isEmpty && contentType !== 'code'}
+        {...(contentType !== 'code' && {
+          value: String(children),
+          readOnly: true,
+          disabled: isEmpty
+        })}
       >
         {contentType === 'code' ? children : null}
-        {!isEmpty ? (
-          <CopyButton
-            onClick={copyToClipboard}
-            position={position}
-            copied={copied}
-            variant={variant}
-            contentType={contentType}
-          />
-        ) : null}
       </Component>
-    </>
+      {!isEmpty && (
+        <CopyButton
+          onClick={copyToClipboard}
+          position={position}
+          copied={copied}
+          variant={variant}
+          contentType={contentType}
+        />
+      )}
+    </div>
   )
 }
 
@@ -118,12 +120,11 @@ const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
           'flex p-1 w-fit h-fit bg-background hover:bg-border text-neutral-600 dark:text-neutral-300 rounded-md group-hover:opacity-100 group-hover:pointer-events-auto transition select-none',
           position === 'inside' && contentType !== 'code'
             ? 'absolute top-2 right-2'
-            : // : 'absolute top-0 -right-1 translate-x-full'
-              'ml-auto mb-auto'
+            : 'ml-auto mb-auto'
         )}
         {...rest}
       >
-        {variant == 'text' ? (
+        {variant === 'text' ? (
           copied ? (
             <span className="flex gap-1">
               <CheckIcon />
