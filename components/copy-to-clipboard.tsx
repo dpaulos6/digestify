@@ -47,7 +47,8 @@ export default function CopyToClipboardWrapper({
         toast({
           description: (
             <span>
-              Coppied <code>{truncatedText}</code> to clipboard.
+              Coppied <code className="code">{truncatedText}</code> to
+              clipboard.
             </span>
           )
         })
@@ -73,7 +74,8 @@ export default function CopyToClipboardWrapper({
       <Component
         className={cn(
           className,
-          position === 'inside' ? 'relative' : 'flex gap-2'
+          position === 'inside' ? 'relative' : 'flex gap-2',
+          contentType === 'code' ? 'code' : ''
         )}
         ref={textRef as RefObject<any>}
         value={contentType !== 'code' ? String(children) : undefined}
