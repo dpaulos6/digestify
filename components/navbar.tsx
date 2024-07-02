@@ -2,7 +2,15 @@
 
 import { DigestifyIcon } from '@/icons'
 import { cn } from '@/lib/utils'
-import { Moon, Sun } from 'lucide-react'
+import {
+  CreditCard,
+  Keyboard,
+  Menu,
+  Moon,
+  Settings,
+  Sun,
+  User
+} from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Montserrat } from 'next/font/google'
 import Link from 'next/link'
@@ -14,6 +22,21 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger
 } from '@/components/ui/navigation-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+
 import React from 'react'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -67,14 +90,14 @@ export default function Navbar() {
             <DigestifyIcon className="w-10 h-10 text-primary group-hover:text-primary/75 transition" />
             <span
               className={cn(
-                'text-2xl font-semibold font-custom lowercase group-hover:translate-x-1 transition',
+                'text-2xl hidden sm:block font-semibold font-custom lowercase group-hover:translate-x-1 transition',
                 montserrat.className
               )}
             >
               Digestify
             </span>
           </Link>
-          <NavigationMenu>
+          <NavigationMenu className="hidden sm:block">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-base">
@@ -97,14 +120,33 @@ export default function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
-        <button
-          className="p-2 rounded-md hover:bg-foreground/5 transition"
-          onClick={() => {
-            setTheme(theme == 'light' ? 'dark' : 'light')
-          }}
-        >
-          {theme == 'light' ? <Moon /> : <Sun />}
-        </button>
+        <div className="flex items-center">
+          <button
+            className="p-2 rounded-md hover:bg-foreground/5 transition"
+            onClick={() => {
+              setTheme(theme == 'light' ? 'dark' : 'light')
+            }}
+          >
+            {theme == 'light' ? <Moon /> : <Sun />}
+          </button>
+          <div className="block sm:hidden h-10">
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Menu className="p-2 w-10 h-10 hover:bg-border transition rounded-lg" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {components.map((component, i) => (
+                  <Link key={i} href={component.href}>
+                    <DropdownMenuItem>
+                      {/* <User className="mr-2 h-4 w-4" /> */}
+                      <span className="text-base">{component.title}</span>
+                    </DropdownMenuItem>
+                  </Link>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
       </nav>
     </header>
   )

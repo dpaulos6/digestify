@@ -7,11 +7,13 @@ import { toast } from './ui/use-toast'
 
 type Position = 'inside' | 'outside'
 type ContentType = 'input' | 'textarea' | 'code'
+type Variant = 'text' | 'icon'
 
 interface CopyToClipboardProps {
   children: ReactNode
   position?: Position
   contentType?: ContentType
+  variant?: Variant
   className?: string
 }
 
@@ -19,6 +21,7 @@ export default function CopyToClipboardWrapper({
   children,
   position = 'inside',
   contentType = 'code',
+  variant = 'icon',
   className = ''
 }: CopyToClipboardProps) {
   const textRef = useRef<
@@ -73,8 +76,9 @@ export default function CopyToClipboardWrapper({
     <>
       <Component
         className={cn(
+          'relative flex flex-wrap gap-2 items-center',
           className,
-          position === 'inside' ? 'relative' : 'flex gap-2',
+          position === 'outside' ? 'flex gap-2' : '',
           contentType === 'code' ? 'code' : ''
         )}
         ref={textRef as RefObject<any>}
@@ -83,14 +87,16 @@ export default function CopyToClipboardWrapper({
         disabled={isEmpty && contentType !== 'code'}
       >
         {contentType === 'code' ? children : null}
+        {!isEmpty ? (
+          <CopyButton
+            onClick={copyToClipboard}
+            position={position}
+            copied={copied}
+            variant={variant}
+            contentType={contentType}
+          />
+        ) : null}
       </Component>
-      {!isEmpty ? (
-        <CopyButton
-          onClick={copyToClipboard}
-          position={position}
-          copied={copied}
-        />
-      ) : null}
     </>
   )
 }
@@ -98,21 +104,42 @@ export default function CopyToClipboardWrapper({
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   position?: Position
   copied: boolean
+  variant: Variant
+  contentType: ContentType
 }
 
 const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
-    const { position, copied, ...rest } = props
+    const { position, variant, contentType, copied, ...rest } = props
     return (
       <button
         ref={ref}
         className={cn(
-          'z-10 p-1 w-fit bg-background hover:bg-border text-neutral-600 dark:text-neutral-300 rounded-md group-hover:opacity-100 group-hover:pointer-events-auto transition select-none',
-          position === 'inside' ? 'absolute top-2 right-2' : ''
+          'flex p-1 w-fit h-fit bg-background hover:bg-border text-neutral-600 dark:text-neutral-300 rounded-md group-hover:opacity-100 group-hover:pointer-events-auto transition select-none',
+          position === 'inside' && contentType !== 'code'
+            ? 'absolute top-2 right-2'
+            : // : 'absolute top-0 -right-1 translate-x-full'
+              'ml-auto mb-auto'
         )}
         {...rest}
       >
-        {copied ? <CheckIcon /> : <CopyIcon />}
+        {variant == 'text' ? (
+          copied ? (
+            <span className="flex gap-1">
+              <CheckIcon />
+              Coppied
+            </span>
+          ) : (
+            <span className="flex gap-1">
+              <CopyIcon />
+              Copy
+            </span>
+          )
+        ) : copied ? (
+          <CheckIcon />
+        ) : (
+          <CopyIcon />
+        )}
       </button>
     )
   }
