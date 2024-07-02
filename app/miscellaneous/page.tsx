@@ -34,6 +34,7 @@ const formSchema = z.object({
 
 export default function SecretGenerator() {
   const [securePassword, setSecurePassword] = useState('')
+  const [screenSize, setScreenSize] = useState('sm')
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -78,19 +79,25 @@ export default function SecretGenerator() {
     }
   }
 
-  function checkScreenSize() {
-    const smallBreakpoint = window.matchMedia('(max-width: 640px)')
-    const mediumBreakpoint = window.matchMedia('(min-width: 768px)')
-    const largeBreakpoint = window.matchMedia('(min-width: 1024px)')
+  useEffect(() => {
+    function checkScreenSize() {
+      const smallBreakpoint = window.matchMedia('(max-width: 640px)')
+      const mediumBreakpoint = window.matchMedia('(min-width: 768px)')
+      const largeBreakpoint = window.matchMedia('(min-width: 1024px)')
 
-    if (smallBreakpoint.matches) {
-      return 'sm'
-    } else if (mediumBreakpoint.matches) {
-      return 'md'
-    } else if (largeBreakpoint.matches) {
-      return 'lg'
+      if (smallBreakpoint.matches) {
+        setScreenSize('sm')
+      } else if (mediumBreakpoint.matches) {
+        setScreenSize('md')
+      } else if (largeBreakpoint.matches) {
+        setScreenSize('lg')
+      }
     }
-  }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   return (
     <main className="flex-1 flex flex-col items-center">
@@ -107,7 +114,7 @@ export default function SecretGenerator() {
               Secure Password:
             </label>
             <CopyToClipboardWrapper
-              position={checkScreenSize() == 'lg' ? 'outside' : 'inside'}
+              position={screenSize == 'lg' ? 'outside' : 'inside'}
             >
               <pre className="max-w-52 lg:max-w-2xl whitespace-pre-wrap break-words">
                 {securePassword ? securePassword : '            '}
