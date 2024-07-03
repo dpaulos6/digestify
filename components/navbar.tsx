@@ -62,7 +62,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
   {
     title: 'Encoding and Decoding',
-    href: '/',
+    href: '/encoding',
     description:
       'Efficiently encode and decode text and files in formats like Base64 and Base32.'
   },

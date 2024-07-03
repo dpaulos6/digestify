@@ -31,12 +31,18 @@ importers:
       '@radix-ui/react-toast':
         specifier: ^1.2.1
         version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      base32.js:
+        specifier: ^0.1.0
+        version: 0.1.0
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1(encoding@0.1.13)
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
+      bs58:
+        specifier: ^6.0.0
+        version: 6.0.0
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -1181,6 +1187,13 @@ packages:
         integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
       }
 
+  base-x@5.0.0:
+    resolution: {integrity: sha512-sMW3VGSX1QWVFA6l8U62MLKz29rRfpTlYdCqLdpLo1/Yd4zZwSbnUaDfciIAowAqvq7YFnWq9hrhdg1KYgc1lQ==}
+
+  base32.js@0.1.0:
+    resolution: {integrity: sha512-n3TkB02ixgBOhTvANakDb4xaMXnYUVkNoRFJjQflcqMQhyEKxEHdj3E6N8t8sUQ0mjH/3/JxzlXuz3ul/J90pQ==}
+    engines: {node: '>=0.12.0'}
+
   bcrypt@5.1.1:
     resolution:
       {
@@ -1219,6 +1232,9 @@ packages:
         integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==
       }
     engines: { node: '>=8' }
+
+  bs58@6.0.0:
+    resolution: {integrity: sha512-PD0wEnEYg6ijszw/u8s+iI3H17cTymlrwkKhDhPZq+Sokl3AU4htyBFTjAeNAlCCmg0f53g6ih3jATyCKftTfw==}
 
   busboy@1.6.0:
     resolution:
@@ -4618,6 +4634,10 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
+  base-x@5.0.0: {}
+
+  base32.js@0.1.0: {}
+
   bcrypt@5.1.1(encoding@0.1.13):
     dependencies:
       '@mapbox/node-pre-gyp': 1.0.11(encoding@0.1.13)
@@ -4642,6 +4662,10 @@ snapshots:
   braces@3.0.3:
     dependencies:
       fill-range: 7.1.1
+
+  bs58@6.0.0:
+    dependencies:
+      base-x: 5.0.0
 
   busboy@1.6.0:
     dependencies:
