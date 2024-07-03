@@ -101,7 +101,7 @@ export default function Encryption() {
             className="flex gap-2 text-base"
             onClick={toggleMode}
           >
-            <ArrowDownUp className="w-5 h-5 text-foreground/80" />
+            <ArrowDownUp className="w-5 h-5" />
             {isEncoding ? 'Switch to Decode' : 'Switch to Encode'}
           </Button>
           <Select
