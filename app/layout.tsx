@@ -8,6 +8,8 @@ import Footer from '@/components/footer'
 import { cn } from '@/lib/utils'
 import { Metadata } from 'next'
 
+import { Analytics } from '@vercel/analytics/react'
+
 const mulish = Mulish({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -34,6 +36,7 @@ export default function RootLayout({
           <Toaster />
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
