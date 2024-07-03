@@ -1,13 +1,12 @@
 'use client'
 
-import CopyToClipboardWrapper from '@/components/copy-to-clipboard'
+import OutputWrapper from '@/components/output-wrapper'
 import { generatePassword } from '@/helpers/password'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -31,29 +30,11 @@ const formSchema = z.object({
   includeLowercase: z.boolean().default(true),
   includeNumbers: z.boolean().default(true),
   includeSymbols: z.boolean().default(true)
-  // easyToRead: z.boolean().default(false),
-  // easyToSay: z.boolean().default(false)
 })
-// .refine(
-//   (data) =>
-//     data.includeUppercase ||
-//     data.includeLowercase ||
-//     data.includeNumbers ||
-//     data.includeSymbols,
-//   {
-//     message: 'At least one character type must be selected',
-//     path: [
-//       'includeUppercase',
-//       'includeLowercase',
-//       'includeNumbers',
-//       'includeSymbols'
-//     ]
-//   }
-// )
 
 export default function SecretGenerator() {
   const [securePassword, setSecurePassword] = useState('')
-  const [isUnselected, setIsUnselected] = useState(false)
+  const [screenSize, setScreenSize] = useState('sm')
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,8 +44,6 @@ export default function SecretGenerator() {
       includeLowercase: true,
       includeNumbers: true,
       includeSymbols: true
-      // easyToRead: false,
-      // easyToSay: false
     }
   })
 
@@ -86,7 +65,6 @@ export default function SecretGenerator() {
       !includeLowercase &&
       !includeNumbers &&
       !includeSymbols
-    setIsUnselected(unselected)
 
     if (!unselected) {
       toast({ itemID: 'invalidPasswordOptions' }).dismiss()
@@ -101,125 +79,147 @@ export default function SecretGenerator() {
     }
   }
 
+  useEffect(() => {
+    function checkScreenSize() {
+      const smallBreakpoint = window.matchMedia('(max-width: 640px)')
+      const mediumBreakpoint = window.matchMedia('(min-width: 768px)')
+      const largeBreakpoint = window.matchMedia('(min-width: 1024px)')
+
+      if (smallBreakpoint.matches) {
+        setScreenSize('sm')
+      } else if (mediumBreakpoint.matches) {
+        setScreenSize('md')
+      } else if (largeBreakpoint.matches) {
+        setScreenSize('lg')
+      }
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
   return (
     <main className="flex-1 flex flex-col items-center">
-      <span className="flex items-center gap-2 text-3xl mt-12">
+      <span className="flex items-center gap-2 text-center text-2xl lg:text-3xl mt-12">
         Generate a secure password.
       </span>
-      <section className="flex flex-col max-w-5xl items-start justify-center w-full gap-4 my-12 px-12">
-        <div className="w-full flex flex-col items-start gap-6 ">
-          <div className="flex gap-2 items-center">
+      <section className="flex flex-col max-w-5xl items-start justify-center w-fit lg:w-full gap-4 my-12 px-4 md:px-12">
+        <div className="w-full flex flex-col sm:flex-row lg:flex-col justify-start items-start gap-6 ">
+          <div className="flex flex-col lg:flex-row gap-2 w-full sm:w-fit items-center sm:items-start lg:items-center order-1 sm:order-2 lg:order-1">
             <label
               className="text-xl font-semibold whitespace-nowrap"
               htmlFor="keygen-secret-32"
             >
               Secure Password:
             </label>
-            <CopyToClipboardWrapper position="outside">
-              <pre className="max-w-2xl whitespace-pre-wrap break-words">
-                {securePassword ? securePassword : '            '}
-              </pre>
-            </CopyToClipboardWrapper>
+            <OutputWrapper className="code" buttonPosition="outside">
+              {securePassword ? securePassword : '            '}
+            </OutputWrapper>
           </div>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="min-w-fit w-full bg-popup ring-1 ring-border px-8 py-6 rounded-xl space-y-8"
+              className="min-w-fit lg:w-full bg-popup ring-1 ring-border px-8 py-6 rounded-xl space-y-8 order-2 sm:order-1 lg:order-2"
             >
-              <div className="flex justify-between gap-8">
+              <div className="flex flex-col lg:flex-row justify-evenly gap-8">
                 <FormField
                   control={form.control}
                   name="length"
                   render={({ field: { value, onChange } }) => (
-                    <FormItem>
-                      <FormLabel className="text-lg">Password length</FormLabel>
+                    <FormItem className="space-y-4">
+                      <div className="flex gap-2 items-center">
+                        <FormLabel className="text-lg">
+                          Password length
+                        </FormLabel>
+                        <span className="flex items-center justify-center min-w-10 ring-1 ring-border px-2 py-1 rounded-md">
+                          {value}
+                        </span>
+                      </div>
                       <FormControl>
-                        <div className="flex gap-2">
-                          <span className="flex items-center justify-center min-w-10 ring-1 ring-border px-2 py-1 rounded-md">
-                            {value}
-                          </span>
-                          <Slider
-                            min={8}
-                            max={64}
-                            step={1}
-                            defaultValue={[value]}
-                            onValueChange={onChange}
-                            className="w-32 "
-                          />
-                        </div>
+                        <Slider
+                          min={8}
+                          max={64}
+                          step={1}
+                          defaultValue={[value]}
+                          onValueChange={onChange}
+                          className="w-full"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="includeUppercase"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-base">Uppercase</FormLabel>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="includeLowercase"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-base">Lowercase</FormLabel>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="includeNumbers"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-base">Numbers</FormLabel>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="includeSymbols"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-base">Symbols</FormLabel>
-                      </div>
-                    </FormItem>
-                  )}
-                />
+                <div className="flex flex-col lg:flex-row gap-2 lg:gap-8">
+                  <FormField
+                    control={form.control}
+                    name="includeUppercase"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-base">Uppercase</FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="includeLowercase"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-base">Lowercase</FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="includeNumbers"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-base">Numbers</FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="includeSymbols"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-base">Symbols</FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
               <Button type="submit" className="flex gap-2 mx-auto px-8 text-lg">
                 Generate

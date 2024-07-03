@@ -2,17 +2,19 @@
 
 import { useState } from 'react'
 import { digest } from '@/helpers/bcrypt'
-import CopyToClipboardWrapper from '@/components/copy-to-clipboard'
+import OutputWrapper from '@/components/output-wrapper'
 import Head from 'next/head'
+import InputWrapper from '@/components/input-wrapper'
 
 export default function Home() {
+  const [inputValue, setInputValue] = useState('')
   const [hashedValue, setHashedValue] = useState('')
 
-  const updateValue = async (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const inputValue = event.target.value
-    if (inputValue) {
+  const updateValue = async (value: string) => {
+    setInputValue(value)
+    if (value) {
       try {
-        const hashedResult = await digest(inputValue)
+        const hashedResult = await digest(value)
         setHashedValue(hashedResult)
       } catch (error) {
         console.error('Error while hashing:', error)
@@ -32,24 +34,16 @@ export default function Home() {
           <span className="text-5xl text-center">
             Hash your data at lightspeed!
           </span>
-          <div className="flex gap-4 items-center">
-            <div className="flex flex-col gap-1 w-full">
-              <textarea
-                name="input"
-                id="input"
-                className="w-full min-h-52 h-auto ring-1 ring-border rounded-md resize-none p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:ring-primary transition cursor-default"
-                placeholder="Paste a hashed string"
-                onChange={updateValue}
-              />
-            </div>
-            <div className="flex flex-col gap-1 w-full relative">
-              <CopyToClipboardWrapper
-                contentType="textarea"
-                className="w-full min-h-52 h-auto ring-1 ring-border rounded-md resize-none p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:ring-primary transition cursor-default disabled:cursor-not-allowed disabled:hover:ring-border"
-              >
-                {hashedValue}
-              </CopyToClipboardWrapper>
-            </div>
+          <div className="grid grid-cols-2 gap-4 items-center w-full">
+            <InputWrapper
+              value={inputValue}
+              onChange={(value) => updateValue(value)}
+              className="flex-1 min-h-52 h-auto ring-1 ring-border rounded-md resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:ring-primary transition cursor-default"
+              placeholder="Paste a hashed string"
+            />
+            <OutputWrapper className="w-full min-h-52 h-auto bg-white dark:bg-[#121212] ring-1 ring-border rounded-md hover:ring-primary transition cursor-default">
+              {hashedValue}
+            </OutputWrapper>
           </div>
         </section>
       </main>
