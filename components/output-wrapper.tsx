@@ -5,14 +5,21 @@ import { CopyIcon, CheckIcon } from 'lucide-react'
 import { toast } from './ui/use-toast'
 import { cn } from '@/lib/utils'
 
+type ButtonPosition = 'inside' | 'outside'
+type ButtonAlignment = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+
 interface OutputWrapperProps {
   children: ReactNode
   className?: string
+  buttonPosition?: ButtonPosition
+  buttonAlignment?: ButtonAlignment
 }
 
 export default function OutputWrapper({
   children,
-  className = ''
+  className = '',
+  buttonPosition = 'inside',
+  buttonAlignment = 'top-right'
 }: OutputWrapperProps) {
   const textRef = useRef<HTMLPreElement>(null)
   const [copied, setCopied] = useState(false)
@@ -49,28 +56,40 @@ export default function OutputWrapper({
     <div className={`relative w-full h-full`}>
       <pre
         className={cn(
-          'p-2 whitespace-pre-wrap break-words font-mono',
+          'px-2 py-1 whitespace-pre-wrap break-words font-mono',
           className
         )}
         ref={textRef}
       >
         {children}
       </pre>
-      <CopyButton onClick={copyToClipboard} copied={copied} />
+      <CopyButton
+        onClick={copyToClipboard}
+        copied={copied}
+        buttonPosition={buttonPosition}
+        buttonAlignment={buttonAlignment}
+      />
     </div>
   )
 }
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   copied: boolean
+  buttonPosition: ButtonPosition
+  buttonAlignment: ButtonAlignment
 }
 
 const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ copied, ...rest }, ref) => {
+  ({ copied, buttonPosition, buttonAlignment, ...rest }, ref) => {
     return (
       <button
         ref={ref}
-        className="absolute top-1 right-1 p-1 bg-background hover:bg-border text-neutral-600 dark:text-neutral-300 rounded-md transition select-none"
+        className={cn(
+          'absolute p-1 bg-background hover:bg-border text-neutral-600 dark:text-neutral-300 rounded-md transition select-none',
+          buttonPosition === 'inside'
+            ? `${buttonAlignment.includes('top') ? 'top-1' : 'bottom-1'} ${buttonAlignment.includes('right') ? 'right-1' : 'left-1'}`
+            : 'top-1/2 -translate-y-1/2 -right-2 translate-x-full'
+        )}
         {...rest}
       >
         {copied ? (

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import OutputWrapper from '@/components/output-wrapper'
 import { generateRandomSecret } from '@/helpers/crypto'
+import { cn } from '@/lib/utils'
 
 export default function SecretGenerator() {
   const [secret32, setSecret32] = useState('')
@@ -26,7 +27,12 @@ export default function SecretGenerator() {
           >
             Secret 32 characters
           </label>
-          <OutputWrapper className="code">{secret32}</OutputWrapper>
+          <OutputWrapper
+            className={cn('code', !secret32 && 'text-transparent')}
+            buttonPosition="outside"
+          >
+            {secret32 ? secret32 : '.'.repeat(32)}
+          </OutputWrapper>
         </div>
         <div className="flex gap-2 items-center">
           <label
@@ -35,7 +41,12 @@ export default function SecretGenerator() {
           >
             Secret 64 characters
           </label>
-          <OutputWrapper className="code">{secret64}</OutputWrapper>
+          <OutputWrapper
+            className={cn('code', !secret64 && 'text-transparent')}
+            buttonPosition="outside"
+          >
+            {secret64 ? secret64 : '.'.repeat(64)}
+          </OutputWrapper>
         </div>
       </section>
     </main>

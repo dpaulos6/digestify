@@ -1,6 +1,6 @@
 'use client'
 
-import CopyToClipboardWrapper from '@/components/copy-to-clipboard'
+import OutputWrapper from '@/components/output-wrapper'
 import { generatePassword } from '@/helpers/password'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -113,13 +113,9 @@ export default function SecretGenerator() {
             >
               Secure Password:
             </label>
-            <CopyToClipboardWrapper
-              position={screenSize == 'lg' ? 'outside' : 'inside'}
-            >
-              <pre className="max-w-52 lg:max-w-2xl whitespace-pre-wrap break-words">
-                {securePassword ? securePassword : '            '}
-              </pre>
-            </CopyToClipboardWrapper>
+            <OutputWrapper className="code" buttonPosition="outside">
+              {securePassword ? securePassword : '            '}
+            </OutputWrapper>
           </div>
           <Form {...form}>
             <form
