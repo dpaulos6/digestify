@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer'
-import base32 from 'base32.js'
+import base32 from 'hi-base32'
 import bs58 from 'bs58'
 
 // Base64
@@ -13,20 +13,23 @@ export const decodeBase64 = (input: string) => {
 
 // Base32
 export const encodeBase32 = (input: string) => {
-  const encoder = new base32.Encoder()
-  return encoder.write(input).finalize()
+  return base32.encode(input)
 }
 
 export const decodeBase32 = (input: string) => {
-  const decoder = new base32.Decoder()
-  return decoder.write(input).finalize()
+  return base32.decode(input)
 }
 
 // Base58
 export const encodeBase58 = (input: string) => {
-  return bs58.encode(Buffer.from(input))
+  const encoder = new TextEncoder()
+  const Uint8Array = encoder.encode(input)
+  const buffer = Buffer.from(Uint8Array)
+  return bs58.encode(buffer)
 }
 
 export const decodeBase58 = (input: string) => {
-  return bs58.decode(input).toString()
+  const decodedBuffer = bs58.decode(input)
+  const decoder = new TextDecoder()
+  return decoder.decode(decodedBuffer)
 }

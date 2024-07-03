@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import CopyToClipboardWrapper from '@/components/copy-to-clipboard'
+import OutputWrapper from '@/components/output-wrapper'
 import { generateRandomSecret } from '@/helpers/crypto'
 
 export default function SecretGenerator() {
@@ -20,24 +20,22 @@ export default function SecretGenerator() {
       </span>
       <section className="flex flex-col max-w-5xl items-start justify-center w-full gap-4 my-12 px-12">
         <div className="flex gap-2 items-center max-w-5xl">
-          <label className="text-lg font-semibold" htmlFor="keygen-secret-32">
+          <label
+            className="text-lg font-semibold w-full"
+            htmlFor="keygen-secret-32"
+          >
             Secret 32 characters
           </label>
-          <CopyToClipboardWrapper position="outside">
-            <pre className="max-w-2xl whitespace-pre-wrap break-words">
-              {secret32}
-            </pre>
-          </CopyToClipboardWrapper>
+          <OutputWrapper className="code">{secret32}</OutputWrapper>
         </div>
         <div className="flex gap-2 items-center">
-          <label className="text-lg font-semibold" htmlFor="keygen-secret-64">
+          <label
+            className="text-lg font-semibold w-full"
+            htmlFor="keygen-secret-64"
+          >
             Secret 64 characters
           </label>
-          <CopyToClipboardWrapper position="outside">
-            <pre className="max-w-2xl whitespace-pre-wrap break-words">
-              {secret64}
-            </pre>
-          </CopyToClipboardWrapper>
+          <OutputWrapper className="code">{secret64}</OutputWrapper>
         </div>
       </section>
     </main>
