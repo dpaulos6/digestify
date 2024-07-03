@@ -53,12 +53,9 @@ export default function OutputWrapper({
   }
 
   return (
-    <div className={`relative w-full h-full`}>
+    <div className={cn('relative w-full h-full', className)}>
       <pre
-        className={cn(
-          'px-2 py-1 whitespace-pre-wrap break-words font-mono',
-          className
-        )}
+        className={cn('px-2 py-1 whitespace-pre-wrap break-words font-mono')}
         ref={textRef}
       >
         {children}
@@ -85,7 +82,7 @@ const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'absolute p-1 bg-background hover:bg-border text-neutral-600 dark:text-neutral-300 rounded-md transition select-none',
+          'absolute p-1 bg-border hover:brightness-95 dark:hover:brightness-125 text-neutral-600 dark:text-neutral-300 rounded-md transition select-none',
           buttonPosition === 'inside'
             ? `${buttonAlignment.includes('top') ? 'top-1' : 'bottom-1'} ${buttonAlignment.includes('right') ? 'right-1' : 'left-1'}`
             : 'top-1/2 -translate-y-1/2 -right-2 translate-x-full'
