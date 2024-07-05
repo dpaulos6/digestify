@@ -19,8 +19,8 @@ export default function SecretGenerator() {
       <span className="flex items-center gap-2 text-3xl mt-12 text-center px-4">
         Your randomly generated Secrets.
       </span>
-      <section className="flex flex-col max-w-5xl items-start justify-center w-full gap-4 my-12 px-4 sm:px-12">
-        <div className="flex flex-col gap-2 items-start w-full">
+      <section className="flex flex-col items-start justify-center w-full gap-4 my-12 px-4 sm:px-12 max-w-xs sm:max-w-sm md:max-w-5xl">
+        <div className="flex flex-col gap-2 items-center w-full">
           <label
             className="text-lg font-semibold w-full"
             htmlFor="keygen-secret-32"
@@ -28,11 +28,9 @@ export default function SecretGenerator() {
             Secret 32 characters
           </label>
           <OutputWrapper
-            className={cn(
-              'code w-full break-words',
-              !secret32 && 'text-transparent'
-            )}
-            buttonPosition="inside"
+            className={cn('code w-full', !secret32 && 'text-transparent')}
+            type="code"
+            buttonPosition="outside"
           >
             {secret32 ? secret32 : '.'.repeat(32)}
           </OutputWrapper>
@@ -46,10 +44,11 @@ export default function SecretGenerator() {
           </label>
           <OutputWrapper
             className={cn(
-              'code w-full break-words',
+              'code w-full max-w-xs sm:max-w-sm md:max-w-full',
               !secret64 && 'text-transparent'
             )}
-            buttonPosition="inside"
+            type="code"
+            buttonPosition="outside"
           >
             {secret64 ? secret64 : '.'.repeat(64)}
           </OutputWrapper>

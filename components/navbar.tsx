@@ -68,7 +68,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
   {
     title: 'Miscellaneous',
-    href: '/miscellaneous',
+    href: '/',
     description:
       'Tools for hash comparison, cracking, one-time passwords generation, and more.'
   },

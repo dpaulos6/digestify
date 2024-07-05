@@ -24,7 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn('flex flex-col min-h-screen', mulish.className)}>
+      <body
+        className={cn(
+          'flex flex-col min-h-screen max-w-screen overflow-x-hidden',
+          mulish.className
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
