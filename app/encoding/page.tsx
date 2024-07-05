@@ -69,7 +69,7 @@ export default function Encryption() {
   }
 
   return (
-    <section className="flex flex-col max-w-5xl w-full gap-3 justify-center py-32 px-12">
+    <section className="flex flex-col max-w-5xl w-full gap-3 justify-center py-32 px-6 sm:px-12">
       <span className="text-center text-3xl mb-6">Encode & Decode</span>
       <div className="flex flex-col md:flex-row gap-4 items-center">
         <div className="flex flex-col gap-1 w-full">
@@ -91,10 +91,10 @@ export default function Encryption() {
           </OutputWrapper>
         </div>
       </div>
-      <div className="flex gap-3 justify-start">
+      <div className="flex flex-wrap sm:flex-row gap-3 items-center justify-center sm:justify-start">
         <Button
           type="button"
-          className="flex gap-2 text-base"
+          className="flex w-full xs:w-fit gap-2 text-base"
           onClick={toggleMode}
         >
           <ArrowDownUp className="w-5 h-5" />
@@ -107,7 +107,7 @@ export default function Encryption() {
           }}
           defaultValue={encodingType}
         >
-          <SelectTrigger className="w-[180px] border-2 hover:bg-foreground/5 text-base">
+          <SelectTrigger className="w-full xs:w-[180px] border-2 hover:bg-foreground/5 text-base">
             <SelectValue placeholder={encodingType} />
           </SelectTrigger>
           <SelectContent>

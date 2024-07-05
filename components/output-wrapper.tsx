@@ -58,12 +58,17 @@ export default function OutputWrapper({
     <div
       className={cn(
         'relative w-full h-full',
-        type === 'code' && 'code',
+        buttonPosition === 'outside' &&
+          'flex flex-wrap items-start sm:items-center gap-2',
         className
       )}
     >
       <pre
-        className={cn('whitespace-pre-wrap break-words font-mono')}
+        className={cn(
+          'whitespace-pre-wrap break-words font-mono',
+          type === 'code' &&
+            'code max-w-[16rem] xs:max-w-xs sm:max-w-md md:max-w-lg lg:max-w-5xl'
+        )}
         ref={textRef}
       >
         {children}
@@ -92,12 +97,12 @@ const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'flex ml-auto sm:absolute p-1 bg-border hover:brightness-95 dark:hover:brightness-125 text-neutral-600 dark:text-neutral-300 rounded-md transition select-none',
+          'p-1 bg-border hover:brightness-95 dark:hover:brightness-125 text-neutral-600 dark:text-neutral-300 rounded-md transition select-none',
           wrapperType !== 'code'
             ? buttonPosition === 'inside'
-              ? `${buttonAlignment.includes('top') ? 'top-1' : 'bottom-1'} ${buttonAlignment.includes('right') ? 'right-1' : 'left-1'}`
-              : 'top-1/2 -translate-y-1/2 -right-2 translate-x-full'
-            : 'sm:top-0 sm:-right-1 sm:translate-x-full'
+              ? `absolute ${buttonAlignment.includes('top') ? 'top-1' : 'bottom-1'} ${buttonAlignment.includes('right') ? 'right-1' : 'left-1'}`
+              : 'flex ml-auto top-1/2 -translate-y-1/2 -right-2 translate-x-full'
+            : ''
         )}
         {...rest}
       >
