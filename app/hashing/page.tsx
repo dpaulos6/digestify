@@ -30,11 +30,11 @@ export default function Home() {
         <title>Digestify - Hashing Tools</title>
       </Head>
       <main className="flex-1 flex flex-col items-center">
-        <section className="flex flex-col max-w-5xl w-full gap-10 justify-center my-12 px-12">
-          <span className="text-5xl text-center">
+        <section className="flex flex-col max-w-5xl w-full gap-10 justify-center my-0 px-12">
+          <span className="flex items-center gap-2 text-3xl mt-12 text-center justify-center">
             Hash your data at lightspeed!
           </span>
-          <div className="grid grid-cols-2 gap-4 items-center w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
             <InputWrapper
               value={inputValue}
               onChange={(value) => updateValue(value)}

@@ -9,10 +9,10 @@ export default function Home() {
           <div className="flex flex-col items-center sm:flex-row gap-6 lg:gap-12">
             <div className="flex flex-col w-full justify-center space-y-4">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">
                   Powerful Hashing Tools for Your Needs
                 </h1>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                <p className="max-w-[600px] text-muted-foreground md:text-xl text-center">
                   Streamline your hashing workflows with our suite of
                   cutting-edge tools. Secure your data, optimize your processes,
                   and unlock new possibilities.
@@ -28,7 +28,7 @@ export default function Home() {
               </div> */}
             </div>
 
-            <ShieldCheck className="w-72 h-auto md:w-96 lg:w-[500px] text-primary h-auto" />
+            <ShieldCheck className="w-60 h-auto md:w-96 lg:w-[500px] text-primary" />
           </div>
         </div>
       </section>

@@ -104,23 +104,23 @@ export default function SecretGenerator() {
       <span className="flex items-center gap-2 text-center text-2xl lg:text-3xl mt-12">
         Generate a secure password.
       </span>
-      <section className="flex flex-col max-w-5xl items-start justify-center w-fit lg:w-full gap-4 my-12 px-4 md:px-12">
-        <div className="w-full flex flex-col sm:flex-row lg:flex-col justify-start items-start gap-6 ">
-          <div className="flex flex-col lg:flex-row gap-2 w-full sm:w-fit items-center sm:items-start lg:items-center order-1 sm:order-2 lg:order-1">
+      <section className="flex flex-col max-w-sm md:max-w-5xl items-start justify-center w-fit lg:w-full gap-4 my-12 px-4 md:px-12">
+        <div className="w-full flex flex-col sm:flex-row md:flex-col justify-start items-start gap-6">
+          <div className="flex flex-col lg:flex-row gap-2 w-full sm:w-fit items-center sm:items-start lg:items-center order-1">
             <label
               className="text-xl font-semibold whitespace-nowrap"
               htmlFor="keygen-secret-32"
             >
               Secure Password:
             </label>
-            <OutputWrapper className="code" buttonPosition="outside">
+            <OutputWrapper className="code w-full" buttonPosition="inside">
               {securePassword ? securePassword : '            '}
             </OutputWrapper>
           </div>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="min-w-fit lg:w-full bg-popup ring-1 ring-border px-8 py-6 rounded-xl space-y-8 order-2 sm:order-1 lg:order-2"
+              className="min-w-fit lg:w-full bg-popup ring-1 ring-border px-8 py-6 rounded-xl space-y-8 order-2 sm:order-1 lg:order-2 mx-auto"
             >
               <div className="flex flex-col lg:flex-row justify-evenly gap-8">
                 <FormField

@@ -75,7 +75,7 @@ export default function Encryption() {
       </span>
 
       <section className="flex flex-col max-w-5xl w-full gap-3 justify-center my-8 px-12">
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-col md:flex-row gap-4 items-center">
           <div className="flex flex-col gap-1 w-full">
             <InputWrapper
               value={input}

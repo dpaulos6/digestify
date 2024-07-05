@@ -16,11 +16,11 @@ export default function SecretGenerator() {
 
   return (
     <main className="flex-1 flex flex-col items-center">
-      <span className="flex items-center gap-2 text-3xl mt-12">
+      <span className="flex items-center gap-2 text-3xl mt-12 text-center px-4">
         Your randomly generated Secrets.
       </span>
-      <section className="flex flex-col max-w-5xl items-start justify-center w-full gap-4 my-12 px-12">
-        <div className="flex gap-2 items-center max-w-5xl">
+      <section className="flex flex-col max-w-5xl items-start justify-center w-full gap-4 my-12 px-4 sm:px-12">
+        <div className="flex flex-col gap-2 items-start w-full">
           <label
             className="text-lg font-semibold w-full"
             htmlFor="keygen-secret-32"
@@ -28,13 +28,16 @@ export default function SecretGenerator() {
             Secret 32 characters
           </label>
           <OutputWrapper
-            className={cn('code', !secret32 && 'text-transparent')}
-            buttonPosition="outside"
+            className={cn(
+              'code w-full break-words',
+              !secret32 && 'text-transparent'
+            )}
+            buttonPosition="inside"
           >
             {secret32 ? secret32 : '.'.repeat(32)}
           </OutputWrapper>
         </div>
-        <div className="flex gap-2 items-center">
+        <div className="flex flex-col gap-2 items-start w-full">
           <label
             className="text-lg font-semibold w-full"
             htmlFor="keygen-secret-64"
@@ -42,8 +45,11 @@ export default function SecretGenerator() {
             Secret 64 characters
           </label>
           <OutputWrapper
-            className={cn('code', !secret64 && 'text-transparent')}
-            buttonPosition="outside"
+            className={cn(
+              'code w-full break-words',
+              !secret64 && 'text-transparent'
+            )}
+            buttonPosition="inside"
           >
             {secret64 ? secret64 : '.'.repeat(64)}
           </OutputWrapper>
