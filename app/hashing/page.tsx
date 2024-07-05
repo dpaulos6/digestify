@@ -3,17 +3,24 @@
 import { useState } from 'react'
 import { digest } from '@/helpers/bcrypt'
 import OutputWrapper from '@/components/output-wrapper'
+import OutputWrapper from '@/components/output-wrapper'
 import Head from 'next/head'
+import InputWrapper from '@/components/input-wrapper'
 import InputWrapper from '@/components/input-wrapper'
 
 export default function Home() {
+  const [inputValue, setInputValue] = useState('')
   const [inputValue, setInputValue] = useState('')
   const [hashedValue, setHashedValue] = useState('')
 
   const updateValue = async (value: string) => {
     setInputValue(value)
     if (value) {
+  const updateValue = async (value: string) => {
+    setInputValue(value)
+    if (value) {
       try {
+        const hashedResult = await digest(value)
         const hashedResult = await digest(value)
         setHashedValue(hashedResult)
       } catch (error) {
