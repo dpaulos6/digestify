@@ -9,10 +9,10 @@ export default function Home() {
           <div className="flex flex-col items-center sm:flex-row gap-6 lg:gap-12">
             <div className="flex flex-col w-full justify-center space-y-4">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center sm:text-start">
                   Powerful Hashing Tools for Your Needs
                 </h1>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                <p className="max-w-[600px] text-muted-foreground md:text-xl text-center sm:text-start">
                   Streamline your hashing workflows with our suite of
                   cutting-edge tools. Secure your data, optimize your processes,
                   and unlock new possibilities.
