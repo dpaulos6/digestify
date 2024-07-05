@@ -12,7 +12,7 @@ export default function Home() {
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">
                   Powerful Hashing Tools for Your Needs
                 </h1>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl text-center">
+                <p className="max-w-[600px] text-muted-foreground md:text-xl">
                   Streamline your hashing workflows with our suite of
                   cutting-edge tools. Secure your data, optimize your processes,
                   and unlock new possibilities.
