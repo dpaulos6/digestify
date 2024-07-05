@@ -28,7 +28,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
+    --border: 0 0% 93.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
 
@@ -74,6 +74,6 @@
     @apply bg-background text-foreground;
   }
   .code {
-    @apply w-fit h-fit resize-none border py-1 px-1.5 rounded bg-foreground/5;
+    @apply w-fit h-fit resize-none border py-1 px-1.5 rounded-md bg-foreground/5;
   }
 }
