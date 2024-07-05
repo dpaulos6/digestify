@@ -69,63 +69,58 @@ export default function Encryption() {
   }
 
   return (
-    <main className="flex-1 flex flex-col items-center">
-      <span className="flex items-center gap-2 text-3xl mt-12">
-        Encode & Decode
-      </span>
-
-      <section className="flex flex-col max-w-5xl w-full gap-3 justify-center my-8 px-12">
-        <div className="flex flex-col md:flex-row gap-4 items-center">
-          <div className="flex flex-col gap-1 w-full">
-            <InputWrapper
-              value={input}
-              onChange={handleInputChange}
-              className="flex-1 min-h-52 h-auto ring-1 ring-border rounded-md resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:ring-primary transition cursor-default"
-              placeholder={
-                isEncoding
-                  ? 'Paste a string to encode'
-                  : 'Paste a string to decode'
-              }
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 w-full relative">
-            <OutputWrapper className="w-full min-h-52 h-auto bg-white dark:bg-[#121212] ring-1 ring-border rounded-md hover:ring-primary transition cursor-default">
-              {output}
-            </OutputWrapper>
-          </div>
+    <section className="flex flex-col max-w-5xl w-full gap-3 justify-center py-32 px-12">
+      <span className="text-center text-3xl mb-6">Encode & Decode</span>
+      <div className="flex flex-col md:flex-row gap-4 items-center">
+        <div className="flex flex-col gap-1 w-full">
+          <InputWrapper
+            value={input}
+            onChange={handleInputChange}
+            className="flex-1 min-h-52 h-auto ring-1 ring-border rounded-md resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:ring-primary transition cursor-default"
+            placeholder={
+              isEncoding
+                ? 'Paste a string to encode'
+                : 'Paste a string to decode'
+            }
+          />
         </div>
-        <div className="flex gap-3 justify-start">
-          <Button
-            type="button"
-            className="flex gap-2 text-base"
-            onClick={toggleMode}
-          >
-            <ArrowDownUp className="w-5 h-5" />
-            {isEncoding ? 'Switch to Decode' : 'Switch to Encode'}
-          </Button>
-          <Select
-            onValueChange={(value: string) => {
-              setEncodingType(value)
-              handleSubmit(input)
-            }}
-            defaultValue={encodingType}
-          >
-            <SelectTrigger className="w-[180px] border-2 hover:bg-foreground/5 text-base">
-              <SelectValue placeholder={encodingType} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {['base64', 'base32', 'base58'].map((type) => (
-                  <SelectItem key={type} value={type}>
-                    {type.toLocaleUpperCase()}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+
+        <div className="flex flex-col gap-1 w-full relative">
+          <OutputWrapper className="w-full min-h-52 h-auto bg-white dark:bg-[#121212] ring-1 ring-border rounded-md hover:ring-primary transition cursor-default">
+            {output}
+          </OutputWrapper>
         </div>
-      </section>
-    </main>
+      </div>
+      <div className="flex gap-3 justify-start">
+        <Button
+          type="button"
+          className="flex gap-2 text-base"
+          onClick={toggleMode}
+        >
+          <ArrowDownUp className="w-5 h-5" />
+          {isEncoding ? 'Switch to Decode' : 'Switch to Encode'}
+        </Button>
+        <Select
+          onValueChange={(value: string) => {
+            setEncodingType(value)
+            handleSubmit(input)
+          }}
+          defaultValue={encodingType}
+        >
+          <SelectTrigger className="w-[180px] border-2 hover:bg-foreground/5 text-base">
+            <SelectValue placeholder={encodingType} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {['base64', 'base32', 'base58'].map((type) => (
+                <SelectItem key={type} value={type}>
+                  {type.toLocaleUpperCase()}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+    </section>
   )
 }

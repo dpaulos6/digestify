@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "label": "Secret Generator",
+    "href": "/keygen"
+  },
+  {
+    "id": 2,
+    "label": "Password Generator",
+    "href": "/keygen/password"
+  }
+]

@@ -11,13 +11,15 @@ type ButtonAlignment = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 interface OutputWrapperProps {
   children: ReactNode
   className?: string
+  type?: 'code' | 'default'
   buttonPosition?: ButtonPosition
   buttonAlignment?: ButtonAlignment
 }
 
 export default function OutputWrapper({
   children,
-  className = '',
+  className,
+  type = 'default',
   buttonPosition = 'inside',
   buttonAlignment = 'top-right'
 }: OutputWrapperProps) {
@@ -53,9 +55,15 @@ export default function OutputWrapper({
   }
 
   return (
-    <div className={cn('relative w-full h-full', className)}>
+    <div
+      className={cn(
+        'relative w-full h-full',
+        type === 'code' && 'code',
+        className
+      )}
+    >
       <pre
-        className={cn('px-2 py-1 whitespace-pre-wrap break-words font-mono')}
+        className={cn('whitespace-pre-wrap break-words font-mono')}
         ref={textRef}
       >
         {children}
@@ -63,6 +71,7 @@ export default function OutputWrapper({
       <CopyButton
         onClick={copyToClipboard}
         copied={copied}
+        wrapperType={type}
         buttonPosition={buttonPosition}
         buttonAlignment={buttonAlignment}
       />
@@ -72,20 +81,23 @@ export default function OutputWrapper({
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   copied: boolean
+  wrapperType: 'code' | 'default'
   buttonPosition: ButtonPosition
   buttonAlignment: ButtonAlignment
 }
 
 const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ copied, buttonPosition, buttonAlignment, ...rest }, ref) => {
+  ({ copied, wrapperType, buttonPosition, buttonAlignment, ...rest }, ref) => {
     return (
       <button
         ref={ref}
         className={cn(
-          'absolute p-1 bg-border hover:brightness-95 dark:hover:brightness-125 text-neutral-600 dark:text-neutral-300 rounded-md transition select-none',
-          buttonPosition === 'inside'
-            ? `${buttonAlignment.includes('top') ? 'top-1' : 'bottom-1'} ${buttonAlignment.includes('right') ? 'right-1' : 'left-1'}`
-            : 'top-1/2 -translate-y-1/2 -right-2 translate-x-full'
+          'flex ml-auto sm:absolute p-1 bg-border hover:brightness-95 dark:hover:brightness-125 text-neutral-600 dark:text-neutral-300 rounded-md transition select-none',
+          wrapperType !== 'code'
+            ? buttonPosition === 'inside'
+              ? `${buttonAlignment.includes('top') ? 'top-1' : 'bottom-1'} ${buttonAlignment.includes('right') ? 'right-1' : 'left-1'}`
+              : 'top-1/2 -translate-y-1/2 -right-2 translate-x-full'
+            : 'sm:top-0 sm:-right-1 sm:translate-x-full'
         )}
         {...rest}
       >
