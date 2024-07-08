@@ -100,14 +100,14 @@ export default function SecretGenerator() {
   }, [])
 
   return (
-    <section className="flex flex-col max-w-xs md:max-w-5xl items-start justify-center w-fit lg:w-full gap-4 my-12 px-4 md:px-12">
-      <span className="flex items-center gap-2 text-center text-2xl lg:text-3xl mt-12">
+    <section className="my-12 flex w-fit max-w-xs flex-col items-start justify-center gap-4 px-4 md:max-w-5xl md:px-12 lg:w-full">
+      <span className="mt-12 flex items-center gap-2 text-center text-2xl lg:text-3xl">
         Generate a secure password.
       </span>
-      <div className="w-full flex flex-col justify-start items-start gap-6">
-        <div className="flex flex-col lg:flex-row gap-2 w-full sm:w-fit items-center sm:items-start lg:items-center order-1">
+      <div className="flex w-full flex-col items-start justify-start gap-6">
+        <div className="order-1 flex w-full flex-col items-center gap-2 sm:w-fit sm:items-start lg:flex-row lg:items-center">
           <label
-            className="text-xl font-semibold whitespace-nowrap"
+            className="whitespace-nowrap text-xl font-semibold"
             htmlFor="keygen-secret-32"
           >
             Secure Password:
@@ -123,17 +123,17 @@ export default function SecretGenerator() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="min-w-fit max-w-xs w-full lg:max-w-full lg:w-full bg-popup ring-1 ring-border px-8 py-6 rounded-xl space-y-8 order-2 sm:order-1 lg:order-2 mx-auto"
+            className="bg-popup order-2 mx-auto w-full min-w-fit max-w-xs space-y-8 rounded-xl px-8 py-6 ring-1 ring-border sm:order-1 lg:order-2 lg:w-full lg:max-w-full"
           >
-            <div className="flex flex-col lg:flex-row justify-evenly gap-8">
+            <div className="flex flex-col justify-evenly gap-8 lg:flex-row">
               <FormField
                 control={form.control}
                 name="length"
                 render={({ field: { value, onChange } }) => (
                   <FormItem className="space-y-4">
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-2">
                       <FormLabel className="text-lg">Password length</FormLabel>
-                      <span className="flex items-center justify-center min-w-10 ring-1 ring-border px-2 py-1 rounded-md">
+                      <span className="flex min-w-10 items-center justify-center rounded-md px-2 py-1 ring-1 ring-border">
                         {value}
                       </span>
                     </div>
@@ -151,7 +151,7 @@ export default function SecretGenerator() {
                   </FormItem>
                 )}
               />
-              <div className="flex flex-col lg:flex-row gap-2 lg:gap-8">
+              <div className="flex flex-col gap-2 lg:flex-row lg:gap-8">
                 <FormField
                   control={form.control}
                   name="includeUppercase"
@@ -222,9 +222,12 @@ export default function SecretGenerator() {
                 />
               </div>
             </div>
-            <Button type="submit" className="flex gap-2 mx-auto px-8 text-lg">
+            <Button
+              type="submit"
+              className="mx-auto flex gap-2 px-8 text-lg"
+            >
               Generate
-              <RotateCcw className="w-5 h-5" />
+              <RotateCcw className="h-5 w-5" />
             </Button>
           </form>
         </Form>

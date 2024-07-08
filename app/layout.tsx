@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'flex flex-col min-h-screen max-w-screen overflow-x-hidden',
+          'max-w-screen relative flex min-h-screen flex-col overflow-x-hidden',
           mulish.className
         )}
       >
@@ -38,6 +38,9 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
+          <div className="absolute bottom-20 left-2 z-10 hidden max-w-xs rounded-lg border border-amber-400/25 bg-amber-400/25 p-4 text-sm sm:flex md:text-base">
+            This is an under development deployment, not production ready!
+          </div>
           <Toaster />
           <Footer />
         </ThemeProvider>

@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <>
       <SubNavbar items={items} />
-      <main className="flex-1 flex flex-col items-center">{children}</main>
+      <main className="flex flex-1 flex-col items-center">{children}</main>
     </>
   )
 }

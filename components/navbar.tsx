@@ -3,13 +3,14 @@
 import { DigestifyIcon } from '@/icons'
 import { cn } from '@/lib/utils'
 import {
-  CreditCard,
-  Keyboard,
+  FileKey,
+  FileLock,
+  GraduationCap,
+  Hash,
+  KeyRound,
   Menu,
   Moon,
-  Settings,
-  Sun,
-  User
+  Sun
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Montserrat } from 'next/font/google'
@@ -25,23 +26,15 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 
-import React from 'react'
+import React, { Component, useEffect, useState } from 'react'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
-const components: { title: string; href: string; description: string }[] = [
+const components = [
   {
     title: 'Hashing Tools',
     href: '/hashing',
@@ -82,61 +75,131 @@ const components: { title: string; href: string; description: string }[] = [
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
+  const [screenSize, setScreenSize] = useState('sm')
+
+  useEffect(() => {
+    function checkScreenSize() {
+      const xxlBreakpoint = window.matchMedia('(min-width: 1400px)')
+      const xlBreakpoint = window.matchMedia('(min-width: 1280px)')
+      const largeBreakpoint = window.matchMedia('(min-width: 1024px)')
+      const mediumBreakpoint = window.matchMedia('(min-width: 768px)')
+      const smallBreakpoint = window.matchMedia('(max-width: 640px)')
+
+      if (xxlBreakpoint.matches) {
+        setScreenSize('2xl')
+      } else if (xlBreakpoint.matches) {
+        setScreenSize('xl')
+      } else if (largeBreakpoint.matches) {
+        setScreenSize('lg')
+      } else if (mediumBreakpoint.matches) {
+        setScreenSize('md')
+      } else if (smallBreakpoint.matches) {
+        setScreenSize('sm')
+      } else {
+        setScreenSize('default')
+      }
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
   return (
     <header>
-      <nav className="w-full flex items-center justify-between gap-8 px-4 py-3 border-b border-border">
+      <nav className="z-10 flex w-full items-center justify-between gap-8 border-b border-border bg-background px-4 py-3">
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex gap-1 items-center group">
-            <DigestifyIcon className="w-10 h-10 text-primary group-hover:text-primary/75 transition" />
+          <Link
+            href="/"
+            className="group flex items-center gap-1"
+          >
+            <DigestifyIcon className="h-10 w-10 text-primary transition group-hover:text-primary/75" />
             <span
               className={cn(
-                'text-2xl hidden sm:block font-semibold font-custom lowercase group-hover:translate-x-1 transition',
+                'font-custom hidden text-2xl font-semibold lowercase transition group-hover:translate-x-1 sm:block',
                 montserrat.className
               )}
             >
               Digestify
             </span>
           </Link>
-          <NavigationMenu className="hidden sm:block">
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-base">
-                  Services
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                    {components.map((component) => (
-                      <ListItem
-                        key={component.title}
-                        title={component.title}
-                        href={component.href}
-                      >
-                        {component.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+          <div className="flex items-center">
+            {components
+              .slice(
+                0,
+                screenSize === '2xl' ? 6
+                : screenSize === 'xl' ? 4
+                : screenSize === 'lg' ? 3
+                : screenSize === 'md' ? 2
+                : 0
+              )
+              .map((component) => (
+                <Link
+                  key={component.title}
+                  href={component.href}
+                  className="rounded-md px-3 py-2 transition hover:bg-foreground/5"
+                >
+                  {component.title}
+                </Link>
+              ))}
+            <NavigationMenu className="hidden sm:block 2xl:hidden">
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-base md:hidden">
+                    Services
+                  </NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="hidden text-base md:flex">
+                    More
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      {components
+                        .slice(
+                          screenSize === '2xl' ? 0
+                          : screenSize === 'xl' ? components.length - 2
+                          : screenSize === 'lg' ? components.length - 3
+                          : screenSize === 'md' ? components.length - 4
+                          : screenSize === 'sm' ? components.length
+                          : 0
+                        )
+                        .map((component) => (
+                          <ListItem
+                            key={component.title}
+                            title={component.title}
+                            href={component.href}
+                          >
+                            {component.description}
+                          </ListItem>
+                        ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
         </div>
         <div className="flex items-center">
           <button
-            className="p-2 rounded-md hover:bg-foreground/5 transition"
+            className="rounded-md p-2 transition hover:bg-foreground/5"
             onClick={() => {
               setTheme(theme == 'light' ? 'dark' : 'light')
             }}
           >
-            {theme == 'light' ? <Moon /> : <Sun />}
+            {theme == 'light' ?
+              <Moon />
+            : <Sun />}
           </button>
-          <div className="block sm:hidden h-10">
+          <div className="block h-10 sm:hidden">
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <Menu className="p-2 w-10 h-10 hover:bg-border transition rounded-lg" />
+                <Menu className="h-10 w-10 rounded-lg p-2 transition hover:bg-border" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 {components.map((component, i) => (
-                  <Link key={i} href={component.href}>
+                  <Link
+                    key={i}
+                    href={component.href}
+                  >
                     <DropdownMenuItem>
                       {/* <User className="mr-2 h-4 w-4" /> */}
                       <span className="text-base">{component.title}</span>

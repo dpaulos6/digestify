@@ -24,12 +24,16 @@ export default function SubNavbar({
   return (
     <div
       className={cn(
-        'flex items-center justify-start w-full relative px-6 py-3 bg-background border-b whitespace-nowrap overflow-x-auto',
+        'relative flex w-full items-center justify-start overflow-x-auto whitespace-nowrap border-b bg-background px-6 py-3',
         className
       )}
     >
       {items.map((item) => (
-        <SubNavbarItem key={item.id} label={item.label} href={item.href} />
+        <SubNavbarItem
+          key={item.id}
+          label={item.label}
+          href={item.href}
+        />
       ))}
     </div>
   )
@@ -48,7 +52,7 @@ const SubNavbarItem = ({ label, href }: SubNavbarItemProps): JSX.Element => {
     <Link
       href={href}
       className={cn(
-        'mx-2 px-2 py-1 rounded-md sm:hover:bg-foreground/10 transition',
+        'mx-2 rounded-md px-2 py-1 transition sm:hover:bg-foreground/10',
         isActive && 'font-bold text-primary'
       )}
     >

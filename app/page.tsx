@@ -1,37 +1,74 @@
-import { ShieldCheck } from 'lucide-react'
+import {
+  Component,
+  FileKey,
+  FileLock,
+  GraduationCap,
+  Hash,
+  KeyRound,
+  ShieldCheck
+} from 'lucide-react'
 import Link from 'next/link'
+
+const components = [
+  {
+    title: 'Hashing Tools',
+    href: '/hashing',
+    icon: Hash
+  },
+  {
+    title: 'Key Generation',
+    href: '/keygen',
+    icon: KeyRound
+  },
+  {
+    title: 'Encryption & Decryption',
+    href: '/',
+    icon: FileLock
+  },
+  {
+    title: 'Encoding & Decoding',
+    href: '/encoding',
+    icon: FileKey
+  },
+  {
+    title: 'Miscellaneous',
+    href: '/',
+    icon: Component
+  },
+  {
+    title: 'Educational Resources',
+    href: '/',
+    icon: GraduationCap
+  }
+]
 
 export default function Home() {
   return (
-    <main className="flex flex-1 items-center">
-      <section className="w-full py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="flex flex-col items-center sm:flex-row gap-6 lg:gap-12">
-            <div className="flex flex-col w-full justify-center space-y-4">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">
-                  Powerful Hashing Tools for Your Needs
-                </h1>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl text-center">
-                  Streamline your hashing workflows with our suite of
-                  cutting-edge tools. Secure your data, optimize your processes,
-                  and unlock new possibilities.
-                </p>
-              </div>
-              {/* <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link
-                  href="#"
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                >
-                  Get Started
-                </Link>
-              </div> */}
-            </div>
-
-            <ShieldCheck className="w-60 h-auto md:w-96 lg:w-[500px] text-primary" />
-          </div>
+    <main className="relative flex flex-1 items-center justify-center overflow-y-hidden">
+      <section className="flex w-full max-w-7xl flex-col items-center gap-10 px-8 py-12 sm:gap-16 sm:py-16 md:py-24 lg:py-32">
+        <span className="max-w-3xl text-center text-3xl font-bold tracking-tighter xs:text-5xl sm:text-6xl md:text-7xl">
+          Powerful <span className="text-primary">Hashing Tools</span> for Your
+          Needs
+        </span>
+        <span className="max-w-2xl text-center text-base text-muted-foreground xs:text-lg md:text-2xl">
+          Streamline your hashing workflows with our suite of cutting-edge
+          tools. Secure your data, optimize your processes, and unlock new
+          possibilities.
+        </span>
+        <div className="flex max-w-5xl flex-wrap justify-center gap-4">
+          {components.map((component, index) => (
+            <Link
+              key={index}
+              href={component.href}
+              className="flex items-center gap-2 whitespace-nowrap rounded-xl border px-3 py-1.5 text-sm transition hover:bg-foreground/10 xs:text-base md:text-lg"
+            >
+              <component.icon className="h-3 w-3 xs:h-4 xs:w-4 md:h-5 md:w-5" />
+              {component.title}
+            </Link>
+          ))}
         </div>
       </section>
+      <Hash className="absolute bottom-0 right-[15%] h-auto w-60 translate-y-1/4 rotate-12 opacity-25" />
     </main>
   )
 }

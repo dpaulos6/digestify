@@ -57,8 +57,9 @@ export default function OutputWrapper({
   return (
     <div
       className={cn(
-        'relative w-full h-full',
-        type === 'code' && 'code',
+        'relative h-full w-full',
+        buttonPosition === 'outside' &&
+          'flex flex-wrap items-start gap-2 sm:items-center',
         className
       )}
     >
@@ -92,26 +93,25 @@ const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'flex ml-auto sm:absolute p-1 bg-border hover:brightness-95 dark:hover:brightness-125 text-neutral-600 dark:text-neutral-300 rounded-md transition select-none',
-          wrapperType !== 'code'
-            ? buttonPosition === 'inside'
-              ? `${buttonAlignment.includes('top') ? 'top-1' : 'bottom-1'} ${buttonAlignment.includes('right') ? 'right-1' : 'left-1'}`
-              : 'top-1/2 -translate-y-1/2 -right-2 translate-x-full'
-            : 'sm:top-0 sm:-right-1 sm:translate-x-full'
+          'select-none rounded-md bg-border p-1 text-neutral-600 transition hover:brightness-95 dark:text-neutral-300 dark:hover:brightness-125',
+          wrapperType !== 'code' ?
+            buttonPosition === 'inside' ?
+              `absolute ${buttonAlignment.includes('top') ? 'top-1' : 'bottom-1'} ${buttonAlignment.includes('right') ? 'right-1' : 'left-1'}`
+            : '-right-2 top-1/2 ml-auto flex -translate-y-1/2 translate-x-full'
+          : ''
         )}
         {...rest}
       >
-        {copied ? (
+        {copied ?
           <span className="flex gap-1">
             <CheckIcon />
             Copied
           </span>
-        ) : (
-          <span className="flex gap-1">
+        : <span className="flex gap-1">
             <CopyIcon />
             Copy
           </span>
-        )}
+        }
       </button>
     )
   }

@@ -42,19 +42,16 @@ export default function Encryption() {
     let result
     switch (encodingType) {
       case 'base64':
-        result = isEncoding
-          ? encodeBase64(inputValue)
-          : decodeBase64(inputValue)
+        result =
+          isEncoding ? encodeBase64(inputValue) : decodeBase64(inputValue)
         break
       case 'base32':
-        result = isEncoding
-          ? encodeBase32(inputValue)
-          : decodeBase32(inputValue)
+        result =
+          isEncoding ? encodeBase32(inputValue) : decodeBase32(inputValue)
         break
       case 'base58':
-        result = isEncoding
-          ? encodeBase58(inputValue)
-          : decodeBase58(inputValue)
+        result =
+          isEncoding ? encodeBase58(inputValue) : decodeBase58(inputValue)
         break
       default:
         result = ''
@@ -69,35 +66,35 @@ export default function Encryption() {
   }
 
   return (
-    <section className="flex flex-col max-w-5xl w-full gap-3 justify-center py-32 px-12">
-      <span className="text-center text-3xl mb-6">Encode & Decode</span>
-      <div className="flex flex-col md:flex-row gap-4 items-center">
-        <div className="flex flex-col gap-1 w-full">
+    <section className="flex w-full max-w-5xl flex-col justify-center gap-3 px-6 py-32 sm:px-12">
+      <span className="mb-6 text-center text-3xl">Encode & Decode</span>
+      <div className="flex flex-col items-center gap-4 md:flex-row">
+        <div className="flex w-full flex-col gap-1">
           <InputWrapper
             value={input}
             onChange={handleInputChange}
-            className="flex-1 min-h-52 h-auto ring-1 ring-border rounded-md resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:ring-primary transition cursor-default"
+            className="h-auto min-h-52 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             placeholder={
-              isEncoding
-                ? 'Paste a string to encode'
-                : 'Paste a string to decode'
+              isEncoding ?
+                'Paste a string to encode'
+              : 'Paste a string to decode'
             }
           />
         </div>
 
-        <div className="flex flex-col gap-1 w-full relative">
-          <OutputWrapper className="w-full min-h-52 h-auto bg-white dark:bg-[#121212] ring-1 ring-border rounded-md hover:ring-primary transition cursor-default">
+        <div className="relative flex w-full flex-col gap-1">
+          <OutputWrapper className="h-auto min-h-52 w-full cursor-default rounded-md bg-white ring-1 ring-border transition hover:ring-primary dark:bg-[#121212]">
             {output}
           </OutputWrapper>
         </div>
       </div>
-      <div className="flex gap-3 justify-start">
+      <div className="flex flex-wrap items-center justify-center gap-3 sm:flex-row sm:justify-start">
         <Button
           type="button"
-          className="flex gap-2 text-base"
+          className="flex w-full gap-2 text-base xs:w-fit"
           onClick={toggleMode}
         >
-          <ArrowDownUp className="w-5 h-5" />
+          <ArrowDownUp className="h-5 w-5" />
           {isEncoding ? 'Switch to Decode' : 'Switch to Encode'}
         </Button>
         <Select
@@ -107,13 +104,16 @@ export default function Encryption() {
           }}
           defaultValue={encodingType}
         >
-          <SelectTrigger className="w-[180px] border-2 hover:bg-foreground/5 text-base">
+          <SelectTrigger className="w-full border-2 text-base hover:bg-foreground/5 xs:w-[180px]">
             <SelectValue placeholder={encodingType} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               {['base64', 'base32', 'base58'].map((type) => (
-                <SelectItem key={type} value={type}>
+                <SelectItem
+                  key={type}
+                  value={type}
+                >
                   {type.toLocaleUpperCase()}
                 </SelectItem>
               ))}

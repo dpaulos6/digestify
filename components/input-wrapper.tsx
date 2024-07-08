@@ -20,7 +20,7 @@ export default function InputWrapper({
     <textarea
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className={cn('w-full h-full resize-none p-2', className)}
+      className={cn('h-full w-full resize-none p-2', className)}
       placeholder={placeholder}
     />
   )

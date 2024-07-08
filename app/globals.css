@@ -74,6 +74,6 @@
     @apply bg-background text-foreground;
   }
   .code {
-    @apply w-fit h-fit resize-none border py-1 px-1.5 rounded-md bg-foreground/5;
+    @apply h-fit w-fit resize-none rounded-md border bg-foreground/5 px-1.5 py-1;
   }
 }
