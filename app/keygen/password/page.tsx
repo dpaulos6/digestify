@@ -104,7 +104,7 @@ export default function SecretGenerator() {
       <span className="mt-12 flex items-center gap-2 text-center text-2xl lg:text-3xl">
         Generate a secure password.
       </span>
-      <div className="flex w-full flex-col items-start justify-start gap-6">
+      <div className="flex w-full flex-col items-start justify-start gap-6 bg-background">
         <div className="order-1 flex w-full flex-col items-center gap-2 sm:w-fit sm:items-start lg:flex-row lg:items-center">
           <label
             className="whitespace-nowrap text-xl font-semibold"

@@ -60,7 +60,7 @@ export default function Home() {
             <Link
               key={index}
               href={component.href}
-              className="flex items-center gap-2 whitespace-nowrap rounded-xl border px-3 py-1.5 text-sm transition hover:bg-foreground/10 xs:text-base md:text-lg"
+              className="hover:bg-background-hover flex items-center gap-2 whitespace-nowrap rounded-xl border bg-background px-3 py-1.5 text-sm transition xs:text-base md:text-lg"
             >
               <component.icon className="h-3 w-3 xs:h-4 xs:w-4 md:h-5 md:w-5" />
               {component.title}
@@ -68,7 +68,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <Hash className="absolute bottom-0 right-[15%] h-auto w-60 translate-y-1/4 rotate-12 opacity-25" />
     </main>
   )
 }

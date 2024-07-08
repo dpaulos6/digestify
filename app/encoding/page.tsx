@@ -104,7 +104,7 @@ export default function Encryption() {
           }}
           defaultValue={encodingType}
         >
-          <SelectTrigger className="w-full border-2 text-base hover:bg-foreground/5 xs:w-[180px]">
+          <SelectTrigger className="hover:bg-background-hover w-full border-2 text-base xs:w-[180px]">
             <SelectValue placeholder={encodingType} />
           </SelectTrigger>
           <SelectContent>

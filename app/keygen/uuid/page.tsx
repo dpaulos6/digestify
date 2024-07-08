@@ -34,11 +34,11 @@ export default function UuidGenerator() {
   }, [])
 
   return (
-    <section className="my-12 flex w-full max-w-5xl flex-col items-center justify-center gap-4 px-4 sm:px-12">
-      <span className="mt-12 flex items-center gap-2 px-4 text-center text-3xl">
+    <section className="my-12 flex w-full max-w-5xl flex-col justify-center gap-4 px-4 sm:px-12">
+      <span className="mt-12 w-full text-center text-3xl sm:text-start">
         Your randomly generated UUID.
       </span>
-      <div className="flex w-fit flex-col items-center gap-2 sm:w-full">
+      <div className="mx-auto flex w-fit flex-col items-center gap-2 sm:mx-0 sm:w-full">
         <label
           className="w-full text-lg font-semibold"
           htmlFor="uuid-output"

@@ -137,7 +137,7 @@ export default function Navbar() {
                 <Link
                   key={component.title}
                   href={component.href}
-                  className="rounded-md px-3 py-2 transition hover:bg-foreground/5"
+                  className="hover:bg-background-hover rounded-md px-3 py-2 transition"
                 >
                   {component.title}
                 </Link>
@@ -180,7 +180,7 @@ export default function Navbar() {
         </div>
         <div className="flex items-center">
           <button
-            className="rounded-md p-2 transition hover:bg-foreground/5"
+            className="hover:bg-background-hover rounded-md p-2 transition"
             onClick={() => {
               setTheme(theme == 'light' ? 'dark' : 'light')
             }}
@@ -225,7 +225,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-foreground/5 hover:text-accent-foreground focus:bg-foreground/10 focus:text-accent-foreground',
+            'hover:bg-background-hover block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:text-accent-foreground focus:bg-background-hover focus:text-accent-foreground',
             className
           )}
           {...props}

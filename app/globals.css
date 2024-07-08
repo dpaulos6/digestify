@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --background: 120 11% 98%;
+    --background-hover: 0 0% 95%;
     --foreground: 0 0% 7%;
 
     --card: 0 0% 100%;
@@ -13,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
-    --primary: 136 92% 54%;
+    --primary: 136 92% 47.5%;
     --primary-foreground: 0 0% 2%;
 
     --secondary: 136 39% 72%;
@@ -28,7 +29,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 93.8%;
+    --border: 0 0% 90%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
 
@@ -37,6 +38,7 @@
 
   .dark {
     --background: 120 9% 2%;
+    --background-hover: 0 0% 7.5%;
     --foreground: 0 0% 93%;
 
     --card: 0 0% 3.9%;
@@ -45,7 +47,7 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 136 92% 46%;
+    --primary: 136 92% 50%;
     --primary-foreground: 0 0% 9%;
 
     --secondary: 135 38% 28%;
@@ -60,7 +62,7 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 14.9%;
+    --border: 0 0% 12.5%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
   }
@@ -74,6 +76,6 @@
     @apply bg-background text-foreground;
   }
   .code {
-    @apply h-fit w-fit resize-none rounded-md border bg-foreground/5 px-1.5 py-1;
+    @apply bg-background-hover h-fit w-fit resize-none rounded-md border px-1.5 py-1;
   }
 }
