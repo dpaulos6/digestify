@@ -8,10 +8,31 @@ import { cn } from '@/lib/utils'
 export default function SecretGenerator() {
   const [secret32, setSecret32] = useState('')
   const [secret64, setSecret64] = useState('')
+  const [screenSize, setScreenSize] = useState('sm')
 
   useEffect(() => {
     setSecret32(generateRandomSecret(32))
     setSecret64(generateRandomSecret(64))
+  }, [])
+
+  useEffect(() => {
+    function checkScreenSize() {
+      const smallBreakpoint = window.matchMedia('(max-width: 640px)')
+      const mediumBreakpoint = window.matchMedia('(min-width: 768px)')
+      const largeBreakpoint = window.matchMedia('(min-width: 1024px)')
+
+      if (smallBreakpoint.matches) {
+        setScreenSize('sm')
+      } else if (mediumBreakpoint.matches) {
+        setScreenSize('md')
+      } else if (largeBreakpoint.matches) {
+        setScreenSize('lg')
+      }
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
   return (

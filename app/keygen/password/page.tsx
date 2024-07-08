@@ -115,7 +115,7 @@ export default function SecretGenerator() {
           <OutputWrapper
             className="w-full max-w-xs md:max-w-full"
             type="code"
-            buttonPosition={screenSize === 'sm' ? 'inside' : 'outside'}
+            buttonPosition="outside"
           >
             {securePassword ? securePassword : '            '}
           </OutputWrapper>
