@@ -6,6 +6,11 @@
   },
   {
     "id": 2,
+    "label": "UUID Generator",
+    "href": "/keygen/uuid"
+  },
+  {
+    "id": 3,
     "label": "Password Generator",
     "href": "/keygen/password"
   }
