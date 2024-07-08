@@ -73,13 +73,15 @@ export default function OutputWrapper({
       >
         {children}
       </pre>
-      <CopyButton
-        onClick={copyToClipboard}
-        copied={copied}
-        wrapperType={type}
-        buttonPosition={buttonPosition}
-        buttonAlignment={buttonAlignment}
-      />
+      {children ?
+        <CopyButton
+          onClick={copyToClipboard}
+          copied={copied}
+          wrapperType={type}
+          buttonPosition={buttonPosition}
+          buttonAlignment={buttonAlignment}
+        />
+      : null}
     </div>
   )
 }
