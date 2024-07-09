@@ -5,9 +5,12 @@ import { useRouter } from 'next/navigation'
 export default function Custom404() {
   const router = useRouter()
   return (
-    <main className="flex flex-col flex-1 items-center justify-center relative">
+    <main className="relative flex flex-1 flex-col items-center justify-center">
       <span className="text-5xl">Page not found!</span>
-      <Button onClick={() => router.back()} className="mt-8 text-2xl h-12 w-36">
+      <Button
+        onClick={() => router.back()}
+        className="mt-8 h-12 w-36 text-2xl"
+      >
         Go Back
       </Button>
     </main>

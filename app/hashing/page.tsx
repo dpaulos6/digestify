@@ -5,6 +5,9 @@ import { digest } from '@/helpers/bcrypt'
 import OutputWrapper from '@/components/output-wrapper'
 import Head from 'next/head'
 import InputWrapper from '@/components/input-wrapper'
+import { Hash } from 'lucide-react'
+import Return from '@/components/return'
+import PageWrapper from '@/components/PageWrapper'
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('')
@@ -29,22 +32,16 @@ export default function Home() {
       <Head>
         <title>Digestify - Hashing Tools</title>
       </Head>
-      <section className="flex flex-col max-w-5xl w-full gap-10 justify-center py-16 px-12">
-        <span className="flex items-center gap-2 text-3xl mt-12 text-center justify-center">
-          Hash your data at lightspeed!
-        </span>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
-          <InputWrapper
-            value={inputValue}
-            onChange={(value) => updateValue(value)}
-            className="flex-1 min-h-52 h-auto ring-1 ring-border rounded-md resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:ring-primary transition cursor-default"
-            placeholder="Paste a hashed string"
-          />
-          <OutputWrapper className="w-full min-h-52 h-auto bg-white dark:bg-[#121212] ring-1 ring-border rounded-md hover:ring-primary transition cursor-default">
-            {hashedValue}
-          </OutputWrapper>
-        </div>
-      </section>
+      <PageWrapper title="Hash your data at lightspeed!">
+        <InputWrapper
+          value={inputValue}
+          onChange={(value) => updateValue(value)}
+          className="h-auto min-h-52 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          placeholder="Paste a hashed string"
+        />
+        <OutputWrapper title="Hashed string">{hashedValue}</OutputWrapper>
+      </PageWrapper>
+      <Hash className="absolute bottom-16 right-[15%] -z-10 h-auto w-60 translate-y-1/4 rotate-12 opacity-25" />
     </>
   )
 }

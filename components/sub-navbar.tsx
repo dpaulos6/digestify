@@ -21,18 +21,25 @@ export default function SubNavbar({
 }: SubNavbarProps): JSX.Element | null {
   if (!items || items.length === 0) return null
 
-  return (
-    <div
-      className={cn(
-        'flex items-center justify-start w-full relative px-6 py-3 bg-background border-b whitespace-nowrap overflow-x-auto',
-        className
-      )}
-    >
-      {items.map((item) => (
-        <SubNavbarItem key={item.id} label={item.label} href={item.href} />
-      ))}
-    </div>
-  )
+  return items.length > 1 ?
+      <div className="mx-auto flex h-fit w-full max-w-5xl flex-col bg-background px-4 py-6 sm:px-12">
+        <span className="text-center text-3xl md:text-start">Other tools</span>
+        <div
+          className={cn(
+            'flex items-center justify-start gap-4 overflow-x-auto whitespace-nowrap py-5',
+            className
+          )}
+        >
+          {items.map((item) => (
+            <SubNavbarItem
+              key={item.id}
+              label={item.label}
+              href={item.href}
+            />
+          ))}
+        </div>
+      </div>
+    : null
 }
 
 interface SubNavbarItemProps {
@@ -48,8 +55,9 @@ const SubNavbarItem = ({ label, href }: SubNavbarItemProps): JSX.Element => {
     <Link
       href={href}
       className={cn(
-        'mx-2 px-2 py-1 rounded-md sm:hover:bg-foreground/10 transition',
-        isActive && 'font-bold text-primary'
+        'rounded-xl border border-foreground/15 px-3 py-1.5 font-bold transition sm:hover:bg-background-hover',
+        isActive &&
+          'border-primary/50 text-primary sm:hover:bg-primary/5 dark:sm:hover:bg-primary/10'
       )}
     >
       {label}
