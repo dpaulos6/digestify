@@ -47,7 +47,6 @@ export default function RootLayout({
           : null}
           <Toaster />
           <Footer />
-          <Hash className="absolute bottom-16 right-[15%] -z-10 h-auto w-60 translate-y-1/4 rotate-12 opacity-25" />
         </ThemeProvider>
         <Analytics />
       </body>

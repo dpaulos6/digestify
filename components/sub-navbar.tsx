@@ -22,13 +22,11 @@ export default function SubNavbar({
   if (!items || items.length === 0) return null
 
   return items.length > 1 ?
-      <div className="mx-auto flex h-fit w-full max-w-5xl flex-col bg-background px-12 py-6">
-        <span className="text-center text-3xl md:ml-3 md:text-start">
-          Other tools
-        </span>
+      <div className="mx-auto flex h-fit w-full max-w-5xl flex-col bg-background px-4 py-6 sm:px-12">
+        <span className="text-center text-3xl md:text-start">Other tools</span>
         <div
           className={cn(
-            'flex items-center justify-start overflow-x-auto whitespace-nowrap py-5',
+            'flex items-center justify-start gap-4 overflow-x-auto whitespace-nowrap py-5',
             className
           )}
         >
@@ -57,7 +55,7 @@ const SubNavbarItem = ({ label, href }: SubNavbarItemProps): JSX.Element => {
     <Link
       href={href}
       className={cn(
-        'sm:hover:bg-background-hover mx-2 rounded-xl border border-foreground/15 px-3 py-1.5 font-bold transition',
+        'rounded-xl border border-foreground/15 px-3 py-1.5 font-bold transition sm:hover:bg-background-hover',
         isActive &&
           'border-primary/50 text-primary sm:hover:bg-primary/5 dark:sm:hover:bg-primary/10'
       )}

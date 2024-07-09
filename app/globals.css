@@ -76,6 +76,6 @@
     @apply bg-background text-foreground;
   }
   .code {
-    @apply bg-background-hover h-fit w-fit resize-none rounded-md border px-1.5 py-1;
+    @apply h-fit w-fit resize-none rounded-md border bg-background-hover px-1.5 py-1;
   }
 }

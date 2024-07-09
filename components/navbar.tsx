@@ -30,7 +30,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -47,30 +47,30 @@ const components = [
     description:
       'Generate secure UUIDs and secrets for any application or need.'
   },
-  {
-    title: 'Encryption and Decryption',
-    href: '/',
-    description:
-      'Encrypt and decrypt text and files using robust symmetric algorithms.'
-  },
+  // {
+  //   title: 'Encryption and Decryption',
+  //   href: '/',
+  //   description:
+  //     'Encrypt and decrypt text and files using robust symmetric algorithms.'
+  // },
   {
     title: 'Encoding and Decoding',
     href: '/encoding',
     description:
       'Efficiently encode and decode text and files in formats like Base64 and Base32.'
-  },
-  {
-    title: 'Miscellaneous',
-    href: '/',
-    description:
-      'Tools for hash comparison, cracking, one-time passwords generation, and more.'
-  },
-  {
-    title: 'Educational Resources',
-    href: '/',
-    description:
-      'Guides and explanations to enhance your understanding of security practices.'
   }
+  // {
+  //   title: 'Miscellaneous',
+  //   href: '/',
+  //   description:
+  //     'Tools for hash comparison, cracking, one-time passwords generation, and more.'
+  // },
+  // {
+  //   title: 'Educational Resources',
+  //   href: '/',
+  //   description:
+  //     'Guides and explanations to enhance your understanding of security practices.'
+  // }
 ]
 
 export default function Navbar() {
@@ -124,25 +124,28 @@ export default function Navbar() {
             </span>
           </Link>
           <div className="flex items-center">
-            {components
-              .slice(
-                0,
-                screenSize === '2xl' ? 6
-                : screenSize === 'xl' ? 4
-                : screenSize === 'lg' ? 3
-                : screenSize === 'md' ? 2
-                : 0
-              )
-              .map((component) => (
-                <Link
-                  key={component.title}
-                  href={component.href}
-                  className="hover:bg-background-hover rounded-md px-3 py-2 transition"
-                >
-                  {component.title}
-                </Link>
-              ))}
-            <NavigationMenu className="hidden sm:block 2xl:hidden">
+            <div className="hidden items-center md:flex">
+              {components
+                .slice(
+                  0,
+                  3
+                  // screenSize === '2xl' ? 6
+                  // : screenSize === 'xl' ? 4
+                  // : screenSize === 'lg' ? 3
+                  // : screenSize === 'md' ? 2
+                  // : 0
+                )
+                .map((component) => (
+                  <Link
+                    key={component.title}
+                    href={component.href}
+                    className="rounded-md px-3 py-2 transition hover:bg-background-hover"
+                  >
+                    {component.title}
+                  </Link>
+                ))}
+            </div>
+            <NavigationMenu className="hidden sm:block md:hidden 2xl:hidden">
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-base md:hidden">
@@ -180,7 +183,7 @@ export default function Navbar() {
         </div>
         <div className="flex items-center">
           <button
-            className="hover:bg-background-hover rounded-md p-2 transition"
+            className="rounded-md p-2 transition hover:bg-background-hover"
             onClick={() => {
               setTheme(theme == 'light' ? 'dark' : 'light')
             }}
@@ -225,7 +228,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'hover:bg-background-hover block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:text-accent-foreground focus:bg-background-hover focus:text-accent-foreground',
+            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-background-hover hover:text-accent-foreground focus:bg-background-hover focus:text-accent-foreground',
             className
           )}
           {...props}
