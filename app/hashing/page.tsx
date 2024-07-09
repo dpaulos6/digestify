@@ -37,7 +37,7 @@ export default function Home() {
           value={inputValue}
           onChange={(value) => updateValue(value)}
           className="h-auto min-h-52 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          placeholder="Paste a hashed string"
+          placeholder="Type or paste anything to hash it"
         />
         <OutputWrapper title="Hashed string">{hashedValue}</OutputWrapper>
       </PageWrapper>
