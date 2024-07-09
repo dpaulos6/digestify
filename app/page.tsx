@@ -72,11 +72,6 @@ export default function Home() {
         </section>
         <Hash className="absolute bottom-0 right-[15%] -z-10 h-auto w-60 translate-y-1/4 rotate-12 opacity-25" />
       </main>
-      {preview === 'preview' ?
-        <div className="bottom-20 left-2 z-10 mx-auto my-2 flex max-w-xs rounded-lg border border-amber-200 bg-amber-100 p-4 text-sm text-black dark:border-amber-400 dark:bg-amber-200 sm:absolute sm:m-0 md:text-base">
-          This is an under development deployment, not production ready!
-        </div>
-      : null}
     </>
   )
 }
