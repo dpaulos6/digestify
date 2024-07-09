@@ -46,7 +46,7 @@ export default function Home() {
   const preview = process.env.NEXT_PUBLIC_DEPLOYMENT_TYPE
   return (
     <>
-      <main className="flex flex-1 items-center justify-center overflow-hidden">
+      <main className="relative flex flex-1 items-center justify-center overflow-hidden">
         <section className="flex w-full max-w-7xl flex-col items-center gap-10 px-8 py-12 sm:gap-16 sm:py-16 md:py-24 lg:py-32">
           <span className="max-w-3xl text-center text-3xl font-bold tracking-tighter xs:text-5xl sm:text-6xl md:text-7xl">
             Powerful <span className="text-primary">Hashing Tools</span> for
