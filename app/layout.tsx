@@ -23,12 +23,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const preview = process.env.NEXT_PUBLIC_DEPLOYMENT_TYPE
   return (
     <html lang="en">
       <body
         className={cn(
-          'max-w-screen relative flex min-h-screen flex-col overflow-x-hidden',
+          'max-w-screen relative flex min-h-screen flex-col',
           mulish.className
         )}
       >
@@ -40,11 +39,6 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
-          {preview === 'preview' ?
-            <div className="bottom-20 left-2 z-10 mx-auto my-2 flex max-w-xs rounded-lg border border-amber-200 bg-amber-100 p-4 text-sm text-black dark:border-amber-400 dark:bg-amber-200 sm:absolute sm:m-0 md:text-base">
-              This is an under development deployment, not production ready!
-            </div>
-          : null}
           <Toaster />
           <Footer />
         </ThemeProvider>
