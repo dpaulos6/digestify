@@ -19,7 +19,7 @@ import {
 export default function Home() {
   const [inputValue, setInputValue] = useState('')
   const [hashedValue, setHashedValue] = useState('')
-  const [hashingType, setHashingType] = useState('bcrypt')
+  const [hashingType, setHashingType] = useState(hashingAlgorithms[0])
 
   useEffect(() => {
     const updateValue = async (value: string, type: string) => {
@@ -44,7 +44,7 @@ export default function Home() {
       <Head>
         <title>Digestify - Hashing Tools</title>
       </Head>
-      <PageWrapper title="Hash your data at lightspeed!">
+      <PageWrapper title={`Hash your data with ${hashingType}!`}>
         <Select
           onValueChange={(value: string) => {
             setHashingType(value) // Update hashingType state immediately
