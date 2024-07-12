@@ -10,7 +10,7 @@ import {
   decodeBase32,
   encodeBase58,
   decodeBase58
-} from '@/helpers/base'
+} from '@/helpers/encoding'
 import { ArrowDownUp } from 'lucide-react'
 import InputWrapper from '@/components/input-wrapper'
 import {
@@ -22,14 +22,14 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import Return from '@/components/return'
 import PageWrapper from '@/components/PageWrapper'
+import { encodingTypes } from '@/helpers/encoding/encodingTypes'
 
 export default function Encryption() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [isEncoding, setIsEncoding] = useState(true)
-  const [encodingType, setEncodingType] = useState('base64')
+  const [encodingType, setEncodingType] = useState(encodingTypes[0])
 
   const handleInputChange = (value: string) => {
     setInput(value)
@@ -42,7 +42,7 @@ export default function Encryption() {
 
   const handleSubmit = (inputValue: string = input) => {
     let result
-    switch (encodingType) {
+    switch (encodingType.toLowerCase()) {
       case 'base64':
         result =
           isEncoding ? encodeBase64(inputValue) : decodeBase64(inputValue)
@@ -69,7 +69,9 @@ export default function Encryption() {
 
   return (
     <>
-      <PageWrapper title="Encode & Decode.">
+      <PageWrapper
+        title={`${isEncoding ? 'Encode' : 'Decode'} using ${encodingType}!`}
+      >
         <div className="flex w-full flex-wrap items-center justify-start gap-3 sm:flex-row sm:justify-start">
           <Button
             type="button"
@@ -91,12 +93,12 @@ export default function Encryption() {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {['base64', 'base32', 'base58'].map((type) => (
+                {encodingTypes.map((type) => (
                   <SelectItem
                     key={type}
                     value={type}
                   >
-                    {type.toLocaleUpperCase()}
+                    {type}
                   </SelectItem>
                 ))}
               </SelectGroup>

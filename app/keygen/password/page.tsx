@@ -1,7 +1,7 @@
 'use client'
 
 import OutputWrapper from '@/components/output-wrapper'
-import { generatePassword } from '@/helpers/password'
+import { generatePassword } from '@/helpers/keygen'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {

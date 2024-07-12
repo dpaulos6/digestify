@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import OutputWrapper from '@/components/output-wrapper'
-import { generateUuid } from '@/helpers/uuid'
+import { generateUuid } from '@/helpers/keygen'
 import PageWrapper from '@/components/PageWrapper'
 
 export default function UuidGenerator() {

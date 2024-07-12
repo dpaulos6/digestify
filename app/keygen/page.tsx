@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import OutputWrapper from '@/components/output-wrapper'
-import { generateRandomSecret } from '@/helpers/crypto'
+import { generateRandomSecret } from '@/helpers/keygen'
 import PageWrapper from '@/components/PageWrapper'
 
 export default function SecretGenerator() {
