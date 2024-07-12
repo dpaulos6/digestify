@@ -10,7 +10,7 @@ import {
   decodeBase32,
   encodeBase58,
   decodeBase58
-} from '@/helpers/base'
+} from '@/helpers/encoding'
 import { ArrowDownUp } from 'lucide-react'
 import InputWrapper from '@/components/input-wrapper'
 import {
@@ -22,7 +22,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import Return from '@/components/return'
 import PageWrapper from '@/components/PageWrapper'
 
 export default function Encryption() {
@@ -69,7 +68,9 @@ export default function Encryption() {
 
   return (
     <>
-      <PageWrapper title="Encode & Decode.">
+      <PageWrapper
+        title={`${isEncoding ? 'Encode' : 'Decode'} using ${encodingType.toUpperCase()}`}
+      >
         <div className="flex w-full flex-wrap items-center justify-start gap-3 sm:flex-row sm:justify-start">
           <Button
             type="button"
