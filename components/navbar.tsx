@@ -3,11 +3,6 @@
 import { DigestifyIcon } from '@/icons'
 import { cn } from '@/lib/utils'
 import {
-  FileKey,
-  FileLock,
-  GraduationCap,
-  Hash,
-  KeyRound,
   Menu,
   Moon,
   Sun
@@ -29,49 +24,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-
 import React, { useEffect, useState } from 'react'
+import { navbarItems } from '@/data/navbar-items'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
-
-const components = [
-  {
-    title: 'Hashing Tools',
-    href: '/hashing',
-    description:
-      'Hash text and files with various algorithms like MD5, SHA-256, and more.'
-  },
-  {
-    title: 'Key Generation',
-    href: '/keygen',
-    description:
-      'Generate secure UUIDs and secrets for any application or need.'
-  },
-  // {
-  //   title: 'Encryption and Decryption',
-  //   href: '/',
-  //   description:
-  //     'Encrypt and decrypt text and files using robust symmetric algorithms.'
-  // },
-  {
-    title: 'Encoding and Decoding',
-    href: '/encoding',
-    description:
-      'Efficiently encode and decode text and files in formats like Base64 and Base32.'
-  }
-  // {
-  //   title: 'Miscellaneous',
-  //   href: '/',
-  //   description:
-  //     'Tools for hash comparison, cracking, one-time passwords generation, and more.'
-  // },
-  // {
-  //   title: 'Educational Resources',
-  //   href: '/',
-  //   description:
-  //     'Guides and explanations to enhance your understanding of security practices.'
-  // }
-]
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
@@ -125,23 +81,22 @@ export default function Navbar() {
           </Link>
           <div className="flex items-center">
             <div className="hidden items-center md:flex">
-              {components
+              {navbarItems
                 .slice(
                   0,
-                  3
-                  // screenSize === '2xl' ? 6
-                  // : screenSize === 'xl' ? 4
-                  // : screenSize === 'lg' ? 3
-                  // : screenSize === 'md' ? 2
-                  // : 0
+                  screenSize === '2xl' ? 6
+                  : screenSize === 'xl' ? 4
+                  : screenSize === 'lg' ? 3
+                  : screenSize === 'md' ? 2
+                  : 0
                 )
-                .map((component) => (
+                .map((item) => (
                   <Link
-                    key={component.title}
-                    href={component.href}
+                    key={item.title}
+                    href={item.href}
                     className="rounded-md px-3 py-2 transition hover:bg-background-hover"
                   >
-                    {component.title}
+                    {item.title}
                   </Link>
                 ))}
             </div>
@@ -156,22 +111,22 @@ export default function Navbar() {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {components
+                      {navbarItems
                         .slice(
                           screenSize === '2xl' ? 0
-                          : screenSize === 'xl' ? components.length - 2
-                          : screenSize === 'lg' ? components.length - 3
-                          : screenSize === 'md' ? components.length - 4
-                          : screenSize === 'sm' ? components.length
+                          : screenSize === 'xl' ? navbarItems.length - 2
+                          : screenSize === 'lg' ? navbarItems.length - 3
+                          : screenSize === 'md' ? navbarItems.length - 4
+                          : screenSize === 'sm' ? navbarItems.length
                           : 0
                         )
-                        .map((component) => (
+                        .map((item) => (
                           <ListItem
-                            key={component.title}
-                            title={component.title}
-                            href={component.href}
+                            key={item.title}
+                            title={item.title}
+                            href={item.href}
                           >
-                            {component.description}
+                            {item.description}
                           </ListItem>
                         ))}
                     </ul>
@@ -198,14 +153,14 @@ export default function Navbar() {
                 <Menu className="h-10 w-10 rounded-lg p-2 transition hover:bg-border" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                {components.map((component, i) => (
+                {navbarItems.map((item, i) => (
                   <Link
                     key={i}
-                    href={component.href}
+                    href={item.href}
                   >
                     <DropdownMenuItem>
                       {/* <User className="mr-2 h-4 w-4" /> */}
-                      <span className="text-base">{component.title}</span>
+                      <span className="text-base">{item.title}</span>
                     </DropdownMenuItem>
                   </Link>
                 ))}

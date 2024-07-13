@@ -1,46 +1,6 @@
-import {
-  Component,
-  FileKey,
-  FileLock,
-  GraduationCap,
-  Hash,
-  KeyRound,
-  ShieldCheck
-} from 'lucide-react'
 import Link from 'next/link'
-
-const components = [
-  {
-    title: 'Hashing Tools',
-    href: '/hashing',
-    icon: Hash
-  },
-  {
-    title: 'Key Generation',
-    href: '/keygen',
-    icon: KeyRound
-  },
-  // {
-  //   title: 'Encryption & Decryption',
-  //   href: '/',
-  //   icon: FileLock
-  // },
-  {
-    title: 'Encoding & Decoding',
-    href: '/encoding',
-    icon: FileKey
-  }
-  // {
-  //   title: 'Miscellaneous',
-  //   href: '/',
-  //   icon: Component
-  // },
-  // {
-  //   title: 'Educational Resources',
-  //   href: '/',
-  //   icon: GraduationCap
-  // }
-]
+import { navbarItems } from '@/data/navbar-items'
+import { Hash } from 'lucide-react'
 
 export default function Home() {
   const preview = process.env.NEXT_PUBLIC_DEPLOYMENT_TYPE
@@ -58,14 +18,14 @@ export default function Home() {
             possibilities.
           </span>
           <div className="flex max-w-5xl flex-wrap justify-center gap-4">
-            {components.map((component, index) => (
+            {navbarItems.map((item, index) => (
               <Link
                 key={index}
-                href={component.href}
+                href={item.href}
                 className="flex items-center gap-2 whitespace-nowrap rounded-xl border bg-background px-3 py-1.5 text-sm transition hover:bg-background-hover xs:text-base md:text-lg"
               >
-                <component.icon className="h-3 w-3 xs:h-4 xs:w-4 md:h-5 md:w-5" />
-                {component.title}
+                <item.icon className="h-3 w-3 xs:h-4 xs:w-4 md:h-5 md:w-5" />
+                {item.title}
               </Link>
             ))}
           </div>

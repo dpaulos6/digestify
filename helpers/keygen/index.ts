@@ -1,5 +1,3 @@
-import { generatePassword } from './password'
-import { generateRandomSecret } from './secret'
-import { generateUuid } from './uuid'
-
-export { generatePassword, generateRandomSecret, generateUuid }
+export { generatePassword } from './password'
+export { generateRandomSecret } from './secret'
+export { generateUuid } from './uuid'

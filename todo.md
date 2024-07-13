@@ -2,7 +2,7 @@
 
 ### Hashing Tools
 
-[ ] **Basic String Hashing:** Hash any string with various algorithms like MD5, SHA-1, SHA-256, SHA-512, etc.
+[x] **Basic String Hashing:** Hash any string with various algorithms like MD5, SHA-1, SHA-256, SHA-512, etc.
 [ ] **File Integrity Check:** Upload a file and generate its hash to verify integrity using MD5, SHA-256, etc.
 [ ] **Batch File Hashing:** Upload multiple files and generate their hashes at once.
 [ ] **Checksum Verification:** Compare a file's hash with a provided checksum to verify its integrity.
