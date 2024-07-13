@@ -11,6 +11,11 @@
   },
   {
     "id": 3,
+    "label": "Cryptographic Key Generator",
+    "href": "/keygen/cryptographic"
+  },
+  {
+    "id": 4,
     "label": "Password Generator",
     "href": "/keygen/password"
   }

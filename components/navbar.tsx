@@ -2,11 +2,7 @@
 
 import { DigestifyIcon } from '@/icons'
 import { cn } from '@/lib/utils'
-import {
-  Menu,
-  Moon,
-  Sun
-} from 'lucide-react'
+import { Menu, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Montserrat } from 'next/font/google'
 import Link from 'next/link'

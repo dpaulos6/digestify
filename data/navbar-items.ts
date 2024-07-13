@@ -38,14 +38,14 @@ export const navbarItems = [
   }
   // {
   //   title: 'Miscellaneous',
-  //   href: '/',
+  //   href: '/miscellaneous',
   //   description:
   //     'Tools for hash comparison, cracking, one-time passwords generation, and more.',
   //   icon: Component
   // },
   // {
   //   title: 'Educational Resources',
-  //   href: '/',
+  //   href: '/education',
   //   description:
   //     'Guides and explanations to enhance your understanding of security practices.',
   //   icon: GraduationCap
