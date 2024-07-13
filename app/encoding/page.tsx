@@ -63,8 +63,8 @@ export default function Encryption() {
 
   const toggleMode = () => {
     setIsEncoding(!isEncoding)
-    setInput(output)
-    setOutput(input)
+    setInput(output ? output : "")
+    setOutput(input ? input : "")
   }
 
   return (
