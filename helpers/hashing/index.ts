@@ -1,4 +1,2 @@
-import { hash } from './hashing'
-import { hashingAlgorithms } from './hashingAlgorithms'
-
-export { hash, hashingAlgorithms }
+export { hash } from './hashing'
+export { hashingAlgorithms } from './hashingAlgorithms'

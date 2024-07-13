@@ -2,7 +2,7 @@
 
 ### Hashing Tools
 
-[ ] **Basic String Hashing:** Hash any string with various algorithms like MD5, SHA-1, SHA-256, SHA-512, etc.
+[x] **Basic String Hashing:** Hash any string with various algorithms like MD5, SHA-1, SHA-256, SHA-512, etc.
 [ ] **File Integrity Check:** Upload a file and generate its hash to verify integrity using MD5, SHA-256, etc.
 [ ] **Batch File Hashing:** Upload multiple files and generate their hashes at once.
 [ ] **Checksum Verification:** Compare a file's hash with a provided checksum to verify its integrity.
@@ -19,7 +19,7 @@ This feature is yet to be decided if it will be implemented or not.
 
 [x] **Random Secret Generator:** Generate random strings of a specified length and character set (alphanumeric, special characters, etc.).
 [x] **UUID Generator:** Generate Universally Unique Identifiers (UUIDs).
-[ ] **Cryptographic Key Generator:** Generate keys for symmetric encryption (AES) and asymmetric encryption (RSA, ECC).
+[x] **Cryptographic Key Generator:** Generate keys for symmetric encryption (AES) and asymmetric encryption (RSA).
 [x] **Password Generator:** Create secure, random passwords with customizable options (length, character types, etc.).
 
 ### **Encryption and Decryption Tools**
