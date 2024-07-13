@@ -1,15 +1,13 @@
 import { Mulish } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
-
 import './globals.css'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { cn } from '@/lib/utils'
 import { Metadata } from 'next'
-
 import { Analytics } from '@vercel/analytics/react'
-import { Hash } from 'lucide-react'
+import Head from './_head'
 
 const mulish = Mulish({ subsets: ['latin'] })
 
@@ -31,6 +29,7 @@ export default function RootLayout({
           mulish.className
         )}
       >
+        <Head />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
