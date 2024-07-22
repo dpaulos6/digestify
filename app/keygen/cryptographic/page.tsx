@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react'
 import OutputWrapper from '@/components/output-wrapper'
 import PageWrapper from '@/components/PageWrapper'
-import { generateAESKey, generateRSAKeyPair, KeyPair } from '@/helpers/encryption'
-
+import { generateAESKey, generateRSAKeyPair, KeyPair } from '@/helpers/keygen'
 
 export default function Page() {
   const [AESKey, setAESKey] = useState<string>('')
@@ -30,8 +29,12 @@ export default function Page() {
   return (
     <PageWrapper title="Your randomly generated cryptographic keys.">
       <OutputWrapper title="AES Key">{AESKey || ' '}</OutputWrapper>
-      <OutputWrapper title="RSA Public Key">{RSAKeys?.publicKey || ' '}</OutputWrapper>
-      <OutputWrapper title="RSA Private Key">{RSAKeys?.privateKey || ' '}</OutputWrapper>
+      <OutputWrapper title="RSA Public Key">
+        {RSAKeys?.publicKey || ' '}
+      </OutputWrapper>
+      <OutputWrapper title="RSA Private Key">
+        {RSAKeys?.privateKey || ' '}
+      </OutputWrapper>
     </PageWrapper>
   )
 }
