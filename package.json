@@ -8,7 +8,9 @@
     "dev:docs": "npm run dev --prefix docs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "npm run sitemap",
+    "sitemap": "next-sitemap"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
@@ -37,6 +39,7 @@
     "js-sha3": "^0.9.3",
     "lucide-react": "^0.397.0",
     "next": "14.2.4",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
     "node-forge": "^1.3.1",
     "node-gyp": "^10.1.0",
