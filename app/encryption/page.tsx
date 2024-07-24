@@ -20,13 +20,8 @@ import {
 } from '@/components/ui/select'
 import PageWrapper from '@/components/PageWrapper'
 
-// Define types for encryption results
-type EncryptedAES = {
-  iv: string
-  encryptedData: string
-}
-
-type EncryptedText = EncryptedAES | string
+// Define type for encryption results
+type EncryptedText = string
 
 export default function Home() {
   const [text, setText] = useState<string>('')
@@ -49,22 +44,9 @@ export default function Home() {
   const handleDecrypt = () => {
     let decrypted: string | undefined
     if (algorithm === 'aes') {
-      // Ensure encryptedText is properly typed
-      if (
-        typeof encryptedText === 'object' &&
-        'encryptedData' in encryptedText &&
-        'iv' in encryptedText
-      ) {
-        decrypted = decryptTextAES({
-          encryptedData: encryptedText.encryptedData,
-          iv: encryptedText.iv
-        })
-      }
+      decrypted = decryptTextAES(encryptedText)
     } else if (algorithm === 'blowfish') {
-      // Ensure encryptedText is properly typed
-      if (typeof encryptedText === 'string') {
-        decrypted = decryptTextBlowfish(encryptedText)
-      }
+      decrypted = decryptTextBlowfish(encryptedText)
     }
     // Check if decrypted is undefined
     if (decrypted !== undefined) {
@@ -117,7 +99,7 @@ export default function Home() {
         </Button>
       </div>
       <OutputWrapper title="Encrypted Text">
-        <pre>{JSON.stringify(encryptedText, null, 2)}</pre>
+        <pre>{encryptedText}</pre>
       </OutputWrapper>
       <OutputWrapper title="Decrypted Text">
         <pre>{decryptedText}</pre>

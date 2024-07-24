@@ -1,4 +1,3 @@
-// utils/encryption.ts
 import crypto from 'crypto'
 import CryptoJS from 'crypto-js'
 
@@ -6,10 +5,7 @@ const AES_KEY = crypto.randomBytes(32)
 const AES_IV = crypto.randomBytes(16)
 
 // AES Encryption
-export function encryptTextAES(text: string): {
-  iv: string
-  encryptedData: string
-} {
+export function encryptTextAES(text: string): string {
   const cipher = crypto.createCipheriv(
     'aes-256-cbc',
     Uint8Array.from(AES_KEY),
@@ -17,20 +13,20 @@ export function encryptTextAES(text: string): {
   )
   let encrypted = cipher.update(text, 'utf8', 'hex')
   encrypted += cipher.final('hex')
-  return { iv: AES_IV.toString('hex'), encryptedData: encrypted }
+  // Concatenate IV and encrypted data with a delimiter (e.g., ':')
+  return `${AES_IV.toString('hex')}:${encrypted}`
 }
 
 // AES Decryption
-export function decryptTextAES(encrypted: {
-  iv: string
-  encryptedData: string
-}): string {
-  const decipher = crypto.createDecipher(
+export function decryptTextAES(encryptedText: string): string {
+  // Split the input string to get the IV and encrypted data
+  const [iv, encryptedData] = encryptedText.split(':')
+  const decipher = crypto.createDecipheriv(
     'aes-256-cbc',
     Uint8Array.from(AES_KEY),
-    Buffer.from(encrypted.iv, 'hex')
+    Buffer.from(iv, 'hex')
   )
-  let decrypted = decipher.update(encrypted.encryptedData, 'hex', 'utf8')
+  let decrypted = decipher.update(encryptedData, 'hex', 'utf8')
   decrypted += decipher.final('utf8')
   return decrypted
 }
