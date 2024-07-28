@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": 1,
+    "label": "Hash Comparison",
+    "href": "/miscellaneous"
+  },
+  {
+    "id": 2,
+    "label": "Checksum Generator",
+    "href": "/miscellaneous/checksum"
+  }
+]
