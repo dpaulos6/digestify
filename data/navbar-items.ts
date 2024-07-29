@@ -22,13 +22,13 @@ export const navbarItems = [
       'Generate secure UUIDs and secrets for any application or need.',
     icon: KeyRound
   },
-  // {
-  //   title: 'Encryption & Decryption',
-  //   href: '/encryption',
-  //   description:
-  //     'Encrypt and decrypt text and files using robust symmetric algorithms.',
-  //   icon: FileLock
-  // },
+  {
+    title: 'Encryption & Decryption',
+    href: '/encryption',
+    description:
+      'Encrypt and decrypt text and files using robust symmetric algorithms.',
+    icon: FileLock
+  },
   {
     title: 'Encoding & Decoding',
     href: '/encoding',
@@ -42,7 +42,7 @@ export const navbarItems = [
   //   description:
   //     'Tools for hash comparison, cracking, one-time passwords generation, and more.',
   //   icon: Component
-  // },
+  // }
   // {
   //   title: 'Educational Resources',
   //   href: '/education',
