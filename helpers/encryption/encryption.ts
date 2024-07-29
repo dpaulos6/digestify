@@ -1,44 +1,35 @@
 import crypto from 'crypto'
 import CryptoJS from 'crypto-js'
 
-const AES_KEY = crypto.randomBytes(32)
-const AES_IV = crypto.randomBytes(16)
+const AES_KEY = Buffer.from(
+  '9706318f249c62668c37e05e21983ff5a346006739300c8963f4e4f7fbe9d24f',
+  'hex'
+)
+const AES_IV = Buffer.from('e1921eabb0dc5da4f89847c842624ccf', 'hex')
 
 // AES Encryption
 export function encryptTextAES(text: string): string {
-  const cipher = crypto.createCipheriv(
-    'aes-256-cbc',
-    Uint8Array.from(AES_KEY),
-    Uint8Array.from(AES_IV)
-  )
+  const cipher = crypto.createCipheriv('aes-256-cbc', AES_KEY, AES_IV)
   let encrypted = cipher.update(text, 'utf8', 'hex')
   encrypted += cipher.final('hex')
-  return `${AES_IV.toString('hex')}:${encrypted}`
+  return encrypted
 }
 
 // AES Decryption
 export function decryptTextAES(encryptedText: string): string {
-  const [iv, encryptedData] = encryptedText.split(':')
-  const decipher = crypto.createDecipheriv(
-    'aes-256-cbc',
-    Uint8Array.from(AES_KEY),
-    Uint8Array.from(Buffer.from(iv, 'hex'))
-  )
-  let decrypted = decipher.update(encryptedData, 'hex', 'utf8')
+  const decipher = crypto.createDecipheriv('aes-256-cbc', AES_KEY, AES_IV)
+  let decrypted = decipher.update(encryptedText, 'hex', 'utf8')
   decrypted += decipher.final('utf8')
   return decrypted
 }
 
-// Blowfish Encryption
+const BLOWFISH_KEY = '776f54e445c35295c5581d84257b10d8'
+
 export function encryptTextBlowfish(text: string): string {
-  return CryptoJS.Blowfish.encrypt(text, AES_KEY.toString('hex')).toString()
+  return CryptoJS.Blowfish.encrypt(text, BLOWFISH_KEY).toString()
 }
 
-// Blowfish Decryption
 export function decryptTextBlowfish(encryptedText: string): string {
-  const bytes = CryptoJS.Blowfish.decrypt(
-    encryptedText,
-    AES_KEY.toString('hex')
-  )
+  const bytes = CryptoJS.Blowfish.decrypt(encryptedText, BLOWFISH_KEY)
   return bytes.toString(CryptoJS.enc.Utf8)
 }

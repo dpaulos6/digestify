@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   encryptTextAES,
   decryptTextAES,
@@ -7,8 +7,6 @@ import {
   decryptTextBlowfish
 } from '@/helpers/encryption/encryption'
 import OutputWrapper from '@/components/output-wrapper'
-import { Button } from '@/components/ui/button'
-import { ArrowDownUp } from 'lucide-react'
 import InputWrapper from '@/components/input-wrapper'
 import {
   Select,
@@ -27,37 +25,64 @@ export default function Home() {
   const [text, setText] = useState<string>('')
   const [algorithm, setAlgorithm] = useState<string>('aes')
   const [encryptedText, setEncryptedText] = useState<EncryptedText>('')
-  const [decryptedText, setDecryptedText] = useState<string>('')
+  const [decryptedText, setDecryptedText] = useState<EncryptedText>('')
 
-  const handleEncrypt = () => {
+  // Encrypt text whenever the input changes
+  useEffect(() => {
+    if (!text) {
+      setEncryptedText('')
+      return
+    }
+
     let encrypted: EncryptedText
     if (algorithm === 'aes') {
       encrypted = encryptTextAES(text)
     } else if (algorithm === 'blowfish') {
       encrypted = encryptTextBlowfish(text)
     } else {
-      return // Handle invalid algorithm case
+      console.error('Invalid encryption algorithm selected')
+      return
     }
     setEncryptedText(encrypted)
-  }
+  }, [text, algorithm])
 
-  const handleDecrypt = () => {
-    let decrypted: string | undefined
-    if (algorithm === 'aes') {
-      decrypted = decryptTextAES(encryptedText)
-    } else if (algorithm === 'blowfish') {
-      decrypted = decryptTextBlowfish(encryptedText)
+  // Decrypt text whenever the encryptedText input changes
+  useEffect(() => {
+    if (!encryptedText) {
+      setDecryptedText('')
+      return
     }
+
+    let decrypted: string | undefined
+    try {
+      if (algorithm === 'aes') {
+        decrypted = decryptTextAES(encryptedText)
+      } else if (algorithm === 'blowfish') {
+        decrypted = decryptTextBlowfish(encryptedText)
+      } else {
+        console.error('Invalid decryption algorithm selected')
+        return
+      }
+    } catch (error) {
+      console.error('Decryption failed', error)
+      decrypted = 'Decryption failed or invalid data'
+    }
+
     // Check if decrypted is undefined
-    if (decrypted !== undefined) {
+    if (decrypted) {
       setDecryptedText(decrypted)
     } else {
       setDecryptedText('Decryption failed or invalid data')
     }
-  }
+  }, [encryptedText, algorithm])
 
   return (
     <PageWrapper title="Encrypt and Decrypt Text">
+      <div className="mb-2 w-full text-center">
+        <span className="text-yellow-500 dark:text-yellow-300">WARNING: </span>
+        If you encrypted text on a different website/tool, the decryption might
+        due to different secret keys.
+      </div>
       <div className="flex w-full flex-wrap items-center justify-start gap-3 sm:flex-row sm:justify-start">
         <Select
           onValueChange={(value: string) => {
@@ -79,31 +104,17 @@ export default function Home() {
       <InputWrapper
         value={text}
         onChange={(value: string) => setText(value)}
-        className="h-auto min-h-52 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="h-auto min-h-32 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         placeholder="Enter text to encrypt"
       />
-      <div className="flex w-full flex-wrap items-center justify-start gap-3 sm:flex-row sm:justify-start">
-        <Button
-          type="button"
-          className="flex w-full gap-2 text-base xs:w-fit"
-          onClick={handleEncrypt}
-        >
-          Encrypt
-        </Button>
-        <Button
-          type="button"
-          className="flex w-full gap-2 text-base xs:w-fit"
-          onClick={handleDecrypt}
-        >
-          Decrypt
-        </Button>
-      </div>
-      <OutputWrapper title="Encrypted Text">
-        <pre>{encryptedText}</pre>
-      </OutputWrapper>
-      <OutputWrapper title="Decrypted Text">
-        <pre>{decryptedText}</pre>
-      </OutputWrapper>
+      <InputWrapper
+        value={encryptedText}
+        onChange={(value: string) => setEncryptedText(value)}
+        className="h-auto min-h-32 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        placeholder="Enter text to decrypt"
+      />
+      <OutputWrapper title="Encrypted Text">{encryptedText}</OutputWrapper>
+      <OutputWrapper title="Decrypted Text">{decryptedText}</OutputWrapper>
     </PageWrapper>
   )
 }
