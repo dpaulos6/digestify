@@ -35,14 +35,14 @@ export const navbarItems = [
     description:
       'Efficiently encode and decode text and files in formats like Base64 and Base32.',
     icon: FileKey
-  },
-  {
-    title: 'Miscellaneous',
-    href: '/miscellaneous',
-    description:
-      'Tools for hash comparison, cracking, one-time passwords generation, and more.',
-    icon: Component
   }
+  // {
+  //   title: 'Miscellaneous',
+  //   href: '/miscellaneous',
+  //   description:
+  //     'Tools for hash comparison, cracking, one-time passwords generation, and more.',
+  //   icon: Component
+  // }
   // {
   //   title: 'Educational Resources',
   //   href: '/education',
