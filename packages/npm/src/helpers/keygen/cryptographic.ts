@@ -1,8 +1,8 @@
 import * as CryptoJS from 'crypto-js'
 import forge from 'node-forge'
-import { KeyPair } from './interfaces'
+import type { KeyPair } from './interfaces'
 
-export function generateAESKey(length: number = 32): string {
+export function generateAESKey(length = 32): string {
   const randomBytes = CryptoJS.lib.WordArray.random(length)
   return randomBytes.toString(CryptoJS.enc.Hex)
 }

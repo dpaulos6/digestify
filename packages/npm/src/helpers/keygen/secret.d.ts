@@ -1,1 +1,1 @@
-export declare const generateRandomSecret: (length: number) => string;
+export declare const generateRandomSecret: (length: number) => string

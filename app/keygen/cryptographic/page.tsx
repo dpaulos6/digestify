@@ -3,7 +3,11 @@
 import { useEffect, useState } from 'react'
 import OutputWrapper from '@/components/output-wrapper'
 import PageWrapper from '@/components/PageWrapper'
-import { generateAESKey, generateRSAKeyPair, KeyPair } from '@/helpers/keygen'
+import {
+  generateAESKey,
+  generateRSAKeyPair,
+  type KeyPair
+} from '@/helpers/keygen'
 
 export default function Page() {
   const [AESKey, setAESKey] = useState<string>('')

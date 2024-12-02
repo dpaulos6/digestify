@@ -52,20 +52,14 @@ export default function Home() {
           defaultValue={hashingType}
         >
           <SelectTrigger className="w-full border-2 text-base hover:bg-background-hover xs:w-[180px]">
-            <SelectValue
-              placeholder={hashingType}
-              defaultValue={'bcrypt'}
-            />
+            <SelectValue placeholder={hashingType} defaultValue={'bcrypt'} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               {hashingAlgorithms
                 .sort((a, b) => a.localeCompare(b)) // Sort alphabetically by name
-                .map((type, i) => (
-                  <SelectItem
-                    key={i}
-                    value={type}
-                  >
+                .map((type) => (
+                  <SelectItem key={type} value={type}>
                     {type}
                   </SelectItem>
                 ))}
@@ -75,7 +69,7 @@ export default function Home() {
         <InputWrapper
           value={inputValue}
           onChange={(value) => setInputValue(value)}
-          className="h-auto min-h-52 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="h-auto min-h-52 flex-1 "
           placeholder="Type or paste anything to hash it."
         />
         <OutputWrapper title="Hashed string">{hashedValue}</OutputWrapper>

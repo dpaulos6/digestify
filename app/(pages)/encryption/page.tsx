@@ -104,13 +104,13 @@ export default function Home() {
       <InputWrapper
         value={text}
         onChange={(value: string) => setText(value)}
-        className="h-auto min-h-32 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="h-auto min-h-32 flex-1 "
         placeholder="Enter text to encrypt"
       />
       <InputWrapper
         value={encryptedText}
         onChange={(value: string) => setEncryptedText(value)}
-        className="h-auto min-h-32 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="h-auto min-h-32 flex-1 "
         placeholder="Enter text to decrypt"
       />
       <OutputWrapper title="Encrypted Text">{encryptedText}</OutputWrapper>

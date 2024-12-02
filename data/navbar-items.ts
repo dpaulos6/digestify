@@ -1,4 +1,5 @@
 import {
+  Braces,
   Component,
   FileKey,
   FileLock,
@@ -35,6 +36,12 @@ export const navbarItems = [
     description:
       'Efficiently encode and decode text and files in formats like Base64 and Base32.',
     icon: FileKey
+  },
+  {
+    title: 'JSON Tools',
+    href: '/json',
+    description: 'Tools for JSON manipulation, beautification, and validation.',
+    icon: Braces
   }
   // {
   //   title: 'Miscellaneous',

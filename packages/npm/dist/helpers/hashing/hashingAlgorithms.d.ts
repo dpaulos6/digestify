@@ -1,1 +1,1 @@
-export declare const hashingAlgorithms: string[];
+export declare const hashingAlgorithms: string[]

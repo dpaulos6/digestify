@@ -4,7 +4,7 @@ import {
   generatePassword,
   generateRSAKeyPair,
   generateUuid,
-  KeyPair
+  type KeyPair
 } from './helpers/keygen'
 import {
   encodeBase32,

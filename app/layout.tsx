@@ -5,7 +5,7 @@ import './globals.css'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { cn } from '@/lib/utils'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import Head from './_head'
 
@@ -28,6 +28,7 @@ export default function RootLayout({
           'max-w-screen relative flex min-h-screen flex-col',
           mulish.className
         )}
+        suppressHydrationWarning
       >
         <Head />
         <ThemeProvider

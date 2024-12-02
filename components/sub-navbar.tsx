@@ -31,11 +31,7 @@ export default function SubNavbar({
         )}
       >
         {items.map((item) => (
-          <SubNavbarItem
-            key={item.id}
-            label={item.label}
-            href={item.href}
-          />
+          <SubNavbarItem key={item.id} label={item.label} href={item.href} />
         ))}
       </div>
     </div>

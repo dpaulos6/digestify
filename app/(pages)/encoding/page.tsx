@@ -41,19 +41,22 @@ export default function Encryption() {
   }
 
   const handleSubmit = (inputValue: string = input) => {
-    let result
+    let result: string
     switch (encodingType.toLowerCase()) {
       case 'base64':
-        result =
-          isEncoding ? encodeBase64(inputValue) : decodeBase64(inputValue)
+        result = isEncoding
+          ? encodeBase64(inputValue)
+          : decodeBase64(inputValue)
         break
       case 'base32':
-        result =
-          isEncoding ? encodeBase32(inputValue) : decodeBase32(inputValue)
+        result = isEncoding
+          ? encodeBase32(inputValue)
+          : decodeBase32(inputValue)
         break
       case 'base58':
-        result =
-          isEncoding ? encodeBase58(inputValue) : decodeBase58(inputValue)
+        result = isEncoding
+          ? encodeBase58(inputValue)
+          : decodeBase58(inputValue)
         break
       default:
         result = ''
@@ -94,10 +97,7 @@ export default function Encryption() {
             <SelectContent>
               <SelectGroup>
                 {encodingTypes.map((type) => (
-                  <SelectItem
-                    key={type}
-                    value={type}
-                  >
+                  <SelectItem key={type} value={type}>
                     {type}
                   </SelectItem>
                 ))}
@@ -108,7 +108,7 @@ export default function Encryption() {
         <InputWrapper
           value={input}
           onChange={handleInputChange}
-          className="h-auto min-h-52 flex-1 cursor-default resize-none rounded-md ring-1 ring-border transition hover:ring-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="h-auto min-h-52 flex-1 "
           placeholder={
             isEncoding ? 'Paste a string to encode' : 'Paste a string to decode'
           }
