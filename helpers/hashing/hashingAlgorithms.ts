@@ -4,7 +4,7 @@ export const hashingAlgorithms: string[] = [
   'BLAKE2s',
   'BLAKE3',
   'CRC32',
-  'CRC32C',
+  'CRC64',
   'Keccak224',
   'Keccak256',
   'Keccak384',

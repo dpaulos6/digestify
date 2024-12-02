@@ -61,10 +61,7 @@ export default function Navbar() {
     <header>
       <nav className="z-10 flex w-full items-center justify-between gap-8 border-b border-border bg-background px-4 py-3">
         <div className="flex items-center gap-6">
-          <Link
-            href="/"
-            className="group flex items-center gap-1"
-          >
+          <Link href="/" className="group flex items-center gap-1">
             <DigestifyIcon className="h-10 w-10 text-primary transition group-hover:text-primary/75" />
             <span
               className={cn(
@@ -80,11 +77,15 @@ export default function Navbar() {
               {navbarItems
                 .slice(
                   0,
-                  screenSize === '2xl' ? 6
-                  : screenSize === 'xl' ? 4
-                  : screenSize === 'lg' ? 3
-                  : screenSize === 'md' ? 2
-                  : 0
+                  screenSize === '2xl'
+                    ? 6
+                    : screenSize === 'xl'
+                      ? 4
+                      : screenSize === 'lg'
+                        ? 3
+                        : screenSize === 'md'
+                          ? 2
+                          : 0
                 )
                 .map((item) => (
                   <Link
@@ -109,12 +110,17 @@ export default function Navbar() {
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {navbarItems
                         .slice(
-                          screenSize === '2xl' ? 0
-                          : screenSize === 'xl' ? navbarItems.length - 2
-                          : screenSize === 'lg' ? navbarItems.length - 3
-                          : screenSize === 'md' ? navbarItems.length - 4
-                          : screenSize === 'sm' ? navbarItems.length
-                          : 0
+                          screenSize === '2xl'
+                            ? 0
+                            : screenSize === 'xl'
+                              ? navbarItems.length - 2
+                              : screenSize === 'lg'
+                                ? navbarItems.length - 3
+                                : screenSize === 'md'
+                                  ? navbarItems.length - 4
+                                  : screenSize === 'sm'
+                                    ? navbarItems.length
+                                    : 0
                         )
                         .map((item) => (
                           <ListItem
@@ -139,9 +145,7 @@ export default function Navbar() {
               setTheme(theme == 'light' ? 'dark' : 'light')
             }}
           >
-            {theme == 'light' ?
-              <Moon />
-            : <Sun />}
+            {theme == 'light' ? <Moon /> : <Sun />}
           </button>
           <div className="block h-10 sm:hidden">
             <DropdownMenu>
@@ -150,10 +154,7 @@ export default function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 {navbarItems.map((item, i) => (
-                  <Link
-                    key={i}
-                    href={item.href}
-                  >
+                  <Link key={i} href={item.href}>
                     <DropdownMenuItem>
                       {/* <User className="mr-2 h-4 w-4" /> */}
                       <span className="text-base">{item.title}</span>

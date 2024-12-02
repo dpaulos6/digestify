@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState, ReactNode } from 'react'
+import React, { useRef, useState, type ReactNode } from 'react'
 import { CopyIcon, CheckIcon } from 'lucide-react'
 import { toast } from './ui/use-toast'
 import { cn } from '@/lib/utils'
@@ -32,7 +32,7 @@ export default function OutputWrapper({
           if (text.length <= maxLength) {
             return text
           }
-          return text.slice(0, maxLength) + '...'
+          return `${text.slice(0, maxLength)}...`
         }
         const truncatedText = truncateText(text, 16)
 
@@ -94,16 +94,17 @@ const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...rest}
       >
-        {copied ?
+        {copied ? (
           <span className="flex gap-1 text-sm xs:text-base">
             <CheckIcon className="h-5 w-5 xs:h-6 xs:w-6" />
             Copied
           </span>
-        : <span className="flex gap-1 text-sm xs:text-base">
+        ) : (
+          <span className="flex gap-1 text-sm xs:text-base">
             <CopyIcon className="h-5 w-5 xs:h-6 xs:w-6" />
             Copy
           </span>
-        }
+        )}
       </button>
     )
   }

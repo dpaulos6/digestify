@@ -1,1 +1,1 @@
-export declare const encodingTypes: string[];
+export declare const encodingTypes: string[]

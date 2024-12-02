@@ -186,10 +186,7 @@ export default function SecretGenerator() {
               />
             </div>
           </div>
-          <Button
-            type="submit"
-            className="mx-auto flex gap-2 px-8 text-lg"
-          >
+          <Button type="submit" className="mx-auto flex gap-2 px-8 text-lg">
             Generate
             <RotateCcw className="h-5 w-5" />
           </Button>

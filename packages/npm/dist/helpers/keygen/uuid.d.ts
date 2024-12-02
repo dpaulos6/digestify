@@ -1,1 +1,1 @@
-export declare const generateUuid: () => string;
+export declare const generateUuid: () => string
