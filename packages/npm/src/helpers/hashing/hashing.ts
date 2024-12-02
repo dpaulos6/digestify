@@ -7,7 +7,7 @@ import {
   blake2s,
   blake3,
   crc32,
-  crc32c,
+  crc64,
   createSHA1,
   md4,
   md5,
@@ -319,12 +319,12 @@ export const hash = async (input: string, type: string): Promise<string> => {
         throw error
       }
 
-    case 'crc32c':
+    case 'crc64':
       try {
-        const hashedValue = crc32c(input)
+        const hashedValue = crc64(input)
         return hashedValue
       } catch (error) {
-        console.error('Error while hashing with CRC32C:', error)
+        console.error('Error while hashing with CRC64:', error)
         throw error
       }
 
