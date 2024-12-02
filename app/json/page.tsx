@@ -82,42 +82,41 @@ export default function JsonTools() {
     const blob = new Blob([inputValue], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
 
-    const a = document.createElement('a') // Create an anchor element
+    const a = document.createElement('a')
     a.href = url
-    a.download = 'export.json' // Specify the download file name
-    document.body.appendChild(a) // Append the anchor to the body (optional but ensures DOM presence)
-    a.click() // Programmatically click the anchor
-    document.body.removeChild(a) // Remove the anchor after click
-    URL.revokeObjectURL(url) // Release the object URL
+    a.download = 'export.json'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
   }
 
   const handleButtonClick = () => {
-    hiddenFileInput.current?.click() // Trigger the hidden input's click event
+    hiddenFileInput.current?.click()
   }
 
   const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0] // Get the selected file
+    const file = event.target.files?.[0]
     if (file && file.type === 'application/json') {
       const reader = new FileReader()
 
       reader.onload = (e) => {
         if (e.target?.result) {
           try {
-            const data = JSON.parse(e.target.result as string) // Parse JSON
+            const data = JSON.parse(e.target.result as string)
             console.log('Imported JSON Data:', data)
-            // Use the imported data as needed
             setInputValue(JSON.stringify(data, null, 2))
           } catch (error) {
             console.error('Error parsing JSON:', error)
           }
         }
-        event.target.value = '' // Reset the input value
+        event.target.value = ''
       }
 
-      reader.readAsText(file) // Read the file content as text
+      reader.readAsText(file)
     } else {
       console.error('Please select a valid JSON file.')
-      event.target.value = '' // Reset the input value
+      event.target.value = ''
     }
   }
 
