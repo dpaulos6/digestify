@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
-import * as crypto from 'node:crypto'
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
+import * as crypto from 'crypto'
 import { encoders, Whirlpool } from 'whirlpool-hash'
 import {
   adler32,
