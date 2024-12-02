@@ -2028,9 +2028,9 @@ export const ashenVibrant = {
     }
   ],
   colors: {
-    'editor.background': '#282b30',
+    'editor.background': '#202020',
     'editor.foreground': '#eeffffd0',
-    'editor.lineHighlightBackground': '#424549',
+    'editor.lineHighlightBackground': '#303030',
     'editorLineNumber.foreground': '#aeb1b5af',
     'editorLineNumber.activeForeground': '#5b96f0',
     'editorGroupHeader.tabsBackground': '#181a1d',
