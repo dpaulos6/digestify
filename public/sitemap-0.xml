@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://digestify.dev/json</loc><lastmod>2024-12-02T16:27:46.396Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev/encoding</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev/encryption</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev/keygen</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev/educational</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev/keygen/uuid</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev/keygen/cryptographic</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev/keygen/password</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://digestify.dev/hashing</loc><lastmod>2024-12-02T16:27:46.397Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/hashing</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/encryption</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/encoding</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/json</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/educational</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/keygen/cryptographic</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/keygen/password</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/keygen</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://digestify.dev/keygen/uuid</loc><lastmod>2024-12-02T21:32:22.617Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
