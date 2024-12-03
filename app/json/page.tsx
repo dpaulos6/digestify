@@ -7,21 +7,12 @@ import { Separator } from '@/components/ui/separator'
 import { toast } from '@/components/ui/use-toast'
 import { copyToClipboard } from '@/utils/copy'
 import { useRef, useState } from 'react'
-import { Editor, type Monaco } from '@monaco-editor/react'
-import { ashenVibrant } from './theme'
+import { Editor } from '@monaco-editor/react'
+import { handleEditorDidMount } from './actions/monaco'
 
 export default function JsonTools() {
   const [inputValue, setInputValue] = useState('')
   const hiddenFileInput = useRef<HTMLInputElement | null>(null)
-
-  const handleEditorDidMount = (monaco: Monaco) => {
-    monaco.editor.defineTheme('AshenVibrant', {
-      base: 'vs-dark',
-      inherit: true,
-      rules: [],
-      ...ashenVibrant
-    })
-  }
 
   const handleFormat = () => {
     try {
@@ -39,9 +30,7 @@ export default function JsonTools() {
   const handleValidate = () => {
     try {
       if (inputValue === '') return
-
       JSON5.parse(inputValue)
-
       toast({
         description: <span>Valid JSON!</span>
       })
