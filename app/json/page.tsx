@@ -94,7 +94,7 @@ export default function JsonTools() {
           try {
             const data = JSON.parse(e.target.result as string)
             console.log('Imported JSON Data:', data)
-            setInputValue(JSON.stringify(data, null, 2))
+            setInputValue(e.target.result as string)
           } catch (error) {
             console.error('Error parsing JSON:', error)
           }
