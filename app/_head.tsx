@@ -10,6 +10,12 @@ export default function Head() {
       <meta property="og:site_name" content="Digestify" />
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:image" content="0" />
+      <meta name="google-adsense-account" content="ca-pub-4113864436683156" />
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4113864436683156"
+        crossOrigin="anonymous"
+      />
     </head>
   )
 }

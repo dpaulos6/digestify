@@ -1,6 +1,6 @@
 'use client'
 
-import { DigestifyIcon } from '@/icons'
+import { DigestifyIcon, PaypalIcon } from '@/icons'
 import { cn } from '@/lib/utils'
 import { Menu, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import React, { useEffect, useState } from 'react'
 import { navbarItems } from '@/data/navbar-items'
+import { Button } from './ui/button'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -60,7 +61,7 @@ export default function Navbar() {
   return (
     <header>
       <nav className="z-10 flex w-full items-center justify-between gap-8 border-b border-border bg-background px-4 py-3">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           <Link href="/" className="group flex items-center gap-1">
             <DigestifyIcon className="h-10 w-10 text-primary transition group-hover:text-primary/75" />
             <span
@@ -139,22 +140,33 @@ export default function Navbar() {
           </div>
         </div>
         <div className="flex items-center">
+          <Button
+            asChild
+            variant="outline"
+            className="rounded-full gap-2 border-blue-400 hover:bg-background-hover mr-2"
+          >
+            <Link href="https://www.paypal.com/donate/?hosted_button_id=NK7E6B9J8RXFN">
+              <span>Support</span>
+              <PaypalIcon className="size-4" />
+            </Link>
+          </Button>
           <button
+            type="button"
             className="rounded-md p-2 transition hover:bg-background-hover"
             onClick={() => {
-              setTheme(theme == 'light' ? 'dark' : 'light')
+              setTheme(theme === 'light' ? 'dark' : 'light')
             }}
           >
-            {theme == 'light' ? <Moon /> : <Sun />}
+            {theme === 'light' ? <Moon /> : <Sun />}
           </button>
           <div className="block h-10 sm:hidden">
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <Menu className="h-10 w-10 rounded-lg p-2 transition hover:bg-border" />
+                <Menu className="h-10 w-10 rounded-lg p-2 transition hover:bg-background-hover" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                {navbarItems.map((item, i) => (
-                  <Link key={i} href={item.href}>
+                {navbarItems.map((item) => (
+                  <Link key={item.title} href={item.href}>
                     <DropdownMenuItem>
                       {/* <User className="mr-2 h-4 w-4" /> */}
                       <span className="text-base">{item.title}</span>

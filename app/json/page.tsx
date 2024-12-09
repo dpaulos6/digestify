@@ -6,26 +6,18 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { toast } from '@/components/ui/use-toast'
 import { copyToClipboard } from '@/utils/copy'
-import { useState } from 'react'
-import { Editor, type Monaco } from '@monaco-editor/react'
-import { ashenVibrant } from './theme'
+import { useRef, useState } from 'react'
+import { Editor } from '@monaco-editor/react'
+import { handleEditorDidMount } from './actions/monaco'
 
 export default function JsonTools() {
   const [inputValue, setInputValue] = useState('')
-
-  const handleEditorDidMount = (monaco: Monaco) => {
-    monaco.editor.defineTheme('AshenVibrant', {
-      base: 'vs-dark',
-      inherit: true,
-      rules: [],
-      ...ashenVibrant
-    })
-  }
+  const hiddenFileInput = useRef<HTMLInputElement | null>(null)
 
   const handleFormat = () => {
     try {
       if (inputValue === '') return
-      const parsed = JSON.parse(inputValue)
+      const parsed = JSON5.parse(inputValue)
       setInputValue(JSON.stringify(parsed, null, 2))
     } catch (e) {
       toast({
@@ -38,9 +30,7 @@ export default function JsonTools() {
   const handleValidate = () => {
     try {
       if (inputValue === '') return
-
       JSON5.parse(inputValue)
-
       toast({
         description: <span>Valid JSON!</span>
       })
@@ -77,6 +67,48 @@ export default function JsonTools() {
     setInputValue('')
   }
 
+  const handleExport = () => {
+    const blob = new Blob([inputValue], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'export.json'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
+  const handleButtonClick = () => {
+    hiddenFileInput.current?.click()
+  }
+
+  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file && file.type === 'application/json') {
+      const reader = new FileReader()
+
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          try {
+            const data = JSON.parse(e.target.result as string)
+            console.log('Imported JSON Data:', data)
+            setInputValue(e.target.result as string)
+          } catch (error) {
+            console.error('Error parsing JSON:', error)
+          }
+        }
+        event.target.value = ''
+      }
+
+      reader.readAsText(file)
+    } else {
+      console.error('Please select a valid JSON file.')
+      event.target.value = ''
+    }
+  }
+
   return (
     <PageWrapper title="JSON Tools">
       <div className="flex flex-wrap gap-2 items-center">
@@ -107,6 +139,20 @@ export default function JsonTools() {
         >
           Remove whitespaces
         </Button>
+        <Separator orientation="vertical" className="bg-white/10 h-8" />
+        <Button variant="outline" onClick={handleExport} disabled={!inputValue}>
+          Export
+        </Button>
+        <Button variant="outline" onClick={handleButtonClick}>
+          Import
+        </Button>
+        <input
+          type="file"
+          accept="application/json"
+          ref={hiddenFileInput}
+          className="hidden"
+          onChange={handleImport}
+        />
       </div>
       <Editor
         height="100%"
@@ -114,7 +160,7 @@ export default function JsonTools() {
         language="json"
         value={inputValue}
         onChange={(value) => setInputValue(value || '')}
-        className="min-h-[50dvh] rounded-md overflow-x-hidden"
+        className="min-h-[50dvh] rounded-md "
         theme="AshenVibrant"
         options={{
           minimap: { enabled: false },
