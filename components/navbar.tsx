@@ -61,7 +61,7 @@ export default function Navbar() {
   return (
     <header>
       <nav className="z-10 flex w-full items-center justify-between gap-8 border-b border-border bg-background px-4 py-3">
-        <div className="flex items-center">
+        <div className="flex items-center gap-4 sm:gap-6">
           <Link href="/" className="group flex items-center gap-1">
             <DigestifyIcon className="h-10 w-10 text-primary transition group-hover:text-primary/75" />
             <span
