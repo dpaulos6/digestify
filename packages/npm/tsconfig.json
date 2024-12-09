@@ -7,7 +7,12 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "declaration": true
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true
   },
+  "paths": {
+    "@/*": ["../../*"]
+  },
+  "outDir": "./dist",
   "include": ["src"]
 }
