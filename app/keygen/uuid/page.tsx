@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react'
-import OutputWrapper from '@/components/output-wrapper'
-import { generateUuid } from '@/helpers/keygen'
-import PageWrapper from '@/components/PageWrapper'
+import PageWrapper from "@/components/PageWrapper"
+import OutputWrapper from "@/components/output-wrapper"
+import { generateUuid } from "@/helpers/keygen"
+import { useEffect, useState } from "react"
 
 export default function UuidGenerator() {
-  const [uuid, setUuid] = useState('')
+  const [uuid, setUuid] = useState("")
 
   useEffect(() => {
     setUuid(generateUuid())
@@ -14,7 +14,7 @@ export default function UuidGenerator() {
 
   return (
     <PageWrapper title="Your randomly generated UUID.">
-      <OutputWrapper title="UUID">{uuid ? uuid : ' '}</OutputWrapper>
+      <OutputWrapper title="UUID">{uuid ? uuid : " "}</OutputWrapper>
     </PageWrapper>
   )
 }

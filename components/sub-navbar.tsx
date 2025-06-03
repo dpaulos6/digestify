@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 interface ItemsProps {
   id: number
@@ -26,12 +26,16 @@ export default function SubNavbar({
       <span className="text-center text-3xl md:text-start">Other tools</span>
       <div
         className={cn(
-          'flex items-center justify-start gap-4 overflow-x-auto whitespace-nowrap py-5',
+          "flex items-center justify-start gap-4 overflow-x-auto whitespace-nowrap py-5",
           className
         )}
       >
         {items.map((item) => (
-          <SubNavbarItem key={item.id} label={item.label} href={item.href} />
+          <SubNavbarItem
+            key={item.id}
+            label={item.label}
+            href={item.href}
+          />
         ))}
       </div>
     </div>
@@ -51,9 +55,9 @@ const SubNavbarItem = ({ label, href }: SubNavbarItemProps): JSX.Element => {
     <Link
       href={href}
       className={cn(
-        'rounded-xl border border-foreground/15 px-3 py-1.5 font-bold transition sm:hover:bg-background-hover',
+        "rounded-xl border border-foreground/15 px-3 py-1.5 font-bold transition sm:hover:bg-background-hover",
         isActive &&
-          'border-primary/50 text-primary sm:hover:bg-primary/5 dark:sm:hover:bg-primary/10'
+          "border-primary/50 text-primary sm:hover:bg-primary/5 dark:sm:hover:bg-primary/10"
       )}
     >
       {label}

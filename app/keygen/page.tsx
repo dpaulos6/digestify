@@ -1,13 +1,13 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react'
-import OutputWrapper from '@/components/output-wrapper'
-import { generateRandomSecret } from '@/helpers/keygen'
-import PageWrapper from '@/components/PageWrapper'
+import PageWrapper from "@/components/PageWrapper"
+import OutputWrapper from "@/components/output-wrapper"
+import { generateRandomSecret } from "@/helpers/keygen"
+import { useEffect, useState } from "react"
 
 export default function SecretGenerator() {
-  const [secret32, setSecret32] = useState('')
-  const [secret64, setSecret64] = useState('')
+  const [secret32, setSecret32] = useState("")
+  const [secret64, setSecret64] = useState("")
 
   useEffect(() => {
     setSecret32(generateRandomSecret(32))
@@ -17,10 +17,10 @@ export default function SecretGenerator() {
   return (
     <PageWrapper title="Your randomly generated Secrets.">
       <OutputWrapper title="32 characters">
-        {secret32 ? secret32 : ' '}
+        {secret32 ? secret32 : " "}
       </OutputWrapper>
       <OutputWrapper title="64 characters">
-        {secret64 ? secret64 : ' '}
+        {secret64 ? secret64 : " "}
       </OutputWrapper>
     </PageWrapper>
   )

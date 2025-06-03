@@ -1,20 +1,20 @@
 import {
-  generateRandomSecret,
+  decodeBase32,
+  decodeBase58,
+  decodeBase64,
+  encodeBase32,
+  encodeBase58,
+  encodeBase64
+} from "./helpers/encoding"
+import { hash } from "./helpers/hashing"
+import {
+  type KeyPair,
   generateAESKey,
   generatePassword,
   generateRSAKeyPair,
-  generateUuid,
-  type KeyPair
-} from './helpers/keygen'
-import {
-  encodeBase32,
-  encodeBase58,
-  encodeBase64,
-  decodeBase32,
-  decodeBase58,
-  decodeBase64
-} from './helpers/encoding'
-import { hash } from './helpers/hashing'
+  generateRandomSecret,
+  generateUuid
+} from "./helpers/keygen"
 
 async function main() {
   // Keygen
@@ -29,7 +29,7 @@ async function main() {
   console.log(`RSA private key:\n ${keys.privateKey}`)
 
   // Encoding
-  const encodeTxt = 'digestify'
+  const encodeTxt = "digestify"
   const encoded32 = encodeBase32(encodeTxt)
   const decoded32 = decodeBase32(encoded32)
   const encoded64 = encodeBase64(encodeTxt)
@@ -45,21 +45,21 @@ async function main() {
   console.log(`Decode58 '${encoded58}': ${decoded58}\n`)
 
   // Hashing
-  const hashTxt = 'digestify is a cool library!'
+  const hashTxt = "digestify is a cool library!"
   console.log(
-    `Hashed '${hashTxt}' using 'bcrypt': ${await hash(hashTxt.trim(), 'bcrypt')}`
+    `Hashed '${hashTxt}' using 'bcrypt': ${await hash(hashTxt.trim(), "bcrypt")}`
   )
   console.log(
-    `Hashed '${hashTxt}' using 'sha512': ${await hash(hashTxt.trim(), 'sha-512')}`
+    `Hashed '${hashTxt}' using 'sha512': ${await hash(hashTxt.trim(), "sha-512")}`
   )
   console.log(
-    `Hashed '${hashTxt}' using 'md4': ${await hash(hashTxt.trim(), 'md4')}`
+    `Hashed '${hashTxt}' using 'md4': ${await hash(hashTxt.trim(), "md4")}`
   )
   console.log(
-    `Hashed '${hashTxt}' using 'xxHash32': ${await hash(hashTxt.trim(), 'xxHash32')}`
+    `Hashed '${hashTxt}' using 'xxHash32': ${await hash(hashTxt.trim(), "xxHash32")}`
   )
   console.log(
-    `Hashed '${hashTxt}' using 'ripemd-160': ${await hash(hashTxt.trim(), 'ripemd-160')}`
+    `Hashed '${hashTxt}' using 'ripemd-160': ${await hash(hashTxt.trim(), "ripemd-160")}`
   )
 }
 

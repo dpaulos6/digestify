@@ -1,19 +1,19 @@
-import { Mulish } from 'next/font/google'
-import { ThemeProvider } from '@/components/theme-provider'
-import { Toaster } from '@/components/ui/toaster'
-import './globals.css'
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
-import { cn } from '@/lib/utils'
-import type { Metadata } from 'next'
-import { Analytics } from '@vercel/analytics/react'
-import Head from './_head'
+import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
+import { Mulish } from "next/font/google"
+import "./globals.css"
+import Footer from "@/components/footer"
+import Navbar from "@/components/navbar"
+import { cn } from "@/lib/utils"
+import { Analytics } from "@vercel/analytics/react"
+import type { Metadata } from "next"
+import Head from "./_head"
 
-const mulish = Mulish({ subsets: ['latin'] })
+const mulish = Mulish({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: 'Digestify',
-  description: 'Digest your data at light-speed!'
+  title: "Digestify",
+  description: "Digest your data at light-speed!"
 }
 
 export default function RootLayout({
@@ -22,10 +22,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body
         className={cn(
-          'max-w-screen relative flex min-h-screen flex-col',
+          "relative flex min-h-screen max-w-screen flex-col",
           mulish.className
         )}
         suppressHydrationWarning

@@ -1,24 +1,23 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
-import { hash, hashingAlgorithms } from '@/helpers/hashing'
-import OutputWrapper from '@/components/output-wrapper'
-import Head from 'next/head'
-import InputWrapper from '@/components/input-wrapper'
-import PageWrapper from '@/components/PageWrapper'
+import PageWrapper from "@/components/PageWrapper"
+import InputWrapper from "@/components/input-wrapper"
+import OutputWrapper from "@/components/output-wrapper"
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue
-} from '@/components/ui/select'
+} from "@/components/ui/select"
+import { hash, hashingAlgorithms } from "@/helpers/hashing"
+import Head from "next/head"
+import { useEffect, useState } from "react"
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('')
-  const [hashedValue, setHashedValue] = useState('')
+  const [inputValue, setInputValue] = useState("")
+  const [hashedValue, setHashedValue] = useState("")
   const [hashingType, setHashingType] = useState(hashingAlgorithms[0])
 
   useEffect(() => {
@@ -29,10 +28,10 @@ export default function Home() {
           const hashedResult = await hash(value.trim(), type)
           setHashedValue(hashedResult)
         } catch (error) {
-          console.error('Error while hashing:', error)
+          console.error("Error while hashing:", error)
         }
       } else {
-        setHashedValue('')
+        setHashedValue("")
       }
     }
 
@@ -51,15 +50,21 @@ export default function Home() {
           }}
           defaultValue={hashingType}
         >
-          <SelectTrigger className="w-full border-2 text-base hover:bg-background-hover xs:w-[180px]">
-            <SelectValue placeholder={hashingType} defaultValue={'bcrypt'} />
+          <SelectTrigger className="w-full xs:w-[180px] border-2 text-base hover:bg-background-hover">
+            <SelectValue
+              placeholder={hashingType}
+              defaultValue={"bcrypt"}
+            />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               {hashingAlgorithms
                 .sort((a, b) => a.localeCompare(b)) // Sort alphabetically by name
                 .map((type) => (
-                  <SelectItem key={type} value={type}>
+                  <SelectItem
+                    key={type}
+                    value={type}
+                  >
                     {type}
                   </SelectItem>
                 ))}

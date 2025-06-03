@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "development"
-  ],
+  "extends": ["development"],
   "hints": {
     "axe/forms": [
       "default",
@@ -13,9 +11,7 @@
     "compat-api/html": [
       "default",
       {
-        "ignore": [
-          "meta[name=theme-color]"
-        ]
+        "ignore": ["meta[name=theme-color]"]
       }
     ]
   }

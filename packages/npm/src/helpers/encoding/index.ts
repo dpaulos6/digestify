@@ -5,4 +5,4 @@ export {
   decodeBase32,
   decodeBase58,
   decodeBase64
-} from './encoding'
+} from "./encoding"

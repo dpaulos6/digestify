@@ -1,49 +1,41 @@
-'use client'
+"use client"
 
-import JSON5 from 'json5'
-import PageWrapper from '@/components/PageWrapper'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
-import { toast } from '@/components/ui/use-toast'
-import { copyToClipboard } from '@/utils/copy'
-import { useRef, useState } from 'react'
-import { Editor } from '@monaco-editor/react'
-import { handleEditorDidMount } from './actions/monaco'
+import PageWrapper from "@/components/PageWrapper"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { copyToClipboard } from "@/utils/copy"
+import { Editor } from "@monaco-editor/react"
+import JSON5 from "json5"
+import { useRef, useState } from "react"
+import { toast } from "sonner"
+import { handleEditorDidMount } from "./actions/monaco"
 
 export default function JsonTools() {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState("")
   const hiddenFileInput = useRef<HTMLInputElement | null>(null)
 
   const handleFormat = () => {
     try {
-      if (inputValue === '') return
+      if (inputValue === "") return
       const parsed = JSON5.parse(inputValue)
       setInputValue(JSON.stringify(parsed, null, 2))
     } catch (e) {
-      toast({
-        variant: 'destructive',
-        description: <span>{String(e)}</span>
-      })
+      toast.error(<span>{String(e)}</span>)
     }
   }
 
   const handleValidate = () => {
     try {
-      if (inputValue === '') return
+      if (inputValue === "") return
       JSON5.parse(inputValue)
-      toast({
-        description: <span>Valid JSON!</span>
-      })
+      toast(<span>Valid JSON!</span>)
     } catch (e) {
-      toast({
-        variant: 'destructive',
-        description: <span>{String(e)}</span>
-      })
+      toast.error(<span>{String(e)}</span>)
     }
   }
 
   const handleRemoveWhitespaces = () => {
-    setInputValue(inputValue.replace(/\s/g, ''))
+    setInputValue(inputValue.replace(/\s/g, ""))
   }
 
   const handlePaste = async () => {
@@ -54,26 +46,24 @@ export default function JsonTools() {
   const handleCopy = async () => {
     if (!inputValue) return
     const response = copyToClipboard(inputValue)
-    toast({
-      description: (
-        <span>
-          Copied <code className="code">{response}</code> to clipboard.
-        </span>
-      )
-    })
+    toast(
+      <span>
+        Copied <code className="code">{response}</code> to clipboard.
+      </span>
+    )
   }
 
   const handleClear = () => {
-    setInputValue('')
+    setInputValue("")
   }
 
   const handleExport = () => {
-    const blob = new Blob([inputValue], { type: 'application/json' })
+    const blob = new Blob([inputValue], { type: "application/json" })
     const url = URL.createObjectURL(blob)
 
-    const a = document.createElement('a')
+    const a = document.createElement("a")
     a.href = url
-    a.download = 'export.json'
+    a.download = "export.json"
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -86,43 +76,59 @@ export default function JsonTools() {
 
   const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
-    if (file && file.type === 'application/json') {
+    if (file && file.type === "application/json") {
       const reader = new FileReader()
 
       reader.onload = (e) => {
         if (e.target?.result) {
           try {
             const data = JSON.parse(e.target.result as string)
-            console.log('Imported JSON Data:', data)
+            toast.info("Imported JSON Data:", data)
             setInputValue(e.target.result as string)
           } catch (error) {
-            console.error('Error parsing JSON:', error)
+            console.error("Error parsing JSON:", error)
           }
         }
-        event.target.value = ''
+        event.target.value = ""
       }
 
       reader.readAsText(file)
     } else {
-      console.error('Please select a valid JSON file.')
-      event.target.value = ''
+      console.error("Please select a valid JSON file.")
+      event.target.value = ""
     }
   }
 
   return (
     <PageWrapper title="JSON Tools">
-      <div className="flex flex-wrap gap-2 items-center">
-        <Button variant="outline" onClick={handlePaste}>
+      <div className="flex flex-wrap items-center gap-2">
+        <Button
+          variant="outline"
+          onClick={handlePaste}
+        >
           Paste
         </Button>
-        <Button variant="outline" onClick={handleCopy}>
+        <Button
+          variant="outline"
+          onClick={handleCopy}
+        >
           Copy
         </Button>
-        <Button variant="outline" onClick={handleClear}>
+        <Button
+          variant="outline"
+          onClick={handleClear}
+        >
           Clear
         </Button>
-        <Separator orientation="vertical" className="bg-white/10 h-8" />
-        <Button variant="outline" onClick={handleFormat} disabled={!inputValue}>
+        <Separator
+          orientation="vertical"
+          className="h-8 bg-white/10"
+        />
+        <Button
+          variant="outline"
+          onClick={handleFormat}
+          disabled={!inputValue}
+        >
           Format
         </Button>
         <Button
@@ -139,11 +145,21 @@ export default function JsonTools() {
         >
           Remove whitespaces
         </Button>
-        <Separator orientation="vertical" className="bg-white/10 h-8" />
-        <Button variant="outline" onClick={handleExport} disabled={!inputValue}>
+        <Separator
+          orientation="vertical"
+          className="h-8 bg-white/10"
+        />
+        <Button
+          variant="outline"
+          onClick={handleExport}
+          disabled={!inputValue}
+        >
           Export
         </Button>
-        <Button variant="outline" onClick={handleButtonClick}>
+        <Button
+          variant="outline"
+          onClick={handleButtonClick}
+        >
           Import
         </Button>
         <input
@@ -159,14 +175,14 @@ export default function JsonTools() {
         width="100%"
         language="json"
         value={inputValue}
-        onChange={(value) => setInputValue(value || '')}
+        onChange={(value) => setInputValue(value || "")}
         className="min-h-[50dvh] rounded-md "
         theme="AshenVibrant"
         options={{
           minimap: { enabled: false },
-          lineNumbers: 'on',
+          lineNumbers: "on",
           scrollBeyondLastLine: false,
-          wordWrap: 'off',
+          wordWrap: "off",
           fontSize: 14,
           tabSize: 4
         }}

@@ -1,13 +1,7 @@
-'use client'
-import { useState, useEffect } from 'react'
-import {
-  encryptTextAES,
-  decryptTextAES,
-  encryptTextBlowfish,
-  decryptTextBlowfish
-} from '@/helpers/encryption/encryption'
-import OutputWrapper from '@/components/output-wrapper'
-import InputWrapper from '@/components/input-wrapper'
+"use client"
+import PageWrapper from "@/components/PageWrapper"
+import InputWrapper from "@/components/input-wrapper"
+import OutputWrapper from "@/components/output-wrapper"
 import {
   Select,
   SelectContent,
@@ -15,32 +9,38 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from '@/components/ui/select'
-import PageWrapper from '@/components/PageWrapper'
+} from "@/components/ui/select"
+import {
+  decryptTextAES,
+  decryptTextBlowfish,
+  encryptTextAES,
+  encryptTextBlowfish
+} from "@/helpers/encryption/encryption"
+import { useEffect, useState } from "react"
 
 // Define type for encryption results
 type EncryptedText = string
 
 export default function Home() {
-  const [text, setText] = useState<string>('')
-  const [algorithm, setAlgorithm] = useState<string>('aes')
-  const [encryptedText, setEncryptedText] = useState<EncryptedText>('')
-  const [decryptedText, setDecryptedText] = useState<EncryptedText>('')
+  const [text, setText] = useState<string>("")
+  const [algorithm, setAlgorithm] = useState<string>("aes")
+  const [encryptedText, setEncryptedText] = useState<EncryptedText>("")
+  const [decryptedText, setDecryptedText] = useState<EncryptedText>("")
 
   // Encrypt text whenever the input changes
   useEffect(() => {
     if (!text) {
-      setEncryptedText('')
+      setEncryptedText("")
       return
     }
 
     let encrypted: EncryptedText
-    if (algorithm === 'aes') {
+    if (algorithm === "aes") {
       encrypted = encryptTextAES(text)
-    } else if (algorithm === 'blowfish') {
+    } else if (algorithm === "blowfish") {
       encrypted = encryptTextBlowfish(text)
     } else {
-      console.error('Invalid encryption algorithm selected')
+      console.error("Invalid encryption algorithm selected")
       return
     }
     setEncryptedText(encrypted)
@@ -49,30 +49,30 @@ export default function Home() {
   // Decrypt text whenever the encryptedText input changes
   useEffect(() => {
     if (!encryptedText) {
-      setDecryptedText('')
+      setDecryptedText("")
       return
     }
 
     let decrypted: string | undefined
     try {
-      if (algorithm === 'aes') {
+      if (algorithm === "aes") {
         decrypted = decryptTextAES(encryptedText)
-      } else if (algorithm === 'blowfish') {
+      } else if (algorithm === "blowfish") {
         decrypted = decryptTextBlowfish(encryptedText)
       } else {
-        console.error('Invalid decryption algorithm selected')
+        console.error("Invalid decryption algorithm selected")
         return
       }
     } catch (error) {
-      console.error('Decryption failed', error)
-      decrypted = 'Decryption failed or invalid data'
+      console.error("Decryption failed", error)
+      decrypted = "Decryption failed or invalid data"
     }
 
     // Check if decrypted is undefined
     if (decrypted) {
       setDecryptedText(decrypted)
     } else {
-      setDecryptedText('Decryption failed or invalid data')
+      setDecryptedText("Decryption failed or invalid data")
     }
   }, [encryptedText, algorithm])
 
@@ -90,7 +90,7 @@ export default function Home() {
           }}
           defaultValue={algorithm}
         >
-          <SelectTrigger className="w-full border-2 text-base hover:bg-background-hover xs:w-[180px]">
+          <SelectTrigger className="w-full xs:w-[180px] border-2 text-base hover:bg-background-hover">
             <SelectValue placeholder={algorithm} />
           </SelectTrigger>
           <SelectContent>

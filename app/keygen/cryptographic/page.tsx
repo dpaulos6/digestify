@@ -1,16 +1,16 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react'
-import OutputWrapper from '@/components/output-wrapper'
-import PageWrapper from '@/components/PageWrapper'
+import PageWrapper from "@/components/PageWrapper"
+import OutputWrapper from "@/components/output-wrapper"
 import {
+  type KeyPair,
   generateAESKey,
-  generateRSAKeyPair,
-  type KeyPair
-} from '@/helpers/keygen'
+  generateRSAKeyPair
+} from "@/helpers/keygen"
+import { useEffect, useState } from "react"
 
 export default function Page() {
-  const [AESKey, setAESKey] = useState<string>('')
+  const [AESKey, setAESKey] = useState<string>("")
   const [RSAKeys, setRSAKeys] = useState<KeyPair | null>(null)
 
   useEffect(() => {
@@ -20,10 +20,10 @@ export default function Page() {
 
       try {
         const rsaKeys = await generateRSAKeyPair()
-        console.log('RSA keys generated:', rsaKeys)
+        console.log("RSA keys generated:", rsaKeys)
         setRSAKeys(rsaKeys)
       } catch (error) {
-        console.error('Error generating RSA keys:', error)
+        console.error("Error generating RSA keys:", error)
       }
     }
 
@@ -32,12 +32,12 @@ export default function Page() {
 
   return (
     <PageWrapper title="Your randomly generated cryptographic keys.">
-      <OutputWrapper title="AES Key">{AESKey || ' '}</OutputWrapper>
+      <OutputWrapper title="AES Key">{AESKey || " "}</OutputWrapper>
       <OutputWrapper title="RSA Public Key">
-        {RSAKeys?.publicKey || ' '}
+        {RSAKeys?.publicKey || " "}
       </OutputWrapper>
       <OutputWrapper title="RSA Private Key">
-        {RSAKeys?.privateKey || ' '}
+        {RSAKeys?.privateKey || " "}
       </OutputWrapper>
     </PageWrapper>
   )

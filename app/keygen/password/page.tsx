@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import OutputWrapper from '@/components/output-wrapper'
-import { generatePassword } from '@/helpers/keygen'
-import { useEffect, useState } from 'react'
-import { Button } from '@/components/ui/button'
+import PageWrapper from "@/components/PageWrapper"
+import OutputWrapper from "@/components/output-wrapper"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -11,21 +11,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form'
-import { Slider } from '@/components/ui/slider'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { toast } from '@/components/ui/use-toast'
-import { Checkbox } from '@/components/ui/checkbox'
-import { RotateCcw } from 'lucide-react'
-import PageWrapper from '@/components/PageWrapper'
+} from "@/components/ui/form"
+import { Slider } from "@/components/ui/slider"
+import { toast } from "@/components/ui/use-toast"
+import { generatePassword } from "@/helpers/keygen"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { RotateCcw } from "lucide-react"
+import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 const formSchema = z.object({
   length: z.coerce
     .number()
-    .min(8, { message: 'Password cannot be smaller than 8 characters.' })
-    .max(64, { message: 'Password cannot be larger than 64 characters.' })
+    .min(8, { message: "Password cannot be smaller than 8 characters." })
+    .max(64, { message: "Password cannot be larger than 64 characters." })
     .default(12),
   includeUppercase: z.boolean().default(true),
   includeLowercase: z.boolean().default(true),
@@ -34,7 +34,7 @@ const formSchema = z.object({
 })
 
 export default function SecretGenerator() {
-  const [securePassword, setSecurePassword] = useState('')
+  const [securePassword, setSecurePassword] = useState("")
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,23 +66,23 @@ export default function SecretGenerator() {
       !includeNumbers &&
       !includeSymbols
 
-    if (!unselected) {
-      toast({ itemID: 'invalidPasswordOptions' }).dismiss()
-      setSecurePassword(generatePassword(data))
-    } else {
+    if (unselected) {
       toast({
-        itemID: 'invalidPasswordOptions',
-        variant: 'destructive',
-        title: 'Invalid Password Options.',
-        description: 'At least one character type must be selected.'
+        itemID: "invalidPasswordOptions",
+        variant: "destructive",
+        title: "Invalid Password Options.",
+        description: "At least one character type must be selected."
       })
+    } else {
+      toast({ itemID: "invalidPasswordOptions" }).dismiss()
+      setSecurePassword(generatePassword(data))
     }
   }
 
   return (
     <PageWrapper title="Generate a secure password.">
       <OutputWrapper title="Secure password">
-        {securePassword ? securePassword : ' '}
+        {securePassword ? securePassword : " "}
       </OutputWrapper>
       <Form {...form}>
         <form
@@ -186,7 +186,10 @@ export default function SecretGenerator() {
               />
             </div>
           </div>
-          <Button type="submit" className="mx-auto flex gap-2 px-8 text-lg">
+          <Button
+            type="submit"
+            className="mx-auto flex gap-2 px-8 text-lg"
+          >
             Generate
             <RotateCcw className="h-5 w-5" />
           </Button>

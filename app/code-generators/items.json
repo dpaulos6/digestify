@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "label": "QR Code",
+    "href": "/code-generators"
+  },
+  {
+    "id": 2,
+    "label": "Barcode",
+    "href": "/code-generators/barcode"
+  }
+]

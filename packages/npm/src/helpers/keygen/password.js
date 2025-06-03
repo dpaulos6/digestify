@@ -1,4 +1,4 @@
-Object.defineProperty(exports, '__esModule', { value: true })
+Object.defineProperty(exports, "__esModule", { value: true })
 exports.generatePassword = generatePassword
 function generatePassword({
   length,
@@ -9,24 +9,24 @@ function generatePassword({
   easyToRead,
   easyToSay
 }) {
-  let charset = ''
-  const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  const lowercase = 'abcdefghijklmnopqrstuvwxyz'
-  const numbers = '0123456789'
-  const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./-='
+  let charset = ""
+  const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  const lowercase = "abcdefghijklmnopqrstuvwxyz"
+  const numbers = "0123456789"
+  const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-="
   if (includeUppercase) charset += uppercase
   if (includeLowercase) charset += lowercase
   if (includeNumbers) charset += numbers
   if (includeSymbols) charset += symbols
   const easyToReadChars =
-    'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'
-  const easyToSayChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789"
+  const easyToSayChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
   if (easyToRead) charset = easyToReadChars
   if (easyToSay) charset = easyToSayChars
   if (charset.length === 0) {
-    throw new Error('No character sets selected')
+    throw new Error("No character sets selected")
   }
-  let password = ''
+  let password = ""
   const values = new Uint32Array(length)
   window.crypto.getRandomValues(values)
   for (let i = 0; i < length; i++) {

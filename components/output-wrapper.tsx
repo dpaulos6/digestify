@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import React, { useRef, useState, type ReactNode } from 'react'
-import { CopyIcon, CheckIcon } from 'lucide-react'
-import { toast } from './ui/use-toast'
-import { cn } from '@/lib/utils'
-import { Fira_Code } from 'next/font/google'
+import { cn } from "@/lib/utils"
+import { CheckIcon, CopyIcon } from "lucide-react"
+import { Fira_Code } from "next/font/google"
+import React, { useRef, useState, type ReactNode } from "react"
+import { toast } from "./ui/use-toast"
 
-const firacode = Fira_Code({ subsets: ['latin'] })
+const firacode = Fira_Code({ subsets: ["latin"] })
 
 interface OutputWrapperProps {
   children: ReactNode
@@ -17,7 +17,7 @@ interface OutputWrapperProps {
 export default function OutputWrapper({
   children,
   className,
-  title = 'output'
+  title = "output"
 }: OutputWrapperProps) {
   const textRef = useRef<HTMLPreElement>(null)
   const [copied, setCopied] = useState(false)
@@ -53,12 +53,12 @@ export default function OutputWrapper({
   return (
     <div
       className={cn(
-        'relative flex h-full w-full max-w-5xl flex-col overflow-hidden rounded-lg border bg-background-hover sm:min-w-[400px]',
+        "relative flex h-full w-full max-w-5xl flex-col overflow-hidden rounded-lg border bg-background-hover sm:min-w-[400px]",
         className
       )}
     >
       <div className="flex items-center justify-between bg-background-hover p-2">
-        <span className="ml-2 line-clamp-1 text-sm text-foreground/50 xs:text-base sm:text-lg">
+        <span className="ml-2 line-clamp-1 text-foreground/50 text-sm xs:text-base sm:text-lg">
           {title}
         </span>
         <CopyButton
@@ -69,7 +69,7 @@ export default function OutputWrapper({
       </div>
       <pre
         className={cn(
-          'min-h-10 w-full flex-1 whitespace-pre-wrap break-words p-3 font-mono text-sm xs:text-base',
+          "min-h-10 w-full flex-1 whitespace-pre-wrap break-words p-3 font-mono text-sm xs:text-base",
           firacode.className
         )}
         ref={textRef}
@@ -90,18 +90,18 @@ const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'select-none rounded-md bg-border p-1 text-neutral-600 transition hover:brightness-95 disabled:pointer-events-none disabled:opacity-0 dark:text-neutral-300 dark:hover:brightness-125'
+          "select-none rounded-md bg-border p-1 text-neutral-600 transition hover:brightness-95 disabled:pointer-events-none disabled:opacity-0 dark:text-neutral-300 dark:hover:brightness-125"
         )}
         {...rest}
       >
         {copied ? (
           <span className="flex gap-1 text-sm xs:text-base">
-            <CheckIcon className="h-5 w-5 xs:h-6 xs:w-6" />
+            <CheckIcon className="h-5 xs:h-6 w-5 xs:w-6" />
             Copied
           </span>
         ) : (
           <span className="flex gap-1 text-sm xs:text-base">
-            <CopyIcon className="h-5 w-5 xs:h-6 xs:w-6" />
+            <CopyIcon className="h-5 xs:h-6 w-5 xs:w-6" />
             Copy
           </span>
         )}
@@ -109,4 +109,4 @@ const CopyButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   }
 )
-CopyButton.displayName = 'CopyButton'
+CopyButton.displayName = "CopyButton"

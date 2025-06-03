@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import { DigestifyIcon, PaypalIcon } from '@/icons'
-import { cn } from '@/lib/utils'
-import { Menu, Moon, Sun } from 'lucide-react'
-import { useTheme } from 'next-themes'
-import { Montserrat } from 'next/font/google'
-import Link from 'next/link'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,60 +13,63 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger
-} from '@/components/ui/navigation-menu'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-import React, { useEffect, useState } from 'react'
-import { navbarItems } from '@/data/navbar-items'
-import { Button } from './ui/button'
+} from "@/components/ui/navigation-menu"
+import { navbarItems } from "@/data/navbar-items"
+import { DigestifyIcon, PaypalIcon } from "@/icons"
+import { cn } from "@/lib/utils"
+import { Menu, Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
+import { Montserrat } from "next/font/google"
+import Link from "next/link"
+import React, { useEffect, useState } from "react"
+import { Button } from "./ui/button"
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ["latin"] })
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
-  const [screenSize, setScreenSize] = useState('sm')
+  const [screenSize, setScreenSize] = useState("sm")
 
   useEffect(() => {
     function checkScreenSize() {
-      const xxlBreakpoint = window.matchMedia('(min-width: 1400px)')
-      const xlBreakpoint = window.matchMedia('(min-width: 1280px)')
-      const largeBreakpoint = window.matchMedia('(min-width: 1024px)')
-      const mediumBreakpoint = window.matchMedia('(min-width: 768px)')
-      const smallBreakpoint = window.matchMedia('(max-width: 640px)')
+      const xxlBreakpoint = window.matchMedia("(min-width: 1400px)")
+      const xlBreakpoint = window.matchMedia("(min-width: 1280px)")
+      const largeBreakpoint = window.matchMedia("(min-width: 1024px)")
+      const mediumBreakpoint = window.matchMedia("(min-width: 768px)")
+      const smallBreakpoint = window.matchMedia("(max-width: 640px)")
 
       if (xxlBreakpoint.matches) {
-        setScreenSize('2xl')
+        setScreenSize("2xl")
       } else if (xlBreakpoint.matches) {
-        setScreenSize('xl')
+        setScreenSize("xl")
       } else if (largeBreakpoint.matches) {
-        setScreenSize('lg')
+        setScreenSize("lg")
       } else if (mediumBreakpoint.matches) {
-        setScreenSize('md')
+        setScreenSize("md")
       } else if (smallBreakpoint.matches) {
-        setScreenSize('sm')
+        setScreenSize("sm")
       } else {
-        setScreenSize('default')
+        setScreenSize("default")
       }
     }
 
     checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
+    window.addEventListener("resize", checkScreenSize)
+    return () => window.removeEventListener("resize", checkScreenSize)
   }, [])
 
   return (
     <header>
-      <nav className="z-10 flex w-full items-center justify-between gap-8 border-b border-border bg-background px-4 py-3">
+      <nav className="z-10 flex w-full items-center justify-between gap-8 border-border border-b bg-background px-4 py-3">
         <div className="flex items-center gap-4 sm:gap-6">
-          <Link href="/" className="group flex items-center gap-1">
+          <Link
+            href="/"
+            className="group flex items-center gap-1"
+          >
             <DigestifyIcon className="h-10 w-10 text-primary transition group-hover:text-primary/75" />
             <span
               className={cn(
-                'font-custom hidden text-2xl font-semibold lowercase transition group-hover:translate-x-1 sm:block',
+                "hidden font-custom font-semibold text-2xl lowercase transition group-hover:translate-x-1 sm:block",
                 montserrat.className
               )}
             >
@@ -78,13 +81,13 @@ export default function Navbar() {
               {navbarItems
                 .slice(
                   0,
-                  screenSize === '2xl'
+                  screenSize === "2xl"
                     ? 6
-                    : screenSize === 'xl'
+                    : screenSize === "xl"
                       ? 4
-                      : screenSize === 'lg'
+                      : screenSize === "lg"
                         ? 3
-                        : screenSize === 'md'
+                        : screenSize === "md"
                           ? 2
                           : 0
                 )
@@ -111,15 +114,15 @@ export default function Navbar() {
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {navbarItems
                         .slice(
-                          screenSize === '2xl'
+                          screenSize === "2xl"
                             ? 0
-                            : screenSize === 'xl'
+                            : screenSize === "xl"
                               ? navbarItems.length - 2
-                              : screenSize === 'lg'
+                              : screenSize === "lg"
                                 ? navbarItems.length - 3
-                                : screenSize === 'md'
+                                : screenSize === "md"
                                   ? navbarItems.length - 4
-                                  : screenSize === 'sm'
+                                  : screenSize === "sm"
                                     ? navbarItems.length
                                     : 0
                         )
@@ -143,7 +146,7 @@ export default function Navbar() {
           <Button
             asChild
             variant="outline"
-            className="rounded-full gap-2 border-blue-400 hover:bg-background-hover mr-2"
+            className="mr-2 gap-2 rounded-full border-blue-400 hover:bg-background-hover"
           >
             <Link href="https://www.paypal.com/donate/?hosted_button_id=NK7E6B9J8RXFN">
               <span>Support</span>
@@ -154,10 +157,10 @@ export default function Navbar() {
             type="button"
             className="rounded-md p-2 transition hover:bg-background-hover"
             onClick={() => {
-              setTheme(theme === 'light' ? 'dark' : 'light')
+              setTheme(theme === "light" ? "dark" : "light")
             }}
           >
-            {theme === 'light' ? <Moon /> : <Sun />}
+            {theme === "light" ? <Moon /> : <Sun />}
           </button>
           <div className="block h-10 sm:hidden">
             <DropdownMenu>
@@ -166,7 +169,10 @@ export default function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 {navbarItems.map((item) => (
-                  <Link key={item.title} href={item.href}>
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                  >
                     <DropdownMenuItem>
                       {/* <User className="mr-2 h-4 w-4" /> */}
                       <span className="text-base">{item.title}</span>
@@ -183,8 +189,8 @@ export default function Navbar() {
 }
 
 const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'>
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>
@@ -192,13 +198,13 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-background-hover hover:text-accent-foreground focus:bg-background-hover focus:text-accent-foreground',
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-hidden transition-colors hover:bg-background-hover hover:text-accent-foreground focus:bg-background-hover focus:text-accent-foreground",
             className
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <div className="font-medium text-sm leading-none">{title}</div>
+          <p className="line-clamp-2 text-muted-foreground text-sm leading-snug">
             {children}
           </p>
         </a>
@@ -206,4 +212,4 @@ const ListItem = React.forwardRef<
     </li>
   )
 })
-ListItem.displayName = 'ListItem'
+ListItem.displayName = "ListItem"

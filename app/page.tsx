@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { navbarItems } from '@/data/navbar-items'
-import { Hash } from 'lucide-react'
+import { navbarItems } from "@/data/navbar-items"
+import { Hash } from "lucide-react"
+import Link from "next/link"
 
 export default function Home() {
   const preview = process.env.NEXT_PUBLIC_DEPLOYMENT_TYPE
@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <main className="relative flex flex-1 items-center justify-center overflow-hidden">
         <section className="flex w-full max-w-7xl flex-col items-center gap-10 px-8 py-12 sm:gap-16 sm:py-16 md:py-24 lg:py-32">
-          <span className="max-w-3xl text-center text-3xl font-bold tracking-tighter xs:text-5xl sm:text-6xl md:text-7xl">
+          <span className="max-w-3xl text-center font-bold text-3xl xs:text-5xl tracking-tighter sm:text-6xl md:text-7xl">
             Powerful <span className="text-primary">Hashing Tools</span> for
             Your Needs
           </span>
@@ -22,15 +22,15 @@ export default function Home() {
               <Link
                 key={index}
                 href={item.href}
-                className="flex items-center gap-2 whitespace-nowrap rounded-xl border bg-background px-3 py-1.5 text-sm transition hover:bg-background-hover xs:text-base md:text-lg"
+                className="flex items-center gap-2 whitespace-nowrap rounded-xl border bg-background px-3 py-1.5 text-sm xs:text-base transition hover:bg-background-hover md:text-lg"
               >
-                <item.icon className="h-3 w-3 xs:h-4 xs:w-4 md:h-5 md:w-5" />
+                <item.icon className="h-3 xs:h-4 w-3 xs:w-4 md:h-5 md:w-5" />
                 {item.title}
               </Link>
             ))}
           </div>
         </section>
-        <Hash className="absolute bottom-0 right-[15%] -z-10 h-auto w-60 translate-y-1/4 rotate-12 opacity-25" />
+        <Hash className="-z-10 absolute right-[15%] bottom-0 h-auto w-60 translate-y-1/4 rotate-12 opacity-25" />
       </main>
     </>
   )

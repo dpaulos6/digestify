@@ -5,7 +5,7 @@ export {
   generatePassword,
   generateRSAKeyPair,
   generateUuid
-} from './helpers/keygen'
+} from "./helpers/keygen"
 export {
   encodeBase32,
   encodeBase58,
@@ -13,5 +13,5 @@ export {
   decodeBase32,
   decodeBase58,
   decodeBase64
-} from './helpers/encoding'
-export { hash, hashingAlgorithms } from './helpers/hashing'
+} from "./helpers/encoding"
+export { hash, hashingAlgorithms } from "./helpers/hashing"

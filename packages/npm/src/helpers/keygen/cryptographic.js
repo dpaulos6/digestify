@@ -6,7 +6,7 @@ var __createBinding =
         var desc = Object.getOwnPropertyDescriptor(m, k)
         if (
           !desc ||
-          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
+          ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)
         ) {
           desc = {
             enumerable: true,
@@ -23,10 +23,10 @@ var __setModuleDefault =
   (this && this.__setModuleDefault) ||
   (Object.create
     ? (o, v) => {
-        Object.defineProperty(o, 'default', { enumerable: true, value: v })
+        Object.defineProperty(o, "default", { enumerable: true, value: v })
       }
     : (o, v) => {
-        o['default'] = v
+        o["default"] = v
       })
 var __importStar =
   (this && this.__importStar) ||
@@ -35,7 +35,7 @@ var __importStar =
     var result = {}
     if (mod != null)
       for (var k in mod)
-        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+        if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
           __createBinding(result, mod, k)
     __setModuleDefault(result, mod)
     return result
@@ -43,11 +43,11 @@ var __importStar =
 var __importDefault =
   (this && this.__importDefault) ||
   ((mod) => (mod && mod.__esModule ? mod : { default: mod }))
-Object.defineProperty(exports, '__esModule', { value: true })
+Object.defineProperty(exports, "__esModule", { value: true })
 exports.generateAESKey = generateAESKey
 exports.generateRSAKeyPair = generateRSAKeyPair
-const CryptoJS = __importStar(require('crypto-js'))
-const node_forge_1 = __importDefault(require('node-forge'))
+const CryptoJS = __importStar(require("crypto-js"))
+const node_forge_1 = __importDefault(require("node-forge"))
 function generateAESKey(length = 32) {
   const randomBytes = CryptoJS.lib.WordArray.random(length)
   return randomBytes.toString(CryptoJS.enc.Hex)

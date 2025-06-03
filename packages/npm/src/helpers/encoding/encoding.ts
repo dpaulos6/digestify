@@ -1,14 +1,14 @@
-import { Buffer } from 'buffer'
-import base32 from 'hi-base32'
-import bs58 from 'bs58'
+import { Buffer } from "buffer"
+import bs58 from "bs58"
+import base32 from "hi-base32"
 
 // Base64
 export const encodeBase64 = (input: string) => {
-  return Buffer.from(input).toString('base64')
+  return Buffer.from(input).toString("base64")
 }
 
 export const decodeBase64 = (input: string) => {
-  return Buffer.from(input, 'base64').toString('utf8')
+  return Buffer.from(input, "base64").toString("utf8")
 }
 
 // Base32

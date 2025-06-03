@@ -1,47 +1,46 @@
-import {
-  Braces,
-  Component,
-  FileKey,
-  FileLock,
-  GraduationCap,
-  Hash,
-  KeyRound
-} from 'lucide-react'
+import { Braces, FileKey, FileLock, Hash, KeyRound, QrCode } from "lucide-react"
 
 export const navbarItems = [
   {
-    title: 'Hashing Tools',
-    href: '/hashing',
+    title: "Hashing Tools",
+    href: "/hashing",
     description:
-      'Hash text and files with various algorithms like MD5, SHA-256, and more.',
+      "Hash text and files with various algorithms like MD5, SHA-256, and more.",
     icon: Hash
   },
   {
-    title: 'Key Generation',
-    href: '/keygen',
+    title: "Key Generation",
+    href: "/keygen",
     description:
-      'Generate secure UUIDs and secrets for any application or need.',
+      "Generate secure UUIDs and secrets for any application or need.",
     icon: KeyRound
   },
   {
-    title: 'Encryption & Decryption',
-    href: '/encryption',
+    title: "Encryption & Decryption",
+    href: "/encryption",
     description:
-      'Encrypt and decrypt text and files using robust symmetric algorithms.',
+      "Encrypt and decrypt text and files using robust symmetric algorithms.",
     icon: FileLock
   },
   {
-    title: 'Encoding & Decoding',
-    href: '/encoding',
+    title: "Encoding & Decoding",
+    href: "/encoding",
     description:
-      'Efficiently encode and decode text and files in formats like Base64 and Base32.',
+      "Efficiently encode and decode text and files in formats like Base64 and Base32.",
     icon: FileKey
   },
   {
-    title: 'JSON Tools',
-    href: '/json',
-    description: 'Tools for JSON manipulation, beautification, and validation.',
+    title: "JSON Tools",
+    href: "/json",
+    description: "Tools for JSON manipulation, beautification, and validation.",
     icon: Braces
+  },
+  {
+    title: "Code Generators",
+    href: "/code-generators",
+    description:
+      "Generate QR codes, barcodes, and other scannable formats quickly. Perfect for links, product labels, IDs, and more.",
+    icon: QrCode
   }
   // {
   //   title: 'Miscellaneous',
