@@ -47,11 +47,15 @@ export default function SecretGenerator() {
     }
   })
 
-  const { watch } = form
-
   useEffect(() => {
-    setSecurePassword(generatePassword(watch()))
-  }, [watch])
+    const subscription = form.watch((values) => {
+      const parsed = formSchema.safeParse(values)
+      if (parsed.success) {
+        setSecurePassword(generatePassword(parsed.data))
+      }
+    })
+    return () => subscription.unsubscribe()
+  }, [form])
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     const {

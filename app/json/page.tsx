@@ -45,7 +45,7 @@ export default function JsonTools() {
 
   const handleCopy = async () => {
     if (!inputValue) return
-    const response = copyToClipboard(inputValue)
+    const response = await copyToClipboard(inputValue)
     toast(
       <span>
         Copied <code className="code">{response}</code> to clipboard.
