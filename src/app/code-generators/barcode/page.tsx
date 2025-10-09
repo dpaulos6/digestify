@@ -59,7 +59,7 @@ export default function BarcodePage() {
             </div>
             <Button
               onClick={handleDownload}
-              className="rounded-md bg-foreground px-4 py-2 text-background hover:opacity-90"
+              variant="default"
             >
               Download Barcode
             </Button>
