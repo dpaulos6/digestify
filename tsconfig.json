@@ -1,15 +1,8 @@
 {
   "compilerOptions": {
     "types": ["node"],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types"
-    ],
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,7 +12,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "incremental": true,
     "plugins": [
       {
@@ -27,9 +20,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./src/*"]
     },
     "target": "ES2017",
     "forceConsistentCasingInFileNames": true,
@@ -42,7 +33,5 @@
     ".next/types/**/*.ts",
     "next-sitemap.config.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

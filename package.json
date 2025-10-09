@@ -38,9 +38,9 @@
     "hi-base32": "^0.5.1",
     "js-sha3": "^0.9.3",
     "json5": "^2.2.3",
-    "lucide-react": "^0.516.0",
-    "monaco-editor": "^0.52.2",
-    "next": "^15.6.0-canary.53",
+    "lucide-react": "^0.545.0",
+    "monaco-editor": "^0.54.0",
+    "next": "^15.5.4",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.4.6",
     "node-forge": "^1.3.1",
@@ -53,9 +53,9 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
-    "uuid": "^11.1.0",
+    "uuid": "^13.0.0",
     "whirlpool-hash": "^1.1.6",
-    "zod": "^3.25.76"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
@@ -65,7 +65,7 @@
     "@types/node": "^24.7.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
-    "@types/uuid": "^10.0.0",
+    "@types/uuid": "^11.0.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3",

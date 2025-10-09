@@ -1,45 +1,21 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": [
-    "ultracite"
-  ],
+  "extends": ["ultracite"],
   "vcs": {
     "enabled": false,
     "clientKind": "git",
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false,
-    "ignore": [
-      "node_modules",
-      "dist",
-      "build",
-      "coverage",
-      ".next",
-      ".github",
-      ".vscode",
-      ".idea",
-      ".DS_Store",
-      ".git",
-      ".gitignore",
-      ".gitattributes",
-      ".npmrc",
-      ".env*",
-      "packages/npm"
-    ]
-  },
-  "organizeImports": {
-    "enabled": true
+    "ignoreUnknown": false
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "style": {
-        "useBlockStatements": "off"
-      },
-      "nursery": {
-        "noEnum": "off"
+        "useBlockStatements": "off",
+        "useNodejsImportProtocol": "off"
       }
     }
   },
