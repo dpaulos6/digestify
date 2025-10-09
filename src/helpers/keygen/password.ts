@@ -37,7 +37,7 @@ export function generatePassword({
   if (easyToSay) charset = easyToSayChars
 
   if (charset.length === 0) {
-    return ""
+    throw new Error("Invalid password generation options: no character set selected.")
   }
 
   let password = ""
