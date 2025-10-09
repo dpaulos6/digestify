@@ -110,7 +110,7 @@ export const hash = async (input: string, type: string): Promise<string> => {
     throw new Error(`Unsupported hash type: ${type}`)
   }
   try {
-    const result = await handler(input)
+    const result = await handler(plainText)
     return result
   } catch (error) {
     throw new Error(
