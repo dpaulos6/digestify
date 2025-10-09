@@ -1,0 +1,116 @@
+"use client"
+
+import { CheckIcon, CopyIcon } from "lucide-react"
+import { Fira_Code } from "next/font/google"
+import React, { type ReactNode, useRef, useState } from "react"
+import { toast } from "sonner"
+import { cn } from "@/lib/utils"
+
+const firacode = Fira_Code({ subsets: ["latin"] })
+
+export type OutputWrapperProps = {
+  children: ReactNode
+  className?: string
+  title?: string
+}
+
+export default function OutputWrapper({
+  children,
+  className,
+  title = "output"
+}: OutputWrapperProps) {
+  const textRef = useRef<HTMLPreElement>(null)
+  const [copied, setCopied] = useState(false)
+
+  const copyToClipboard = () => {
+    if (textRef.current) {
+      const text = textRef.current.innerText
+      navigator.clipboard.writeText(text).then(() => {
+        setCopied(true)
+
+        const TRUNCATED_CLIPBOARD_TEXT_LENGTH = 16
+        function truncateText(str: string, maxLength = 12) {
+          if (str.length <= maxLength) {
+            return str
+          }
+          return `${str.slice(0, maxLength)}...`
+        }
+        const truncatedText = truncateText(
+          text,
+          TRUNCATED_CLIPBOARD_TEXT_LENGTH
+        )
+
+        toast.success(`Copied ${truncatedText} to clipboard.`, {
+          description: (
+            <span>
+              Copied <code className="code">{truncatedText}</code> to clipboard.
+            </span>
+          )
+        })
+        const COPY_RESET_DELAY_MS = 2000
+        setTimeout(() => {
+          setCopied(false)
+        }, COPY_RESET_DELAY_MS)
+      })
+    }
+  }
+
+  return (
+    <div
+      className={cn(
+        "relative flex h-full w-full max-w-5xl flex-col overflow-hidden rounded-lg border bg-background-hover sm:min-w-[400px]",
+        className
+      )}
+    >
+      <div className="flex items-center justify-between bg-background-hover p-2">
+        <span className="ml-2 line-clamp-1 text-foreground/50 text-sm xs:text-base sm:text-lg">
+          {title}
+        </span>
+        <CopyButton
+          copied={copied}
+          disabled={!children}
+          onClick={copyToClipboard}
+        />
+      </div>
+      <pre
+        className={cn(
+          "min-h-10 w-full flex-1 whitespace-pre-wrap break-words p-3 font-mono text-sm xs:text-base",
+          firacode.className
+        )}
+        ref={textRef}
+      >
+        {children}
+      </pre>
+    </div>
+  )
+}
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  copied: boolean
+}
+
+const CopyButton = ({
+  copied,
+  ...rest
+}: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) => (
+  <button
+    className={cn(
+      "select-none rounded-md bg-border p-1 text-neutral-600 transition hover:brightness-95 disabled:pointer-events-none disabled:opacity-0 dark:text-neutral-300 dark:hover:brightness-125"
+    )}
+    ref={rest.ref}
+    {...rest}
+  >
+    {copied ? (
+      <span className="flex gap-1 text-sm xs:text-base">
+        <CheckIcon className="h-5 xs:h-6 w-5 xs:w-6" />
+        Copied
+      </span>
+    ) : (
+      <span className="flex gap-1 text-sm xs:text-base">
+        <CopyIcon className="h-5 xs:h-6 w-5 xs:w-6" />
+        Copy
+      </span>
+    )}
+  </button>
+)
+CopyButton.displayName = "CopyButton"

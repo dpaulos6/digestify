@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite"],
   "vcs": {
     "enabled": false,
@@ -7,37 +7,15 @@
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false,
-    "ignore": [
-      "node_modules",
-      "dist",
-      "build",
-      "coverage",
-      ".next",
-      ".github",
-      ".vscode",
-      ".idea",
-      ".DS_Store",
-      ".git",
-      ".gitignore",
-      ".gitattributes",
-      ".npmrc",
-      ".env*",
-      "packages/npm"
-    ]
-  },
-  "organizeImports": {
-    "enabled": true
+    "ignoreUnknown": false
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "style": {
-        "useBlockStatements": "off"
-      },
-      "nursery": {
-        "noEnum": "off"
+        "useBlockStatements": "off",
+        "useNodejsImportProtocol": "off"
       }
     }
   },
